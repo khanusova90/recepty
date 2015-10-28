@@ -8,9 +8,33 @@
   <name>recepty</name>
   <url>http://maven.apache.org</url>
   
+  <developers>
+		<developer>
+			<id>hanuska1</id>
+			<name>Kateřina Hanušová</name>
+			<email>k.hanusova90@gmail.com</email>
+			<timezone>GMT+1</timezone>
+			<organization>UHK</organization>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>kamenka1</id>
+			<name>Kristýna Kamenická</name>
+			<email>tyna.kamenicka@gmail.com</email>
+			<timezone>GMT+1</timezone>
+			<organization>UHK</organization>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
+  
   <properties>
   	<spring.version>4.2.2.RELEASE</spring.version>
   	<liquibase.version>3.4.1</liquibase.version>
+  	<mysql.version>5.1.37</mysql.version>
   </properties>
   
   <dependencies>
@@ -29,15 +53,60 @@
 	</dependency>
 	
 	<dependency>
-		<groupId>org.liquibase</groupId>
-		<artifactId>liquibase-core</artifactId>
-		<version>${liquibase.version}</version>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>${mysql.version}</version>
 	</dependency>
 	
     
   </dependencies>
+  
+  
   <build>
     <finalName>recepty</finalName>
+    
+    <plugins>
+  		<plugin>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-maven-plugin</artifactId>
+			<version>${liquibase.version}</version>
+			<configuration>
+				<propertyFile>liquibase.properties</propertyFile>
+				<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+				<driver>com.mysql.jdbc.Driver</driver>
+			</configuration>
+			<executions>
+				<execution>
+					<id>update</id>
+					<goals>
+						<goal>update</goal>
+					</goals>
+				</execution>
+				<execution>
+					<id>rollback</id>
+					<goals>
+						<goal>rollback</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+	
+	<resources>
+		<resource>
+			<directory>src/main/resources</directory>
+			<includes>
+				<include>*.xml</include>
+			</includes>
+			<filtering>true</filtering>
+		</resource>
+		<resource>
+			<directory>src/main/config</directory>
+			<includes>
+				<include>*.properties</include>
+			</includes>
+		</resource>
+	</resources>
   </build>
   
 </project>
