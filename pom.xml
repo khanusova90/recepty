@@ -1,21 +1,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>cz.uhk.fim.ppro</groupId>
+  <groupId>cz.ppro</groupId>
   <artifactId>recepty</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>recepty Maven Webapp</name>
+  <name>recepty</name>
   <url>http://maven.apache.org</url>
+  
+  <properties>
+  	<spring.version>4.2.2.RELEASE</spring.version>
+  	<liquibase.version>3.4.1</liquibase.version>
+  </properties>
+  
   <dependencies>
+  
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
+    <dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-core</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.liquibase</groupId>
+		<artifactId>liquibase-core</artifactId>
+		<version>${liquibase.version}</version>
+	</dependency>
+	
+    
   </dependencies>
   <build>
     <finalName>recepty</finalName>
   </build>
+  
 </project>
