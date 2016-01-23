@@ -32,7 +32,7 @@ public class RecipeIngredient {
 	private Ingredient ingredient;
 
 	@Column(name = "AMOUNT")
-	private float amount;
+	private Float amount;
 
 	@Column(name = "UNIT")
 	private String unit;
@@ -64,11 +64,11 @@ public class RecipeIngredient {
 	/**
 	 * @return Mnozstvi pouzite ingredience
 	 */
-	public float getAmount() {
+	public Float getAmount() {
 		return amount;
 	}
 
-	public void setAmount(float amount) {
+	public void setAmount(Float amount) {
 		this.amount = amount;
 	}
 
