@@ -1,4 +1,35 @@
 --liquibase formatted sql
 
 --changeset hanuska1:create-1
---create table recept
+create table RECIPE(
+	ID_RECIPE bigint(19) not null auto_increment,
+	RATING float(4,4),
+	RATE_COUNT int ,
+	PREPARATION longtext not null,
+	primary key(ID_RECIPE)
+);
+
+create table RECIPE_MEAL(
+	ID_RECIPE_MEAL bigint(19) not null auto_increment,
+	ID_RECIPE bigint(19) not null,
+	MEAL varchar(255) not null,
+	primary key (ID_RECIPE_MEAL),
+	constraint fk_recipe_meals foreign key fk_recipe_meals(ID_RECIPE) references RECIPE(ID_RECIPE)
+);
+
+create table INGREDIENT(
+	ID_INGREDIENT bigint(19) not null auto_increment,
+	INGREDIENT_NAME varchar(255) not null,
+	primary key (ID_INGREDIENT)
+);
+
+create table RECIPE_INGREDIENT(
+	ID_RECIPE_INGREDIENT bigint(19) not null auto_increment,
+	ID_RECIPE bigint(19),
+	ID_INGREDIENT bigint(19),
+	AMOUNT decimal(5,2),
+	UNIT varchar(5),
+	primary key(ID_RECIPE_INGREDIENT),
+	constraint fk_recipe foreign key fk_recipe(ID_RECIPE) references RECIPE(ID_RECIPE),
+	constraint fk_ingredient foreign key fk_ingredient(ID_INGREDIENT) references INGREDIENT(ID_INGREDIENT)
+);
