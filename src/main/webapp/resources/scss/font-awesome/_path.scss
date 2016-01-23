@@ -1,0 +1,59 @@
+/* FONT PATH
+ * -------------------------- */
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}');
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot?#iefix&v=#{$fa-version}') format('embedded-opentype'),
+    url('#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}') format('woff2'),
+    url('#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
+    url('#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype'),
+    url('#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular') format('svg');
+//  src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype'); // used when developing fonts
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fontAwesome{
+	font-family: FontAwesome;
+}
+@font-face {
+  font-family: 'RobotoBold';
+  src: url('#{$fa-font-path}/Roboto-Bold.ttf');
+}
+.RobotoBold{
+  font-family: RobotoBold;
+}
+@font-face {
+  font-family: 'RobotoItalic';
+  src: url('#{$fa-font-path}/Roboto-Bold.ttf');
+}
+.RobotoItalic{
+  font-family: RobotoItalic;
+}
+@font-face {
+  font-family: 'RobotoLight';
+  src: url('#{$fa-font-path}/Roboto-Light.ttf');
+}
+.RobotoLight{
+  font-family: RobotoLight;
+}
+@font-face {
+  font-family: 'RobotoMedium';
+  src: url('#{$fa-font-path}/Roboto-Medium.ttf');
+}
+.RobotoMedium{
+  font-family: RobotoMedium;
+}
+@font-face {
+  font-family: 'RobotoRegular';
+  src: url('#{$fa-font-path}/Roboto-Regular.ttf');
+}
+.RobotoRegular{
+  font-family: RobotoRegular;
+}
+
+.RobotoBoldUP{
+  font-family: RobotoLight;
+  text-transform: uppercase;
+}
