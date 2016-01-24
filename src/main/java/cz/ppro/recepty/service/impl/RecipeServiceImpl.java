@@ -1,6 +1,8 @@
 package cz.ppro.recepty.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cz.ppro.recepty.domain.Ingredient;
 import cz.ppro.recepty.domain.Recipe;
@@ -10,6 +12,7 @@ import cz.ppro.recepty.repository.RecipeIngredientRepository;
 import cz.ppro.recepty.repository.RecipeRepository;
 import cz.ppro.recepty.service.RecipeService;
 
+@Service
 public class RecipeServiceImpl implements RecipeService {
 
 	@Autowired
@@ -21,12 +24,6 @@ public class RecipeServiceImpl implements RecipeService {
 	@Autowired
 	RecipeIngredientRepository recipeIngredientRepository;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see cz.ppro.recepty.service.RecipeService#setRating(cz.ppro.recepty.
-	 * domain.Recipe, int)
-	 */
 	@Override
 	public void setRating(Recipe recipe, int rating) {
 		int rateCount = recipe.getRateCount();
@@ -41,7 +38,7 @@ public class RecipeServiceImpl implements RecipeService {
 		rateCount++;
 		recipe.setRateCount(rateCount);
 
-		// TODO: dao.save(recipe);
+		recipeRepository.save(recipe);
 
 	}
 
@@ -55,6 +52,7 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
+	@Transactional
 	public void addIngredientToRecipe(RecipeIngredient recipeIngredient) {
 		// TODO: Jeste nevim, jestli pujde z view predat rovnou objekt, nebo jen
 		// jeho parametry a pak to tu budu muset vytvorit

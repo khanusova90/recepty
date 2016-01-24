@@ -46,3 +46,9 @@ Temporary Items
 /.project
 /target/
 /.classpath
+/.idea/
+
+.idea/libraries/Maven__antlr_antlr_2_7_7.xml
+.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml
+.idea/libraries/Maven__antlr_antlr_2_7_7.xml
+.idea/libraries/Maven__javax_servlet_javax_servlet_api_4_0_0_b01.xml

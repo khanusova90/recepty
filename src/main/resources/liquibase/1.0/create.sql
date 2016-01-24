@@ -33,3 +33,22 @@ create table RECIPE_INGREDIENT(
 	constraint fk_recipe foreign key fk_recipe(ID_RECIPE) references RECIPE(ID_RECIPE),
 	constraint fk_ingredient foreign key fk_ingredient(ID_INGREDIENT) references INGREDIENT(ID_INGREDIENT)
 );
+
+--changeset hanuska1:create-2
+drop table if exists app_user;
+drop table if exists user_role;
+
+create table APP_USER(
+	ID_APP_USER bigint(19) not null auto_increment,
+	USERNAME varchar(255) not null,
+	PASSWORD varchar(255) not null,
+	primary key (ID_APP_USER)
+);
+
+create table USER_ROLE(
+	ID_USER_ROLE bigint(19) not null auto_increment,
+	ROLE varchar(255) not null,
+	ID_APP_USER bigint(19) not null,
+	primary key(ID_USER_ROLE),
+	constraint fk_user_roles foreign key fk_user_roles(ID_APP_USER) references APP_USER(ID_APP_USER)
+);
