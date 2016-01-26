@@ -3,6 +3,8 @@ package cz.ppro.recepty.service.impl;
 import cz.ppro.recepty.dao.RecipeDao;
 import cz.ppro.recepty.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cz.ppro.recepty.domain.Ingredient;
 import cz.ppro.recepty.domain.Recipe;
@@ -27,9 +29,21 @@ public class RecipeServiceImpl implements RecipeService {
     @Autowired
     RecipeIngredientRepository recipeIngredientRepository;
 
+	@Override
+	public void setRating(Recipe recipe, int rating) {
+		int rateCount = recipe.getRateCount();
+		if (rateCount == 0) {
+			recipe.setRating(rating);
+		} else {
+			float totalRating = recipe.getRating() * rateCount;
+			float newRating = (totalRating + rating) / (rateCount + 1);
+			recipe.setRating(newRating);
+		}
     @Autowired
     private RecipeDao recipeDao;
 
+		rateCount++;
+		recipe.setRateCount(rateCount);
 
     /*
      * (non-Javadoc)
@@ -47,6 +61,7 @@ public class RecipeServiceImpl implements RecipeService {
             float newRating = (totalRating + rating) / (rateCount + 1);
             recipe.setRating(newRating);
         }
+		recipeRepository.save(recipe);
 
         rateCount++;
         recipe.setRateCount(rateCount);
@@ -55,6 +70,11 @@ public class RecipeServiceImpl implements RecipeService {
 
     }
 
+	@Override
+	@Transactional
+	public void addIngredientToRecipe(RecipeIngredient recipeIngredient) {
+		// TODO: Jeste nevim, jestli pujde z view predat rovnou objekt, nebo jen
+		// jeho parametry a pak to tu budu muset vytvorit
     @Override
     public Ingredient createIngredient(String ingredientName) {
         Ingredient ingredient = new Ingredient();

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package cz.ppro.recepty.service.impl;
 import cz.ppro.recepty.dao.UserDao;
 import cz.ppro.recepty.domain.User;
@@ -50,4 +51,33 @@ public class UserServiceImpl implements UserService {
     public List<User> getUserList() {
         return null;
     }
+
+
+	private static Log logger = LogFactory.getLog(UserServiceImpl.class);
+
+	@Autowired
+	UserRepository userRepository;
+
+	private PasswordEncoder encoder;
+
+	public UserServiceImpl() {
+		this.encoder = new BCryptPasswordEncoder();
+	}
+
+	@Transactional
+	public Boolean saveUser(AppUser user) {
+		AppUser existingUser = userRepository.findByUsername(user.getUsername());
+
+		if (existingUser == null) {
+			logger.info("Saving new user: " + user.getUsername());
+			String encPass = encoder.encode(user.getPassword());
+			user.setPassword(encPass);
+			user.getUserRoles().add(Role.ROLE_USER.toString());
+			userRepository.save(user);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

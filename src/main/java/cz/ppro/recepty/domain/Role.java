@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package cz.ppro.recepty.domain;
 
 import javax.persistence.Column;
@@ -42,4 +43,20 @@ public class Role {
     public Role(String role) {
 
     }
+}
+ * Uzivatelske role
+ * 
+ * <p>
+ * <b>ROLE_USER</b> - Bezna uzivatelska role. Umoznuje pridavat recepty,
+ * znamkovat je a komentovat. <br/>
+ * <b>ROLE_ADMIN</b> - Administratorska role. Umozuje spravovat aplikaci
+ * 
+ * @author Katerina Hanusova
+ *
+ */
+
+	ROLE_ADMIN("ROLE_ADMIN"), ROLE_USER("ROLE_USER");
+
+	
+
 }

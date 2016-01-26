@@ -8,6 +8,6 @@ import cz.ppro.recepty.domain.Recipe;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
-	public Recipe findById(Long idRecipe);
+	public Recipe findByIdRecipe(Long idRecipe);
 
 }
