@@ -15,7 +15,10 @@ public class StartController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String start(){
 		logger.info("App started");
-		return "start";
+		return "home";
 	}
-
+	//@RequestMapping(value = "/home", method = RequestMethod.GET)
+	//public String start(){
+	//	return "start";
+	//}
 }
