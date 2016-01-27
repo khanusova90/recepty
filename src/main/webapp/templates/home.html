@@ -5,16 +5,16 @@
     <title>Cooking</title>
     <link rel="shortcut icon" href="/resources/img/icon.ico" type="image/x-icon" />
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <div th:include="includes :: styles"></div>
-    <div th:include="resources/css :: js"></div>
+<!--     <div th:include="includes :: styles"></div> -->
+<!--     <div th:include="resources/css :: js"></div> -->
     <link rel="stylesheet" href="/resources/css/main-style.css"
 		  th:href="@{resources/css/main-style.css}"/>
-	<script src="../resources/bootstrap/js/bootstrap.min.js"
-			th:src="@{resources/bootstrap/js/bootstrap.min.js}"></script>
+	<script src="../resources/js/bootstrap.min.js"
+			th:src="@{resources/js/bootstrap.min.js}"></script>
 </head>
 
 <body>
-    <div th:include="header :: header"></div>
+<!--     <div th:include="header :: header"></div> -->
     <div class="container">
         <div class="row first">
             <div class="col-md-6">
@@ -91,7 +91,7 @@
             </div>
         </div>
         <hr />
-        <footer th:include="footer :: footer"></footer>
+        <footer th:include="basics/footer :: footer"></footer>
     </div>
 </body>
 
