@@ -35,4 +35,36 @@ public interface RecipeService {
 	 */
 	public void addIngredientToRecipe(RecipeIngredient recipeIngredient);
 
+	/**
+	 * Zobrazi recept podle kategorie
+	 *
+	 * @param category
+	 *            Vrati recepty podle kategorie
+	 */
+	public String showRecipesByCategory(String category);
+
+	/**
+	 * Zobrazi recept podle ingredienci
+	 *
+	 * @param ingredients
+	 *            Vrati recepty podle ingredience
+	 */
+	public String showRecipesByIngredients(String[] ingredients);
+
+	/**
+	 * Vytvori recept
+	 *
+	 * @param recipe
+	 *            {@link Recipe} s vyplnenymi hodnotami. Musi mit vyplnen postup
+	 *            a ingredience
+	 */
+	public void createRecipe(Recipe recipe);
+
+	/**
+	 * Smaze vybrany recept z databaze
+	 * 
+	 * @param recipe
+	 */
+	public void deleteRecipe(Recipe recipe);
+
 }

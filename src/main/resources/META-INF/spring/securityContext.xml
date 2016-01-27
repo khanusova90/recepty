@@ -34,7 +34,7 @@
 			username-parameter="username"
 			password-parameter="password"/>
 		<sec:logout
-			logout-success-url="/login-logout"
+			logout-success-url="/"
 			logout-url="/logoutProcess"
 			invalidate-session="true"/>
 	</sec:http>

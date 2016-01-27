@@ -1,0 +1,10 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       >
+
+    <beans:bean id="encoder"
+          class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"
+          c:strength="100"/>
+
+</beans>

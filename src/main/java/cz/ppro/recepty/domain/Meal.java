@@ -13,6 +13,7 @@ package cz.ppro.recepty.domain;
  * @author Katerina Hanusova
  *
  */
+
 public enum Meal {
 
 	BREAKFAST("BREAKFAST"), LUNCH("LUNCH"), DINNER("DINNER"), DESERT("DESERT");

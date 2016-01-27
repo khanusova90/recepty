@@ -2,8 +2,10 @@ package cz.ppro.recepty.domain;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -12,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -31,19 +35,38 @@ public class AppUser implements UserDetails {
 	@Column(name = "ID_APP_USER")
 	private Long idAppUser;
 
+	@Size(min = 5, max = 20)
 	@Column(name = "USERNAME")
 	private String username;
 
 	@Column(name = "PASSWORD")
 	private String password;
 
+	@Size(min = 5, max = 20)
+	@Column(name = "USER_NAME")
+	private String name;
+
+	@Size(min = 5, max = 20)
+	@Column(name = "USER_SURNAME")
+	private String surname;
+
 	@ElementCollection
 	@CollectionTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "ID_USER") })
 	@Column(name = "ROLE")
 	private Set<String> userRoles;
 
+	@Column(name = "EMAIL")
+	private String email;
+
+	@Column(name = "USER_RATING")
+	private float rating;
+
+	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "author")
+	private List<Recipe> recipes;
+
 	public AppUser() {
 		this.userRoles = new HashSet<String>();
+		this.rating = 0;
 	}
 
 	public Long getIdAppUser() {
@@ -72,6 +95,22 @@ public class AppUser implements UserDetails {
 
 	public Set<String> getUserRoles() {
 		return userRoles;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
 	}
 
 	public Collection<GrantedAuthority> getAuthorities() {

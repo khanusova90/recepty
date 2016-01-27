@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cs"
+      xml:lang="cs"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign In</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="/resources/css/main-style.css" rel="stylesheet" media="screen"
+          th:href="@{/resources/css/main-style.css}"/>
+</head>
+
+<body>
+
+<div class="container">
+
+    <form class="form-signin" action="/j_spring_security_check" method="post" th:action="@{/j_spring_security_check}">
+        <th:block th:if="${param.error != null}">
+            <div th:replace="other/alert :: alert (type='danger', message='Chyba přihlášení. Prosím zkuste to znovu.')">
+                Chyba
+            </div>
+        </th:block>
+        <fieldset>
+            <h2 class="form-signin-heading">Přihlásit se</h2>
+
+            <div class="form-group">
+                <label for="inputEmail" class="sr-only">Email</label>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus
+                       name="j_email">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="sr-only">Heslo</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required
+                       name="j_password">
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="_spring_security_remember_me" value="remember-me"> Pamatovat si
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <p><a href="singup" th:href="@{/signup}">Registrace</a></p>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<!-- /container -->
+</body>
+</html>

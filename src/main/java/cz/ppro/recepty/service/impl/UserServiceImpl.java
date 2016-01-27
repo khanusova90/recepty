@@ -13,6 +13,9 @@ import cz.ppro.recepty.domain.Role;
 import cz.ppro.recepty.repository.UserRepository;
 import cz.ppro.recepty.service.UserService;
 
+/**
+ * Created by tynak_000 on 26/01/2016.
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -42,5 +45,41 @@ public class UserServiceImpl implements UserService {
 			return false;
 		}
 	}
+
+	// @Autowired
+	// private UserDao userDao;
+	//
+	//
+	// private BCryptPasswordEncoder encoder;
+	//
+	// @Override
+	// @Transactional
+	// public void createUser(User user) {
+	// user.setPassword(encoder.encode(user.getPassword()));
+	// userDao.addUser(user);
+	// }
+	//
+	// @Override
+	// @Transactional
+	// public void deleteUser(int id) {
+	//
+	// }
+	//
+	// @Override
+	// public void editUserInfo(User user) {
+	//
+	// }
+	//
+	// @Override
+	// @Transactional(readOnly = true)
+	// public User getUserById(int id) {
+	// return null;
+	// }
+	//
+	// @Override
+	// @Transactional(readOnly = true)
+	// public List<User> getUserList() {
+	// return null;
+	// }
 
 }

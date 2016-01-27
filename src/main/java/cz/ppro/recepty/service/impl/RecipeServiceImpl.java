@@ -2,6 +2,8 @@ package cz.ppro.recepty.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Transactional;
 
 import cz.ppro.recepty.domain.Ingredient;
@@ -11,6 +13,7 @@ import cz.ppro.recepty.repository.IngredientRepository;
 import cz.ppro.recepty.repository.RecipeIngredientRepository;
 import cz.ppro.recepty.repository.RecipeRepository;
 import cz.ppro.recepty.service.RecipeService;
+import cz.ppro.recepty.validation.EntityValidator;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -39,7 +42,6 @@ public class RecipeServiceImpl implements RecipeService {
 		recipe.setRateCount(rateCount);
 
 		recipeRepository.save(recipe);
-
 	}
 
 	@Override
@@ -52,30 +54,32 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	@Transactional
 	public void addIngredientToRecipe(RecipeIngredient recipeIngredient) {
-		// TODO: Jeste nevim, jestli pujde z view predat rovnou objekt, nebo jen
-		// jeho parametry a pak to tu budu muset vytvorit
-
-		checkRecipeIngredient(recipeIngredient);
+		EntityValidator.checkRecipeIngredient(recipeIngredient);
 		recipeIngredientRepository.save(recipeIngredient);
 	}
 
-	/**
-	 * Zkontroluje, jestli se ingredience k receptu spravne uklada
-	 * 
-	 * @param ri
-	 */
-	private void checkRecipeIngredient(RecipeIngredient ri) {
-		if (ri.getRecipe() == null) {
-			throw new IllegalArgumentException("Není vyplnìn recept, ke kterému se má ingredience uložit!");
-		}
-		if (ri.getIngredient() == null) {
-			throw new IllegalArgumentException("Není vyplnìna ingredience, která se má receptu pøiøadit!");
-		}
-		if (ri.getAmount() == null || ri.getUnit() == null) {
-			throw new IllegalArgumentException("Není vyplnìno množství ingredience, která se má pøiøadit k receptu!");
-		}
+	@Override
+	public String showRecipesByCategory(String category) {
+		return null;
+	}
+
+	@Override
+	public String showRecipesByIngredients(String[] ingredient) {
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public void createRecipe(Recipe recipe) {
+		EntityValidator.checkRecipe(recipe);
+		recipeRepository.save(recipe);
+	}
+
+	@Override
+	@Transactional
+	public void deleteRecipe(Recipe recipe) {
+		recipeRepository.delete(recipe);
 	}
 
 }

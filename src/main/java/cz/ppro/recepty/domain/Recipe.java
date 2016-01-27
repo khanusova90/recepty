@@ -2,15 +2,19 @@ package cz.ppro.recepty.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Trida reprezentujici recept
@@ -41,12 +45,15 @@ public class Recipe {
 	@Column(name = "PREPARATION")
 	private String preparationProcess;
 
-	// private Date time;
-	// private List<Ingredient> ingredients;
-	// private final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "recipe", fetch = FetchType.EAGER)
+	private List<RecipeIngredient> recipeIngredients;
+
+	@ManyToOne
+	private AppUser author;
 
 	public Recipe() {
 		this.rateCount = 0;
+		this.rating = 0;
 	}
 
 	public Long getIdRecipe() {
@@ -56,14 +63,6 @@ public class Recipe {
 	public void setIdRecipe(Long idRecipe) {
 		this.idRecipe = idRecipe;
 	}
-
-	// public List<Ingredient> getIngrediences() {
-	// return ingredients;
-	// }
-	//
-	// public void setIngrediences(List<Ingredient> ingredients) {
-	// this.ingredients = ingredients;
-	// }
 
 	public List<String> getMeals() {
 		return meals;
@@ -89,20 +88,28 @@ public class Recipe {
 		this.rating = rating;
 	}
 
-	// public Date getTime() {
-	// return time;
-	// }
-	//
-	// public void setTime(Date time) {
-	// this.time = time;
-	// }
-
 	public int getRateCount() {
 		return rateCount;
 	}
 
 	public void setRateCount(int rateCount) {
 		this.rateCount = rateCount;
+	}
+
+	public List<RecipeIngredient> getRecipeIngredients() {
+		return recipeIngredients;
+	}
+
+	public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
+		this.recipeIngredients = recipeIngredients;
+	}
+
+	public AppUser getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(AppUser author) {
+		this.author = author;
 	}
 
 }

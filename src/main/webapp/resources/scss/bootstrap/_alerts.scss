@@ -12,11 +12,11 @@
   border: 1px solid transparent;
   border-radius: $alert-border-radius;
 
-  // Headings for larger alerts
+  // Headings for larger alertss
   h4 {
     margin-top: 0;
     // Specified for the h4 to prevent conflicts of changing $headings-color
-    color: inherit;
+    color: inherit; 
   }
 
   // Provide class for links that match alerts

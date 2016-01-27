@@ -52,3 +52,9 @@ create table USER_ROLE(
 	primary key(ID_USER_ROLE),
 	constraint fk_user_roles foreign key fk_user_roles(ID_APP_USER) references APP_USER(ID_APP_USER)
 );
+
+--changeset hanuska1:create-3
+alter table RECIPE add ID_APP_USER bigint(19) not null;
+alter table RECIPE add constraint fk_recipe_user foreign key fk_recipe_user(ID_APP_USER) references APP_USER(ID_APP_USER);
+alter table APP_USER add EMAIL varchar(255);
+alter table APP_USER add RATING int;
