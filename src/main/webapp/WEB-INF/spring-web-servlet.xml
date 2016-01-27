@@ -14,7 +14,7 @@
 
 	<context:component-scan base-package="cz.ppro.recepty" />
 	<context:annotation-config/>
-	<mvc:default-servlet-handler/>
+<!-- 	<mvc:default-servlet-handler/> -->
 
 	<mvc:annotation-driven>
 	  <mvc:message-converters register-defaults="true">
