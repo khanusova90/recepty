@@ -22,7 +22,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * Uzivatel aplikace. Ma uzivatelske jmeno, heslo a seznam uzivatelskych roli
+ * Uzivatel aplikace.
  * 
  * @author Katerina Hanusova
  *

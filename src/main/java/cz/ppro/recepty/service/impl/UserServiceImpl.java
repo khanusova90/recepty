@@ -46,11 +46,6 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-	// @Autowired
-	// private UserDao userDao;
-	//
-	//
-	// private BCryptPasswordEncoder encoder;
 	//
 	// @Override
 	// @Transactional
