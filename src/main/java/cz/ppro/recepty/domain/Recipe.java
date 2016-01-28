@@ -30,6 +30,8 @@ public class Recipe {
 	@Column(name = "ID_RECIPE")
 	private Long idRecipe;
 
+	private String name;
+
 	@ElementCollection
 	@CollectionTable(name = "RECIPE_MEAL", joinColumns = { @JoinColumn(name = "ID_RECIPE") })
 	@Column(name = "MEAL")
@@ -110,6 +112,14 @@ public class Recipe {
 
 	public void setAuthor(AppUser author) {
 		this.author = author;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
