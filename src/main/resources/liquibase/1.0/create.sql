@@ -58,3 +58,13 @@ alter table RECIPE add ID_APP_USER bigint(19) not null;
 alter table RECIPE add constraint fk_recipe_user foreign key fk_recipe_user(ID_APP_USER) references APP_USER(ID_APP_USER);
 alter table APP_USER add EMAIL varchar(255);
 alter table APP_USER add RATING int;
+
+--changeset hanuska1:create-4
+create table FAVORITE_RECIPES(
+	ID_FAVORITE_RECIPE bigint(19) not null auto_increment,
+	ID_APP_USER bigint(19) not null,
+	ID_RECIPE bigint(19) not null,
+	primary key(ID_FAVORITE_RECIPE),
+	constraint fk_favorite_user foreign key fk_favorite_user(ID_APP_USER) references APP_USER(ID_APP_USER),
+	constraint fk_favorite_recipe foreign key fk_favorite_recipe(ID_RECIPE) references RECIPE(ID_RECIPE)
+);

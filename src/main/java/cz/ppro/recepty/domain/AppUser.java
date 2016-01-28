@@ -50,19 +50,21 @@ public class AppUser implements UserDetails {
 	@Column(name = "USER_SURNAME")
 	private String surname;
 
+	@Column(name = "EMAIL")
+	private String email;
+	
+	@Column(name = "USER_RATING")
+	private float rating;
+	
 	@ElementCollection
 	@CollectionTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "ID_USER") })
 	@Column(name = "ROLE")
 	private Set<String> userRoles;
 
-	@Column(name = "EMAIL")
-	private String email;
-
-	@Column(name = "USER_RATING")
-	private float rating;
-
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "author")
 	private List<Recipe> recipes;
+	
+	private List<Recipe> favoriteRecipes;
 
 	public AppUser() {
 		this.userRoles = new HashSet<String>();
@@ -111,6 +113,13 @@ public class AppUser implements UserDetails {
 
 	public void setRating(float rating) {
 		this.rating = rating;
+	}
+	
+	public List<Recipe> getFavoriteRecipes() {
+		return favoriteRecipes;
+	}
+	public void setFavoriteRecipes(List<Recipe> favoriteRecipes) {
+		this.favoriteRecipes = favoriteRecipes;
 	}
 
 	public Collection<GrantedAuthority> getAuthorities() {
