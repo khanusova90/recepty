@@ -40,6 +40,7 @@
 		<property name="suffix" value=".html" />
 		<property name="characterEncoding" value="UTF-8" />
 		<property name="templateMode" value="HTML5" />
+		<property name="cacheable" value="false" />
 	</bean>
 
 	<bean id="templateEngine"

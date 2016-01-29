@@ -2,9 +2,11 @@
 <html lang="cs" xml:lang="cs" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Sign In</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link href="/resources/css/main-style.css" rel="stylesheet" media="screen" th:href="@{/resources/css/main-style.css}" />
+    <title th:text="#{view.title}"></title>
+    <link rel="shortcut icon" href="/resources/img/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <th:block th:include="fragments/includes :: js" />
+    <link rel="stylesheet" href="/resources/css/main-style.css" th:href="@{resources/css/main-style.css}"/>
 </head>
 
 <body>
