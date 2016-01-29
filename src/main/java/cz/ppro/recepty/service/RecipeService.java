@@ -60,9 +60,21 @@ public interface RecipeService {
 	 * 
 	 * @param ingredients
 	 *            Seznam ingredienci, ktere chceme mit v receptu
-	 * @return Seznam receptu, ktere obsahuji vsechny zadane ingredience
+	 * @return Seznam receptu, ktere obsahuji vsechny zadane ingredience. Pokud
+	 *         nenajde zadny recept, vraci prazdny seznam
 	 */
-	public List<Recipe> showRecipesByIngredients(List<Ingredient> ingredients);
+	public List<Recipe> findRecipesByAllIngredients(List<Ingredient> ingredients);
+
+	/**
+	 * Najde recepty dle zadanych ingredienci
+	 * 
+	 * @param ingredients
+	 *            Seznam ingredienci, ktere chceme mit v receptu
+	 * @return Seznam receptu, ktere lze uvarit pouze ze zadanych ingredienci
+	 *         (vsechny ingredience receptu se nachazi v seznamu). Pokud zadny
+	 *         recept nenajde, vraci prazdny seznam
+	 */
+	public List<Recipe> findRecipesByIngredients(List<Ingredient> ingredients);
 
 	/**
 	 * Vytvori recept
@@ -110,4 +122,5 @@ public interface RecipeService {
 	 * @return
 	 */
 	public List<Photo> getPhotosByRecipe(Recipe recipe);
+
 }

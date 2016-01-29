@@ -80,7 +80,7 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public List<Recipe> showRecipesByIngredients(List<Ingredient> ingredients) {
+	public List<Recipe> findRecipesByAllIngredients(List<Ingredient> ingredients) {
 		List<Recipe> recipes = new ArrayList<>();
 		List<Recipe> foundRecipes = new ArrayList<>();
 
@@ -93,6 +93,26 @@ public class RecipeServiceImpl implements RecipeService {
 			if (count == ingredients.size()) {
 				foundRecipes.add(recipe);
 			}
+		}
+		return foundRecipes;
+	}
+
+	@Override
+	public List<Recipe> findRecipesByIngredients(List<Ingredient> ingredients) {
+		List<Recipe> recipes = new ArrayList<>();
+		List<Recipe> foundRecipes = new ArrayList<>();
+
+		for (Ingredient ingredient : ingredients) {
+			recipes.addAll(recipeRepository.findByRecipeIngredients_Ingredient(ingredient));
+		}
+
+		recipeLoop: for (Recipe recipe : recipes) {
+			for (RecipeIngredient ri : recipe.getRecipeIngredients()) {
+				if (!ingredients.contains(ri.getIngredient())) {
+					continue recipeLoop;
+				}
+			}
+			foundRecipes.add(recipe);
 		}
 		return foundRecipes;
 	}
