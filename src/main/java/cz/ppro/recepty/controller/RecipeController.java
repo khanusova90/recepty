@@ -64,7 +64,7 @@ public class RecipeController {
 		String author = user.getUsername();
 		Recipe recipe = new Recipe();
 		recipeService.createRecipe(recipe);
-		model.addAttribute("recipes", recipeService.getAllRecipesByUserId(user.getIdAppUser()));
+		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
 		return "redirect:/listedRecipes";
 	}
 
@@ -72,7 +72,7 @@ public class RecipeController {
 	public String showDishes(Model model, HttpSession session, @RequestParam("recipe") Recipe recipe) {
 		recipeService.deleteRecipe(recipe);
 		AppUser user = (AppUser) session.getAttribute("user");
-		model.addAttribute("recipes", recipeService.getAllRecipesByUserId(user.getIdAppUser()));
+		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
 		return "listedRecipes";
 	}
 }
