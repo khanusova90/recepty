@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import cz.ppro.recepty.domain.Recipe;
 import cz.ppro.recepty.service.RecipeService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/recipes")
@@ -20,37 +21,42 @@ public class RecipeController {
 	@Autowired
 	private RecipeService recipeService;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String showRecipes(Model model, HttpSession session) {
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String showRecipes(Model model){
+		model.addAttribute("recipes", recipeService.getAllRecipes());
 		return "listedRecipes";
 	}
 
-	@RequestMapping(value = "/recipes/{recipeType}")
+	@RequestMapping(value = "/{recipeType}")
 	public void showRecipesByCategory(HttpSession session, Model model, @PathVariable("recipeType") String recipeType) {
 
 	}
 
-	@RequestMapping(value = "/recipe/detail")
+	@RequestMapping(value = "/detail")
 	public String showRecipesDetail(Recipe recipe, Model model,HttpSession session) {
 		model.addAttribute("recipeIngredients", recipeService.getAllIngredients(recipe.getIdRecipe()));
 		//model.addAttribute("recipe", recipeService.ge);
 		return "recipeDetail";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addRecipe(Recipe recipe, BindingResult br) {
-		if (recipe == null) {
-			return "redirect:/";
-		}
-		if (br.hasErrors()) {
-			return "add";
-		}
-		recipeService.createRecipe(recipe);
-		return null;
+
+
+	@RequestMapping(value = "/addRecipe", method = RequestMethod.GET)
+	public String addRecipe(Recipe recipe) {
+		return "recipeAddForm";
 	}
-	@RequestMapping(value = "/recipes", method = RequestMethod.GET)
-	public String showDishes(Model model){
-		model.addAttribute("allRecipes", recipeService.getAllRecipes());
+
+//	@RequestMapping(value = "/doAddRecipe", method = RequestMethod.POST)
+//public Stirng addRecipe(@RequestParam)
+
+
+	@RequestMapping(value = "/doDeleteRecipe", method = RequestMethod.POST)
+	public String showDishes(@RequestParam Long id){
+		recipeService.deleteRecipe(id);
 		return "listedRecipes";
 	}
+
+
+
+
 }

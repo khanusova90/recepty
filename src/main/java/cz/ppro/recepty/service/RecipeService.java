@@ -75,7 +75,7 @@ public interface RecipeService {
 	 * 
 	 * @param recipe
 	 */
-	public void deleteRecipe(Recipe recipe);
+	public void deleteRecipe(Long id);
 
 	/**
 	 * Vrati list receptu podle jejich nejlepsiho hodnoceni
