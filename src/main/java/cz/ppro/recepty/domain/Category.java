@@ -14,13 +14,13 @@ package cz.ppro.recepty.domain;
  *
  */
 
-public enum Meal {
+public enum Category {
 
 	BREAKFAST("BREAKFAST"), LUNCH("LUNCH"), DINNER("DINNER"), DESERT("DESERT");
 
 	private String meal;
 
-	private Meal(String meal) {
+	private Category(String meal) {
 		this.meal = meal;
 	}
 

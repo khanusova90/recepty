@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
@@ -52,18 +53,20 @@ public class AppUser implements UserDetails {
 
 	@Column(name = "EMAIL")
 	private String email;
-	
+
 	@Column(name = "USER_RATING")
 	private float rating;
-	
+
 	@ElementCollection
-	@CollectionTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "ID_USER") })
+	@CollectionTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "ID_APP_USER") })
 	@Column(name = "ROLE")
 	private Set<String> userRoles;
 
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "author")
 	private List<Recipe> recipes;
-	
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "FAVORITE_RECIPES", joinColumns = @JoinColumn(name = "ID_APP_USER") )
 	private List<Recipe> favoriteRecipes;
 
 	public AppUser() {
@@ -114,10 +117,11 @@ public class AppUser implements UserDetails {
 	public void setRating(float rating) {
 		this.rating = rating;
 	}
-	
+
 	public List<Recipe> getFavoriteRecipes() {
 		return favoriteRecipes;
 	}
+
 	public void setFavoriteRecipes(List<Recipe> favoriteRecipes) {
 		this.favoriteRecipes = favoriteRecipes;
 	}

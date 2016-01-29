@@ -68,3 +68,6 @@ create table FAVORITE_RECIPES(
 	constraint fk_favorite_user foreign key fk_favorite_user(ID_APP_USER) references APP_USER(ID_APP_USER),
 	constraint fk_favorite_recipe foreign key fk_favorite_recipe(ID_RECIPE) references RECIPE(ID_RECIPE)
 );
+
+--changeset hanuska1:create-5
+alter table recipe add NAME varchar(255) not null;
