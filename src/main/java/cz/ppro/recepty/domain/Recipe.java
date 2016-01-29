@@ -52,6 +52,9 @@ public class Recipe {
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "recipe", fetch = FetchType.EAGER)
 	private List<RecipeIngredient> recipeIngredients;
 
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Photo> photos;
+
 	@ManyToOne
 	@JoinColumn(name = "ID_APP_USER")
 	private AppUser author;
@@ -135,6 +138,14 @@ public class Recipe {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
 	}
 
 }
