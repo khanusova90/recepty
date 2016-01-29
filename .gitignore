@@ -53,3 +53,5 @@ Temporary Items
 .idea/libraries/Maven__antlr_antlr_2_7_7.xml
 .idea/libraries/Maven__javax_servlet_javax_servlet_api_4_0_0_b01.xml
 src/main/config/liquibase.properties
+recepty.iml
+*.iml
