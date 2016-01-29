@@ -96,8 +96,14 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
+	public List<Ingredient> getAllIngredients(Long idRecipe) {
+		return null;
+	}
+
+	@Override
 	@Transactional
-	public void deleteRecipe(Recipe recipe) {
+	public void deleteRecipe(Long id) {
+		Recipe recipe = recipeRepository.findOne(id);
 		recipeRepository.delete(recipe);
 	}
 
