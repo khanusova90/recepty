@@ -102,7 +102,12 @@ public class RecipeServiceImpl implements RecipeService {
 		return null;
 	}
 
-	@Override
+    @Override
+    public List<Recipe> getAllRecipesByUserId(Long idUser) {
+        return null;
+    }
+
+    @Override
 	@Transactional
 	public void deleteRecipe(Long id) {
 		Recipe recipe = recipeRepository.findOne(id);

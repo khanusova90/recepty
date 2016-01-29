@@ -84,4 +84,6 @@ public interface RecipeService {
 	public List<Recipe> getRecipesSortedByRating();
 	public List<Recipe> getAllRecipes();
 	public List<Ingredient> getAllIngredients(Long idRecipe);
+	public List<Recipe> getAllRecipesByUserId(Long idUser);
+
 }
