@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.repository.UserRepository;
 
 @Service("userDetailsService")

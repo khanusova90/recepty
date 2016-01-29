@@ -64,7 +64,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public List<Recipe> showRecipesByCategory(String category) {
-		return recipeRepository.findAllByCategory(category);
+		return recipeRepository.findByCategory(category);
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public List<Recipe> getRecipesSortedByRating() {
-		return recipeRepository.findAllOrderByRatingAsc();
+		return recipeRepository.findAllByOrderByRatingAsc();
 	}
 
 	@Override
@@ -98,8 +98,8 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Ingredient> getAllIngredients(Long idRecipe) {
-		return recipeRepository.findRecipeIngredientsByIdRecipe(idRecipe);
+	public List<RecipeIngredient> getAllIngredients(Long idRecipe) {
+		return recipeIngredientRepository.findByRecipe_IdRecipe(idRecipe);
 	}
 
 }
