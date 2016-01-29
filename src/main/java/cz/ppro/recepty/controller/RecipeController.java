@@ -43,6 +43,7 @@ public class RecipeController {
 	@RequestMapping(value = "/detail")
 	public String showRecipesDetail(Model model,HttpSession session,@RequestParam("id") Long id) {
 		model.addAttribute("recipeIngredients", recipeService.getAllIngredients(id));
+		//TODO vytvoøit tuto metodu
 		model.addAttribute("recipe", recipeService.getRecipeById(id));
 		return "recipeDetail";
 	}
@@ -53,16 +54,20 @@ public class RecipeController {
 	}
 
 	@RequestMapping(value = "/doAddRecipe", method = RequestMethod.POST)
-    public String doAddRecipe(@RequestParam("name") String name,
+    public String doAddRecipe(HttpSession session,@RequestParam("name") String name,
 							@RequestParam("description") String description,
 							@RequestParam("preparation") String preparation,
 							@RequestParam("ingredients") List<Ingredient> ingredients
 							){
 		AppUser user = (AppUser)session.getAttribute("user");
-		Recipe recipe = new Recipe(name,description,preparation,ingredients);
 
-		recipeService.createRecipe(Re);
+		/*TODO insert correct constructor for all those params
+		 ratings bude v const pro toto 0 a 0 */
+		String author = user.getUsername();
+		Recipe recipe = new Recipe();
+		recipeService.createRecipe(recipe);
 	}
+
 
 	@RequestMapping(value = "/doDeleteRecipe", method = RequestMethod.POST)
 	public String showDishes(Model model,HttpSession session,@RequestParam("id") Long id){
