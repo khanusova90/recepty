@@ -85,4 +85,4 @@ create table PHOTO(
 );
 
 --changeset hanuska1:create-8
-alter table photo add ACTIVE bit not null,
+alter table photo add ACTIVE bit not null;
