@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
  * @author Katerina Hanusova
  *
  */
-@Entity(name = "RECIPE")
+@Entity
 public class Recipe {
 
 	@Id
@@ -38,6 +38,8 @@ public class Recipe {
 	@Column(name = "RATE_COUNT")
 	private Integer rateCount;
 
+	private String description;
+
 	@Lob
 	@Column(name = "PREPARATION")
 	private String preparationProcess;
@@ -51,6 +53,7 @@ public class Recipe {
 	private List<RecipeIngredient> recipeIngredients;
 
 	@ManyToOne
+	@JoinColumn(name = "ID_APP_USER")
 	private AppUser author;
 
 	public Recipe() {
@@ -124,6 +127,14 @@ public class Recipe {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

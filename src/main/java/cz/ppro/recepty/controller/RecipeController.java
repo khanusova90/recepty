@@ -51,8 +51,8 @@ public class RecipeController {
 
 	@RequestMapping(value = "/doAddRecipe", method = RequestMethod.POST)
 	public String doAddRecipe(Model model, HttpSession session, @RequestParam("name") String name,
-							  @RequestParam("description") String description, @RequestParam("preparation") String preparation,
-							  @RequestParam("ingredients") List<Ingredient> ingredients) {
+			@RequestParam("description") String description, @RequestParam("preparation") String preparation,
+			@RequestParam("ingredients") List<Ingredient> ingredients) {
 		AppUser user = (AppUser) session.getAttribute("user");
 		/*
 		 * TODO insert correct constructor for all those params ratings bude v
@@ -63,7 +63,9 @@ public class RecipeController {
 		 */
 		String author = user.getUsername();
 		Recipe recipe = new Recipe();
-		recipeService.createRecipe(recipe);
+		recipeService.createRecipe(recipe); // FIXME: Tady uz se recept uklada
+											// do DB, musi mit vyplneny hodnoty
+											// (postup a ingredience)
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
 		return "redirect:/listedRecipes";
 	}
@@ -72,7 +74,7 @@ public class RecipeController {
 	public String showDishes(Model model, HttpSession session, @RequestParam("recipe") Recipe recipe) {
 		recipeService.deleteRecipe(recipe);
 		AppUser user = (AppUser) session.getAttribute("user");
-		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
+		model.addAttribute("recipes", recipeService.getAllRecipesByUserId(user.getIdAppUser()));
 		return "listedRecipes";
 	}
 }

@@ -71,3 +71,6 @@ create table FAVORITE_RECIPES(
 
 --changeset hanuska1:create-5
 alter table recipe add NAME varchar(255) not null;
+
+--changeset hanuska1:create-6
+alter table recipe add DESCRIPTION varchar(255);
