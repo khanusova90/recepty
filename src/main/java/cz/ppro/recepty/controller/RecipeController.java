@@ -1,23 +1,21 @@
 package cz.ppro.recepty.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
-import cz.ppro.recepty.domain.AppUser;
-import cz.ppro.recepty.domain.Ingredient;
-import cz.ppro.recepty.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import cz.ppro.recepty.domain.Recipe;
-import cz.ppro.recepty.service.RecipeService;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import cz.ppro.recepty.domain.AppUser;
+import cz.ppro.recepty.domain.Ingredient;
+import cz.ppro.recepty.domain.Recipe;
+import cz.ppro.recepty.service.RecipeService;
 
 @Controller
 @RequestMapping("/recipes")
@@ -26,11 +24,8 @@ public class RecipeController {
 	@Autowired
 	private RecipeService recipeService;
 
-	@Autowired
-	private RecipeRepository recipeRepo;
-
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String showRecipes(Model model){
+	public String showRecipes(Model model) {
 		model.addAttribute("recipes", recipeService.getAllRecipes());
 		return "listedRecipes";
 	}
@@ -41,10 +36,10 @@ public class RecipeController {
 	}
 
 	@RequestMapping(value = "/detail")
-	public String showRecipesDetail(Model model,HttpSession session,@RequestParam("id") Long id) {
+	public String showRecipesDetail(Model model, HttpSession session, @RequestParam("id") Long id) {
 		model.addAttribute("recipeIngredients", recipeService.getAllIngredients(id));
-		//TODO vytvoøit tuto metodu
-		model.addAttribute("recipe", recipeService.getRecipeById(id));
+		// TODO vytvoøit tuto metodu
+		// model.addAttribute("recipe", recipeService.getRecipeById(id));
 		return "recipeDetail";
 	}
 
@@ -54,14 +49,17 @@ public class RecipeController {
 	}
 
 	@RequestMapping(value = "/doAddRecipe", method = RequestMethod.POST)
-    public String doAddRecipe(Model model,HttpSession session,@RequestParam("name") String name,
-							@RequestParam("description") String description,
-							@RequestParam("preparation") String preparation,
-							@RequestParam("ingredients") List<Ingredient> ingredients
-							){
-		AppUser user = (AppUser)session.getAttribute("user");
-		/*TODO insert correct constructor for all those params
-		 ratings bude v const pro toto 0 a 0 */
+	public String doAddRecipe(Model model, HttpSession session, @RequestParam("name") String name,
+			@RequestParam("description") String description, @RequestParam("preparation") String preparation,
+			@RequestParam("ingredients") List<Ingredient> ingredients) {
+		AppUser user = (AppUser) session.getAttribute("user");
+		/*
+		 * TODO insert correct constructor for all those params ratings bude v
+		 * const pro toto 0 a 0
+		 * 
+		 * V Recipe je bezparametricky konstruktor. Nastavi hodnoceni a pocet
+		 * hodnoticich na 0
+		 */
 		String author = user.getUsername();
 		Recipe recipe = new Recipe();
 		recipeService.createRecipe(recipe);
@@ -69,11 +67,10 @@ public class RecipeController {
 		return "redirect:/listedRecipes";
 	}
 
-
 	@RequestMapping(value = "/doDeleteRecipe", method = RequestMethod.POST)
-	public String showDishes(Model model,HttpSession session,@RequestParam("id") Long id){
+	public String showDishes(Model model, HttpSession session, @RequestParam("id") Long id) {
 		recipeService.deleteRecipe(id);
-		AppUser user = (AppUser)session.getAttribute("user");
+		AppUser user = (AppUser) session.getAttribute("user");
 		model.addAttribute("recipes", recipeService.getAllRecipesByUserId(user.getIdAppUser()));
 		return "listedRecipes";
 	}

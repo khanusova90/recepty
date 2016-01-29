@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
  * @author Katerina Hanusova
  *
  */
-@Entity(name = "RECIPE_INGREDIENT")
+@Entity
 public class RecipeIngredient {
 
 	@Id

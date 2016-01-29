@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
  * @author Katerina Hanusova
  *
  */
-@Entity(name = "RECIPE")
+@Entity
 public class Recipe {
 
 	@Id
