@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="cs" xml:lang="cs" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Sign In</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/resources/css/main-style.css" rel="stylesheet" media="screen" th:href="@{/resources/css/main-style.css}" />
+</head>
+
+<body>
+    <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title" th:text="#{registration}"></div>
+                <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()" th:text="#{login}"></a></div>
+            </div>
+            <div class="panel-body">
+                <form id="signupform" class="form-horizontal" role="form" method="post" action="/j_spring_security_check" th:action="@{/j_spring_security_check}">
+                    <div id="signupalert" style="display:none" class="alert alert-danger">
+                        <p>Error:</p>
+                        <span></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-md-3 control-label" th:text="#{email}"></label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="email" placeholder="#{email}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-md-3 control-label" th:text="#{name}"></label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="firstname" placeholder="#{name}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-md-3 control-label" th:text="#{surname}"></label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="lastname" placeholder="#{surname}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-md-3 control-label" th:text="#{pwd}"></label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" name="passwd" placeholder="#{pwd}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- Button -->
+                        <div class="col-md-offset-3 col-md-9">
+                            <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i>
+                                <th:block th:text="#{registration}">
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
