@@ -25,4 +25,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
 	public List<Ingredient> findRecipeIngredientsByIdRecipe(Long idRecipe);
 
+	public List<Recipe> findAllOrderByRatingAsc();
+
 }
