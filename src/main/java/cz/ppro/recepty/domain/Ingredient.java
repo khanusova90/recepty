@@ -12,7 +12,7 @@ import javax.persistence.Id;
  * @author Katerina Hanusova
  *
  */
-@Entity(name = "INGREDIENT")
+@Entity
 public class Ingredient {
 
 	@Id
