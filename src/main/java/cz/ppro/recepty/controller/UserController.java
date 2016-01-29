@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.service.UserService;
 
 /**
