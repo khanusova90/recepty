@@ -38,6 +38,8 @@ public class Recipe {
 	@Column(name = "RATE_COUNT")
 	private Integer rateCount;
 
+	private String description;
+
 	@Lob
 	@Column(name = "PREPARATION")
 	private String preparationProcess;
@@ -124,6 +126,14 @@ public class Recipe {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
