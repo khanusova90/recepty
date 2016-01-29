@@ -36,8 +36,9 @@ public class RecipeController {
 	}
 
 	@RequestMapping(value = "/detail")
-	public String showRecipesDetail(Model model, HttpSession session, @RequestParam("id") Long id) {
-		model.addAttribute("recipeIngredients", recipeService.getAllIngredients(id));
+	public String showRecipesDetail(Model model, HttpSession session, @RequestParam("recipe") Recipe recipe) {
+		model.addAttribute("recipeIngredients", recipe.getRecipeIngredients());
+		model.addAttribute("recipe", recipe);
 		// TODO vytvoøit tuto metodu
 		// model.addAttribute("recipe", recipeService.getRecipeById(id));
 		return "recipeDetail";
@@ -68,8 +69,8 @@ public class RecipeController {
 	}
 
 	@RequestMapping(value = "/doDeleteRecipe", method = RequestMethod.POST)
-	public String showDishes(Model model, HttpSession session, @RequestParam("id") Long id) {
-		recipeService.deleteRecipe(id);
+	public String showDishes(Model model, HttpSession session, @RequestParam("recipe") Recipe recipe) {
+		recipeService.deleteRecipe(recipe);
 		AppUser user = (AppUser) session.getAttribute("user");
 		model.addAttribute("recipes", recipeService.getAllRecipesByUserId(user.getIdAppUser()));
 		return "listedRecipes";
