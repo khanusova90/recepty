@@ -83,3 +83,6 @@ create table PHOTO(
 	primary key(ID_PHOTO),
 	constraint fk_photo_recipe foreign key fk_photo_recipe(ID_RECIPE) references RECIPE(ID_RECIPE)
 );
+
+--changeset hanuska1:create-8
+alter table photo add ACTIVE bit not null,

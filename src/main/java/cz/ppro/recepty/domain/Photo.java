@@ -20,6 +20,8 @@ public class Photo {
 	@JoinColumn(name = "ID_RECIPE")
 	private Recipe recipe;
 
+	private boolean active;
+
 	public Long getIdPhoto() {
 		return idPhoto;
 	}
@@ -42,6 +44,14 @@ public class Photo {
 
 	public void setRecipe(Recipe recipe) {
 		this.recipe = recipe;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }
