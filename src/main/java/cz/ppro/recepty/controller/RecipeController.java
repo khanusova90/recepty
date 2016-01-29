@@ -41,10 +41,10 @@ public class RecipeController {
 	}
 
 	@RequestMapping(value = "/detail")
-	public String showRecipesDetail(Model model,HttpSession session,@RequestParam("id") Long id) {
-		model.addAttribute("recipeIngredients", recipeService.getAllIngredients(id));
-		//TODO vytvoøit tuto metodu
-		model.addAttribute("recipe", recipeService.getRecipeById(id));
+	public String showRecipesDetail(Model model,HttpSession session,@RequestParam("recipe") Recipe recipe) {
+		model.addAttribute("recipeIngredients", recipe.getRecipeIngredients());
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("images", recipe.getRecipeImages());
 		return "recipeDetail";
 	}
 
