@@ -38,20 +38,13 @@
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"	id="transactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	<bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
+	<bean
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		id="entityManagerFactory">
 		<property name="persistenceUnitName" value="persistenceUnit" />
 		<property name="dataSource" ref="dataSource" />
-		<property name="jpaPropertyMap">
-			<map>
-<!-- 				<entry key="javax.persistence.validation.factory" value-ref="jpaValidator" /> -->
-				<entry key="hibernate.dialect" value="${hibernate.dialect}" />
-<!-- 				<entry key="net.sf.ehcache.configurationResourceName" value="cache/ehcache-hibernate.xml" /> -->
-<!-- 				<entry key="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" /> -->
-<!-- 				<entry key="hibernate.cache.use_second_level_cache" value="true" /> -->
-<!-- 				<entry key="hibernate.cache.use_query_cache" value="true" /> -->
-<!-- 				<entry key="hibernate.hbm2ddl.import_files" value="${hibernate.hbm2ddl.import_files}"/> -->
-			</map>
-		</property>
+		<property name="jpaDialect" ref="jpaDialect" />
 	</bean>
+	<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
 	
 </beans>
