@@ -43,10 +43,10 @@
                         <a th:href="@{/articles}" th:text="#{articles}"></a>
                     </li>
                     <li sec:authorize="isAnonymous()">
-                        <a th:href="@{/loginForm}" th:text="#{login}"><i class="fa fa-user"></i></a>
+                        <a th:href="@{/loginForm}"><i class="fa fa-user"></i><span th:text="#{login}"></span></a>
                     </li>
-                    <li sec:authorize="!isAnonymous()">
-                        <a th:href="@{/logoutProcess}" th:text="#{logout}"><i class="fa fa-times"></i></a>
+                    <li sec:authorize="isAuthenticated()">
+                        <a th:href="@{/logoutProcess}"><i class="fa fa-times"></i><span th:text="#{logout}"></span></a>
                     </li>
                 </ul>
             </div>

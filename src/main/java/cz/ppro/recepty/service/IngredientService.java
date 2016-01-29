@@ -14,5 +14,7 @@ public interface IngredientService {
 	 * @return Seznam {@link Ingredient} odpovidajici zadanemu nazvu
 	 */
 	public List<Ingredient> findIngredientByName(String name);
+	public List<Ingredient> getAll();
+
 
 }

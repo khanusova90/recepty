@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import cz.ppro.recepty.repository.IngredientRepository;
+import cz.ppro.recepty.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,9 @@ public class RecipeController {
 
 	@Autowired
 	private RecipeService recipeService;
+
+	@Autowired
+	private IngredientService ingredientService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showRecipes(Model model) {
@@ -69,10 +74,25 @@ public class RecipeController {
 	}
 
 	@RequestMapping(value = "/doDeleteRecipe", method = RequestMethod.POST)
-	public String showDishes(Model model, HttpSession session, @RequestParam("recipe") Recipe recipe) {
+	public String deleteRecipe(Model model, HttpSession session, @RequestParam("recipe") Recipe recipe) {
 		recipeService.deleteRecipe(recipe);
 		AppUser user = (AppUser) session.getAttribute("user");
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
 		return "listedRecipes";
+	}
+
+	@RequestMapping(value = "/search")
+	public String showDishes(Model model) {
+			model.addAttribute("allIngredients",ingredientService.getAll());
+		model.addAttribute("reicpes", null);
+		return "searchByIngredients";
+	}
+
+	@RequestMapping(value = "/searchBy")
+	public String showDishes(Model model, @RequestParam("ingredients") String ingredientsString) {
+
+
+		model.addAttribute("reicpes", null);
+		return "searchByIngredients";
 	}
 }
