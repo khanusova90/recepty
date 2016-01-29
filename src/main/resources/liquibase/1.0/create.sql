@@ -86,3 +86,12 @@ create table PHOTO(
 
 --changeset hanuska1:create-8
 alter table photo add ACTIVE bit not null;
+
+--changeset hanuska1:create-9
+alter table APP_USER add SURNAME varchar(255) not null;
+
+--changeset hanuska1:create-10
+alter table APP_USER add NAME varchar(255) not null;
+
+--changeset hanuska1:create-11
+alter table APP_USER add USER_RATING float(4,4) not null;
