@@ -21,9 +21,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
 	public List<Recipe> findByRecipeIngredients_Ingredient(Ingredient ingredient);
 
-	// public List<Recipe> findRecipeByIngredients(List<Ingredient>
-	// ingredients);
-
 	public List<Recipe> findByAuthor(AppUser author);
 
 }

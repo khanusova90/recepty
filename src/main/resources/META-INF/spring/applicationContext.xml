@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -13,11 +14,14 @@
         http://www.springframework.org/schema/data/jpa
      	http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
      	http://www.springframework.org/schema/data/repository
-     	http://www.springframework.org/schema/data/repository/spring-repository-1.8.xsd ">
+     	http://www.springframework.org/schema/data/repository/spring-repository-1.8.xsd 
+     	http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
  
 	<context:component-scan base-package="cz.ppro.recepty" />
 	<context:annotation-config />
 	<jpa:repositories base-package="cz.ppro.recepty.repository" />
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">

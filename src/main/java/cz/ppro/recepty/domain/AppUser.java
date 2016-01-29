@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -29,6 +30,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  *
  */
 @Entity
+@Table(name = "APP_USER")
 public class AppUser implements UserDetails {
 
 	@Id
@@ -44,11 +46,11 @@ public class AppUser implements UserDetails {
 	private String password;
 
 	@Size(min = 5, max = 20)
-	@Column(name = "USER_NAME")
+	@Column(name = "NAME")
 	private String name;
 
 	@Size(min = 5, max = 20)
-	@Column(name = "USER_SURNAME")
+	@Column(name = "SURNAME")
 	private String surname;
 
 	@Column(name = "EMAIL")
@@ -98,8 +100,20 @@ public class AppUser implements UserDetails {
 		this.password = password;
 	}
 
-	public Set<String> getUserRoles() {
-		return userRoles;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
 	public String getEmail() {
@@ -116,6 +130,22 @@ public class AppUser implements UserDetails {
 
 	public void setRating(float rating) {
 		this.rating = rating;
+	}
+
+	public Set<String> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(Set<String> userRoles) {
+		this.userRoles = userRoles;
+	}
+
+	public List<Recipe> getRecipes() {
+		return recipes;
+	}
+
+	public void setRecipes(List<Recipe> recipes) {
+		this.recipes = recipes;
 	}
 
 	public List<Recipe> getFavoriteRecipes() {

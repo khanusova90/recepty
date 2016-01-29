@@ -16,4 +16,9 @@ public class StartController {
 		logger.info("App started");
 		return "home";
 	}
+
+	@RequestMapping(value = "/home")
+	public String getHomePage() {
+		return "home";
+	}
 }
