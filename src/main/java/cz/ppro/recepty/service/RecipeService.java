@@ -77,4 +77,11 @@ public interface RecipeService {
 	 */
 	public void deleteRecipe(Recipe recipe);
 
+	/**
+	 * Vrati list receptu podle jejich nejlepsiho hodnoceni
+	 *
+	 */
+	public List<Recipe> getRecipesSortedByRating();
+	public List<Recipe> getAllRecipes();
+	public List<Ingredient> getAllIngredients(Long idRecipe);
 }

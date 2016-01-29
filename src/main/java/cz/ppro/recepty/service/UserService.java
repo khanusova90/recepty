@@ -1,7 +1,5 @@
 package cz.ppro.recepty.service;
 
-import cz.ppro.recepty.domain.AppUser;
-
 ///**
 // * Created by Kristyna Kamenicka
 // */

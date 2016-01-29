@@ -2,19 +2,17 @@
 <html lang="cs" xml:lang="cs" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Cooking</title>
-    <link rel="shortcut icon" href="/resources/img/icon.ico" type="image/x-icon" />
+    <title th:text="#{view.title}"></title>
+    <link rel="shortcut icon" href="/resources/img/favicon.ico" type="image/x-icon" />
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-<!--     <div th:include="includes :: styles"></div> -->
-<!--     <div th:include="resources/css :: js"></div> -->
-    <link rel="stylesheet" href="/resources/css/main-style.css"
-		  th:href="@{resources/css/main-style.css}"/>
-	<script src="../resources/js/bootstrap.min.js"
-			th:src="@{resources/js/bootstrap.min.js}"></script>
+    <th:block th:include="fragments/includes :: all" />
+    <link th:fragment="all" rel="stylesheet" href="/resources/css/main-style.css" th:href="@{resources/css/main-style.css}"/>
+
+
 </head>
 
 <body>
-<!--     <div th:include="header :: header"></div> -->
+   <th:block th:include="fragments/header :: header"></th:block>
     <div class="container">
         <div class="row first">
             <div class="col-md-6">
@@ -91,7 +89,7 @@
             </div>
         </div>
         <hr />
-        <footer th:include="basics/footer :: footer"></footer>
+        <footer th:include="fragments/footer :: footer"></footer>
     </div>
 </body>
 
