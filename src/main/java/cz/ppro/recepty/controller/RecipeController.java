@@ -24,7 +24,7 @@ public class RecipeController {
 	@Autowired
 	private RecipeService recipeService;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showRecipes(Model model) {
 		model.addAttribute("recipes", recipeService.getAllRecipes());
 		return "listedRecipes";
@@ -39,8 +39,6 @@ public class RecipeController {
 	public String showRecipesDetail(Model model, HttpSession session, @RequestParam("recipe") Recipe recipe) {
 		model.addAttribute("recipeIngredients", recipe.getRecipeIngredients());
 		model.addAttribute("recipe", recipe);
-		// TODO vytvoøit tuto metodu
-		// model.addAttribute("recipe", recipeService.getRecipeById(id));
 		return "recipeDetail";
 	}
 
