@@ -3,6 +3,8 @@ package cz.ppro.recepty.service.impl;
 import java.util.List;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.stereotype.Service;
@@ -11,9 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.domain.Ingredient;
+import cz.ppro.recepty.domain.Photo;
 import cz.ppro.recepty.domain.Recipe;
 import cz.ppro.recepty.domain.RecipeIngredient;
 import cz.ppro.recepty.repository.IngredientRepository;
+import cz.ppro.recepty.repository.PhotoRepository;
 import cz.ppro.recepty.repository.RecipeIngredientRepository;
 import cz.ppro.recepty.repository.RecipeRepository;
 import cz.ppro.recepty.service.RecipeService;
@@ -22,14 +26,19 @@ import cz.ppro.recepty.validation.EntityValidator;
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
-	@Autowired
-	IngredientRepository ingredientRepository;
+	private static final Log logger = LogFactory.getLog(RecipeServiceImpl.class);
 
 	@Autowired
-	RecipeRepository recipeRepository;
+	private IngredientRepository ingredientRepository;
 
 	@Autowired
-	RecipeIngredientRepository recipeIngredientRepository;
+	private RecipeRepository recipeRepository;
+
+	@Autowired
+	private RecipeIngredientRepository recipeIngredientRepository;
+
+	@Autowired
+	private PhotoRepository photoRepository;
 
 	@Override
 	public void setRating(Recipe recipe, int rating) {
@@ -70,6 +79,8 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public String showRecipesByIngredients(String[] ingredient) {
+
+		// TODO
 		return null;
 	}
 
@@ -98,13 +109,18 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public List<Recipe> getAllRecipesByUser(AppUser user) {
-		return null;
+		return recipeRepository.findByAuthor(user);
 	}
 
 	@Override
 	@Transactional
 	public void deleteRecipe(Recipe recipe) {
 		recipeRepository.delete(recipe);
+	}
+
+	@Override
+	public List<Photo> getPhotosByRecipe(Recipe recipe) {
+		return photoRepository.findByRecipe(recipe);
 	}
 
 }

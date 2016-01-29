@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.domain.Recipe;
 
 @Repository
@@ -20,5 +21,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 	// List<String> findIngredientsByLikeName(@Param("ing_name") String name);
 
 	public List<Recipe> findAllByOrderByRatingAsc();
+
+	public List<Recipe> findByAuthor(AppUser author);
 
 }

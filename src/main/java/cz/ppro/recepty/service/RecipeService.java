@@ -5,6 +5,7 @@ import java.util.List;
 import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.domain.Category;
 import cz.ppro.recepty.domain.Ingredient;
+import cz.ppro.recepty.domain.Photo;
 import cz.ppro.recepty.domain.Recipe;
 import cz.ppro.recepty.domain.RecipeIngredient;
 
@@ -100,4 +101,12 @@ public interface RecipeService {
 	 * @return
 	 */
 	public List<Recipe> getAllRecipesByUser(AppUser user);
+
+	/**
+	 * Najde vsechny fotky k receptu
+	 * 
+	 * @param recipe
+	 * @return
+	 */
+	public List<Photo> getPhotosByRecipe(Recipe recipe);
 }
