@@ -74,7 +74,7 @@ public class RecipeController {
 	public String showDishes(Model model, HttpSession session, @RequestParam("recipe") Recipe recipe) {
 		recipeService.deleteRecipe(recipe);
 		AppUser user = (AppUser) session.getAttribute("user");
-		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
+		model.addAttribute("recipes", recipeService.getAllRecipesByUserId(user.getIdAppUser()));
 		return "listedRecipes";
 	}
 }
