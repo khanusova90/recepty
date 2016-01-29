@@ -1,5 +1,7 @@
 package cz.ppro.recepty.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.List;
 
@@ -78,10 +80,21 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public String showRecipesByIngredients(String[] ingredient) {
+	public List<Recipe> showRecipesByIngredients(List<Ingredient> ingredients) {
+		List<Recipe> recipes = new ArrayList<>();
+		List<Recipe> foundRecipes = new ArrayList<>();
 
-		// TODO
-		return null;
+		for (Ingredient ingredient : ingredients) {
+			recipes.addAll(recipeRepository.findByRecipeIngredients_Ingredient(ingredient));
+		}
+
+		for (Recipe recipe : recipes) {
+			int count = Collections.frequency(recipes, recipe);
+			if (count == ingredients.size()) {
+				foundRecipes.add(recipe);
+			}
+		}
+		return foundRecipes;
 	}
 
 	@Override

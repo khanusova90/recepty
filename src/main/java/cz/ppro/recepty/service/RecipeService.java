@@ -56,12 +56,13 @@ public interface RecipeService {
 	public List<Recipe> showRecipesByCategory(String category);
 
 	/**
-	 * Zobrazi recept podle ingredienci
-	 *
+	 * Najde recepty podle zadanych ingredienci
+	 * 
 	 * @param ingredients
-	 *            Vrati recepty podle ingredience
+	 *            Seznam ingredienci, ktere chceme mit v receptu
+	 * @return Seznam receptu, ktere obsahuji vsechny zadane ingredience
 	 */
-	public String showRecipesByIngredients(String[] ingredients);
+	public List<Recipe> showRecipesByIngredients(List<Ingredient> ingredients);
 
 	/**
 	 * Vytvori recept

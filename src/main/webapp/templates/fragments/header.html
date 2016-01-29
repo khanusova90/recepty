@@ -48,11 +48,9 @@
                         <a th:href="@{/loginForm}" th:text="#{login}"></a>
                     </li>
                     </div>
-                    <div sec:authorize="!isAnonymous()">
-                     <li>
-                        <a th:href="@{/login(logout="true")}" th:text="#{logout}"></a>
+                     <li sec:authorize="!isAnonymous()">
+                        <a th:href="@{/logoutProcess}" th:text="#{logout}"></a>
                     </li>
-                    </div>
                 </ul>
             </div>
         </div>
