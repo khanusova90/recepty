@@ -97,4 +97,7 @@ public interface RecipeService {
 	 * @return Seznam {@link RecipeIngredient}
 	 */
 	public List<RecipeIngredient> getAllIngredients(Long idRecipe);
+
+	public List<Recipe> getAllRecipesByUserId(Long idUser);
+
 }
