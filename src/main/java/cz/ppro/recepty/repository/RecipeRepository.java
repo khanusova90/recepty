@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import cz.ppro.recepty.domain.Ingredient;
 import cz.ppro.recepty.domain.Recipe;
 
 @Repository
@@ -21,5 +22,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 	// @Query("SELECT DISTINCT t FROM RecipeRaw rr JOIN rr.listOfIngredients t "
 	// + "WHERE t LIKE CONCAT('%', :ing_name, '%')")
 	// List<String> findIngredientsByLikeName(@Param("ing_name") String name);
+
+	public List<Ingredient> findRecipeIngredientsByIdRecipe(Long idRecipe);
 
 }

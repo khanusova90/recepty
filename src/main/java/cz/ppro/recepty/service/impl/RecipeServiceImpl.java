@@ -1,6 +1,7 @@
 package cz.ppro.recepty.service.impl;
 
 import java.util.List;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -17,11 +18,6 @@ import cz.ppro.recepty.repository.RecipeIngredientRepository;
 import cz.ppro.recepty.repository.RecipeRepository;
 import cz.ppro.recepty.service.RecipeService;
 import cz.ppro.recepty.validation.EntityValidator;
-
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -69,11 +65,12 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public List<Recipe> showRecipesByCategory(String category) {
-		recipeRepository.findAllByCategory(category);
+		return recipeRepository.findAllByCategory(category);
 	}
 
 	@Override
 	public String showRecipesByIngredients(String[] ingredient) {
+		// TODO: vyresit vyhledavani podle ingredienci
 		return null;
 	}
 
@@ -83,12 +80,14 @@ public class RecipeServiceImpl implements RecipeService {
 		EntityValidator.checkRecipe(recipe);
 		recipeRepository.save(recipe);
 	}
+
 	@Override
 	public List<Recipe> getRecipesSortedByRating() {
+		// TODO: metoda v recipeRepository
 		return recipeRepository.findAll(sortByIdRating());
 	}
-	private Sort sortByIdRating() {
 
+	private Sort sortByIdRating() {
 		return new Sort(Sort.Direction.ASC, "rating");
 	}
 
@@ -101,6 +100,12 @@ public class RecipeServiceImpl implements RecipeService {
 	@Transactional
 	public void deleteRecipe(Recipe recipe) {
 		recipeRepository.delete(recipe);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Ingredient> getAllIngredients(Long idRecipe) {
+		return recipeRepository.findRecipeIngredientsByIdRecipe(idRecipe);
 	}
 
 }
