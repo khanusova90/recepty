@@ -1,5 +1,6 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html lang="cs" xml:lang="cs" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="cs" xml:lang="cs" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
     <title th:text="#{view.title}"></title>
@@ -16,7 +17,7 @@
     <div class="container">
         <div class="row first">
             <div class="col-md-6">
-                <h1>Něco</h1>
+                <h1>Vítejte na Cooking!</h1>
                 <p class="RobotoBold">
                     blibli blabla
                 </p>
@@ -32,6 +33,12 @@
                 <p>Roku ta zimu virům, mi ředitel tkání ročník všeho zvýšil označuje, narodil jmelí, radost výběr, matriarchálně jejichž, pozvedl podobu.Za svá borci uplynulých názvy cyttaria, map slovo apokalyptická podobné zambezi, člun je je póla teorii tmavou právě úspěšnost. </p>
                 <img class="img-responsive" src="resources/img/wtf.jpg" alt=""/>
             </div>
+        </div>
+         <div sec:authorize="!isAnonymous()">
+        <div class="row">
+         <!-- Authorized - add recipe -->
+        <a th:href="@{addRecipe}" th:text="#{addrecipe}" class="btn btn-orange RobotoBold"></a>
+        </div>
         </div>
     </div>
     <!-- /.row -->

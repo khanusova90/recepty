@@ -15,7 +15,7 @@
                 <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()" th:text="#{login}"></a></div>
             </div>
             <div class="panel-body">
-                <form id="signupform" class="form-horizontal" role="form" method="post" action="/j_spring_security_check" th:action="@{/j_spring_security_check}">
+                <form id="signupform" class="form-horizontal" role="form" method="post" th:action="@{/registration}" th:object="${newUser}">
                     <div id="signupalert" style="display:none" class="alert alert-danger">
                         <p>Error:</p>
                         <span></span>
