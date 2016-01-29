@@ -2,6 +2,7 @@ package cz.ppro.recepty.service;
 
 import java.util.List;
 
+import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.domain.Category;
 import cz.ppro.recepty.domain.Ingredient;
 import cz.ppro.recepty.domain.Recipe;
@@ -71,14 +72,6 @@ public interface RecipeService {
 	public void createRecipe(Recipe recipe);
 
 	/**
-	 * Smaze vybrany recept z databaze
-	 * 
-	 * @param id
-	 *            ID receptu
-	 */
-	public void deleteRecipe(Long id);
-
-	/**
 	 * Vrati list receptu podle jejich nejlepsiho hodnoceni
 	 *
 	 */
@@ -92,12 +85,19 @@ public interface RecipeService {
 	/**
 	 * Najde vsechny ingredience zadaneho receptu
 	 * 
-	 * @param idRecipe
-	 *            ID receptu
+	 * @param recipe
 	 * @return Seznam {@link RecipeIngredient}
 	 */
-	public List<RecipeIngredient> getAllIngredients(Long idRecipe);
+	public List<RecipeIngredient> getAllIngredients(Recipe recipe);
 
-	public List<Recipe> getAllRecipesByUserId(Long idUser);
+	public void deleteRecipe(Recipe recipe);
 
+	/**
+	 * Najde recepty podle autora
+	 * 
+	 * @param user
+	 *            {@link AppUser}, ktery recept ulozil
+	 * @return
+	 */
+	public List<Recipe> getAllRecipesByUser(AppUser user);
 }

@@ -1,14 +1,15 @@
 package cz.ppro.recepty.service.impl;
 
 import java.util.List;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Transactional;
 
+import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.domain.Ingredient;
 import cz.ppro.recepty.domain.Recipe;
 import cz.ppro.recepty.domain.RecipeIngredient;
@@ -17,11 +18,6 @@ import cz.ppro.recepty.repository.RecipeIngredientRepository;
 import cz.ppro.recepty.repository.RecipeRepository;
 import cz.ppro.recepty.service.RecipeService;
 import cz.ppro.recepty.validation.EntityValidator;
-
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -86,16 +82,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public List<Recipe> getRecipesSortedByRating() {
-<<<<<<< HEAD
 		return recipeRepository.findAllByOrderByRatingAsc();
-=======
-		return recipeRepository.findAll(sortByIdRating());
-	}
-
-	private Sort sortByIdRating() {
-
-		return new Sort(Sort.Direction.ASC, "rating");
->>>>>>> 8fff9336f165d7035d6db654b7614868681efda2
 	}
 
 	@Override
@@ -104,27 +91,20 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public List<Ingredient> getAllIngredients(Long idRecipe) {
-		return null;
+	@Transactional(readOnly = true)
+	public List<RecipeIngredient> getAllIngredients(Recipe recipe) {
+		return recipeIngredientRepository.findByRecipe(recipe);
 	}
 
-	<<<<<<<HEAD @Override @Transactional(readOnly=true)
-
-	public List<RecipeIngredient> getAllIngredients(Long idRecipe) {
-		return recipeIngredientRepository.findByRecipe_IdRecipe(idRecipe);
-=======
-
 	@Override
-	public List<Recipe> getAllRecipesByUserId(Long idUser) {
+	public List<Recipe> getAllRecipesByUser(AppUser user) {
 		return null;
 	}
 
 	@Override
 	@Transactional
-	public void deleteRecipe(Long id) {
-		Recipe recipe = recipeRepository.findOne(id);
+	public void deleteRecipe(Recipe recipe) {
 		recipeRepository.delete(recipe);
->>>>>>> 8fff9336f165d7035d6db654b7614868681efda2
 	}
 
 }
