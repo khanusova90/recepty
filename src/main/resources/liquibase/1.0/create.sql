@@ -74,3 +74,15 @@ alter table recipe add NAME varchar(255) not null;
 
 --changeset hanuska1:create-6
 alter table recipe add DESCRIPTION varchar(255);
+
+--changeset hanuska1:create-7
+create table PHOTO(
+	ID_PHOTO bigint(19) not null auto_increment,
+	PHOTO blob not null,
+	ID_RECIPE bigint(19) not null,
+	primary key(ID_PHOTO),
+	constraint fk_photo_recipe foreign key fk_photo_recipe(ID_RECIPE) references RECIPE(ID_RECIPE)
+);
+
+--changeset hanuska1:create-8
+alter table photo add ACTIVE bit not null,
