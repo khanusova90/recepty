@@ -4,6 +4,8 @@ import cz.ppro.recepty.domain.Ingredient;
 import cz.ppro.recepty.domain.Recipe;
 import cz.ppro.recepty.domain.RecipeIngredient;
 
+import java.util.List;
+
 public interface RecipeService {
 
 	/**
@@ -67,4 +69,11 @@ public interface RecipeService {
 	 */
 	public void deleteRecipe(Recipe recipe);
 
+	/**
+	 * Vrati list receptu podle jejich nejlepsiho hodnoceni
+	 *
+	 */
+	public List<Recipe> getRecipesSortedByRating();
+	public List<Recipe> getAllRecipes();
+	public List<Ingredient> getAllIngredients(Long idRecipe);
 }

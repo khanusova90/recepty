@@ -14,7 +14,7 @@ import cz.ppro.recepty.domain.Recipe;
 import cz.ppro.recepty.service.RecipeService;
 
 @Controller
-@RequestMapping("/recipe")
+@RequestMapping("/recipes")
 public class RecipeController {
 
 	@Autowired
@@ -22,17 +22,19 @@ public class RecipeController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showRecipes(Model model, HttpSession session) {
-		return "start";
+		return "listedRecipes";
 	}
 
-	@RequestMapping(value = "/{recipeType}")
+	@RequestMapping(value = "/recipes/{recipeType}")
 	public void showRecipesByCategory(HttpSession session, Model model, @PathVariable("recipeType") String recipeType) {
 
 	}
 
-	@RequestMapping(value = "/detail")
-	public String showRecipesDetail(int recipeId) {
-		return "/recipe/detail" + recipeId;
+	@RequestMapping(value = "/recipe/detail")
+	public String showRecipesDetail(Recipe recipe, Model model,HttpSession session) {
+		model.addAttribute("recipeIngredients", recipeService.getAllIngredients(recipe.getIdRecipe()));
+		//model.addAttribute("recipe", recipeService.ge);
+		return "recipeDetail";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -44,8 +46,11 @@ public class RecipeController {
 			return "add";
 		}
 		recipeService.createRecipe(recipe);
-
 		return null;
 	}
-
+	@RequestMapping(value = "/recipes", method = RequestMethod.GET)
+	public String showDishes(Model model){
+		model.addAttribute("allRecipes", recipeService.getAllRecipes());
+		return "listedRecipes";
+	}
 }

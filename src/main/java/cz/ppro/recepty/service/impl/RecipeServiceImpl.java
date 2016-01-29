@@ -1,6 +1,7 @@
 package cz.ppro.recepty.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,11 @@ import cz.ppro.recepty.repository.RecipeIngredientRepository;
 import cz.ppro.recepty.repository.RecipeRepository;
 import cz.ppro.recepty.service.RecipeService;
 import cz.ppro.recepty.validation.EntityValidator;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -74,6 +80,19 @@ public class RecipeServiceImpl implements RecipeService {
 	public void createRecipe(Recipe recipe) {
 		EntityValidator.checkRecipe(recipe);
 		recipeRepository.save(recipe);
+	}
+	@Override
+	public List<Recipe> getRecipesSortedByRating() {
+		return recipeRepository.findAll(sortByIdRating());
+	}
+	private Sort sortByIdRating() {
+
+		return new Sort(Sort.Direction.ASC, "rating");
+	}
+
+	@Override
+	public List<Recipe> getAllRecipes() {
+		return recipeRepository.findAll();
 	}
 
 	@Override

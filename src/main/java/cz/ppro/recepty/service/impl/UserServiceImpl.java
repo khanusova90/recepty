@@ -8,7 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.domain.Role;
 import cz.ppro.recepty.repository.UserRepository;
 import cz.ppro.recepty.service.UserService;
