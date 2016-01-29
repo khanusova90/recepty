@@ -32,11 +32,6 @@ public class Recipe {
 
 	private String name;
 
-	@ElementCollection
-	@CollectionTable(name = "RECIPE_MEAL", joinColumns = { @JoinColumn(name = "ID_RECIPE") })
-	@Column(name = "MEAL")
-	private List<String> meals;
-
 	@Column(name = "RATING")
 	private float rating;
 
@@ -46,6 +41,11 @@ public class Recipe {
 	@Lob
 	@Column(name = "PREPARATION")
 	private String preparationProcess;
+
+	@ElementCollection
+	@CollectionTable(name = "RECIPE_MEAL", joinColumns = { @JoinColumn(name = "ID_RECIPE") })
+	@Column(name = "MEAL")
+	private List<String> categories;
 
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "recipe", fetch = FetchType.EAGER)
 	private List<RecipeIngredient> recipeIngredients;
@@ -66,12 +66,16 @@ public class Recipe {
 		this.idRecipe = idRecipe;
 	}
 
-	public List<String> getMeals() {
-		return meals;
+	public List<String> getCategories() {
+		return categories;
 	}
 
-	public void setMeals(List<String> meals) {
-		this.meals = meals;
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
+	}
+
+	public void addCategory(String category) {
+		this.categories.add(category);
 	}
 
 	public String getPreparationProcess() {

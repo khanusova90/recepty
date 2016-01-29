@@ -1,11 +1,18 @@
 package cz.ppro.recepty.service;
 
+import java.util.List;
+
+import cz.ppro.recepty.domain.Category;
 import cz.ppro.recepty.domain.Ingredient;
 import cz.ppro.recepty.domain.Recipe;
 import cz.ppro.recepty.domain.RecipeIngredient;
 
-import java.util.List;
-
+/**
+ * Interface pro praci s recepty
+ * 
+ * @author Katerina Hanusova
+ *
+ */
 public interface RecipeService {
 
 	/**
@@ -38,12 +45,13 @@ public interface RecipeService {
 	public void addIngredientToRecipe(RecipeIngredient recipeIngredient);
 
 	/**
-	 * Zobrazi recept podle kategorie
-	 *
+	 * Vyhleda recepty podle zadane kategorie
+	 * 
 	 * @param category
-	 *            Vrati recepty podle kategorie
+	 *            String hodnota {@link Category}
+	 * @return List of {@link Recipe}
 	 */
-	public String showRecipesByCategory(String category);
+	public List<Recipe> showRecipesByCategory(String category);
 
 	/**
 	 * Zobrazi recept podle ingredienci

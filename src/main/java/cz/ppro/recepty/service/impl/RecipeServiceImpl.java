@@ -1,5 +1,7 @@
 package cz.ppro.recepty.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -66,8 +68,8 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public String showRecipesByCategory(String category) {
-		return null;
+	public List<Recipe> showRecipesByCategory(String category) {
+		recipeRepository.findAllByCategory(category);
 	}
 
 	@Override
