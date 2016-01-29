@@ -51,6 +51,7 @@ public class Recipe {
 	private List<RecipeIngredient> recipeIngredients;
 
 	@ManyToOne
+	@JoinColumn(name = "ID_APP_USER")
 	private AppUser author;
 
 	public Recipe() {
