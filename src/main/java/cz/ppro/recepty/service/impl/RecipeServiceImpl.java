@@ -69,7 +69,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public List<Recipe> showRecipesByCategory(String category) {
-		recipeRepository.findAllByCategory(category);
+		return recipeRepository.findByCategory(category);
 	}
 
 	@Override
@@ -83,13 +83,19 @@ public class RecipeServiceImpl implements RecipeService {
 		EntityValidator.checkRecipe(recipe);
 		recipeRepository.save(recipe);
 	}
+
 	@Override
 	public List<Recipe> getRecipesSortedByRating() {
+<<<<<<< HEAD
+		return recipeRepository.findAllByOrderByRatingAsc();
+=======
 		return recipeRepository.findAll(sortByIdRating());
 	}
+
 	private Sort sortByIdRating() {
 
 		return new Sort(Sort.Direction.ASC, "rating");
+>>>>>>> 8fff9336f165d7035d6db654b7614868681efda2
 	}
 
 	@Override
@@ -102,16 +108,23 @@ public class RecipeServiceImpl implements RecipeService {
 		return null;
 	}
 
-    @Override
-    public List<Recipe> getAllRecipesByUserId(Long idUser) {
-        return null;
-    }
+	<<<<<<<HEAD @Override @Transactional(readOnly=true)
 
-    @Override
+	public List<RecipeIngredient> getAllIngredients(Long idRecipe) {
+		return recipeIngredientRepository.findByRecipe_IdRecipe(idRecipe);
+=======
+
+	@Override
+	public List<Recipe> getAllRecipesByUserId(Long idUser) {
+		return null;
+	}
+
+	@Override
 	@Transactional
 	public void deleteRecipe(Long id) {
 		Recipe recipe = recipeRepository.findOne(id);
 		recipeRepository.delete(recipe);
+>>>>>>> 8fff9336f165d7035d6db654b7614868681efda2
 	}
 
 }

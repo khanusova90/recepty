@@ -73,7 +73,8 @@ public interface RecipeService {
 	/**
 	 * Smaze vybrany recept z databaze
 	 * 
-	 * @param recipe
+	 * @param id
+	 *            ID receptu
 	 */
 	public void deleteRecipe(Long id);
 
@@ -82,8 +83,21 @@ public interface RecipeService {
 	 *
 	 */
 	public List<Recipe> getRecipesSortedByRating();
+
+	/**
+	 * @return Vsechny instance {@link Recipe} ulozene v DB
+	 */
 	public List<Recipe> getAllRecipes();
-	public List<Ingredient> getAllIngredients(Long idRecipe);
+
+	/**
+	 * Najde vsechny ingredience zadaneho receptu
+	 * 
+	 * @param idRecipe
+	 *            ID receptu
+	 * @return Seznam {@link RecipeIngredient}
+	 */
+	public List<RecipeIngredient> getAllIngredients(Long idRecipe);
+
 	public List<Recipe> getAllRecipesByUserId(Long idUser);
 
 }
