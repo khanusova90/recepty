@@ -43,7 +43,9 @@ public class RecipeServiceImpl implements RecipeService {
 	private PhotoRepository photoRepository;
 
 	@Override
+	@Transactional
 	public void setRating(Recipe recipe, int rating) {
+		logger.info("Prepocitavam hodnoceni u receptu ID " + recipe.getIdRecipe());
 		int rateCount = recipe.getRateCount();
 		if (rateCount == 0) {
 			recipe.setRating(rating);
@@ -52,15 +54,18 @@ public class RecipeServiceImpl implements RecipeService {
 			float newRating = (totalRating + rating) / (rateCount + 1);
 			recipe.setRating(newRating);
 		}
-
 		rateCount++;
 		recipe.setRateCount(rateCount);
+		logger.info("Nove hodnoceni: " + recipe.getRating());
 
 		recipeRepository.save(recipe);
 	}
 
 	@Override
+	@Transactional
 	public Ingredient createIngredient(String ingredientName) {
+		logger.info("Ukladam novou ingredienci s nazvem " + ingredientName);
+
 		Ingredient ingredient = new Ingredient();
 		ingredient.setIngredientName(ingredientName);
 		ingredientRepository.save(ingredient);
@@ -69,17 +74,20 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
+	@Transactional
 	public void addIngredientToRecipe(RecipeIngredient recipeIngredient) {
 		EntityValidator.checkRecipeIngredient(recipeIngredient);
 		recipeIngredientRepository.save(recipeIngredient);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Recipe> showRecipesByCategory(String category) {
 		return recipeRepository.findByCategory(category);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Recipe> findRecipesByAllIngredients(List<Ingredient> ingredients) {
 		List<Recipe> recipes = new ArrayList<>();
 		List<Recipe> foundRecipes = new ArrayList<>();
@@ -98,6 +106,7 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Recipe> findRecipesByIngredients(List<Ingredient> ingredients) {
 		List<Recipe> recipes = new ArrayList<>();
 		List<Recipe> foundRecipes = new ArrayList<>();
@@ -125,11 +134,13 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Recipe> getRecipesSortedByRating() {
 		return recipeRepository.findAllByOrderByRatingAsc();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Recipe> getAllRecipes() {
 		return recipeRepository.findAll();
 	}
@@ -141,6 +152,7 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Recipe> getAllRecipesByUser(AppUser user) {
 		return recipeRepository.findByAuthor(user);
 	}
@@ -152,6 +164,7 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Photo> getPhotosByRecipe(Recipe recipe) {
 		return photoRepository.findByRecipe(recipe);
 	}
