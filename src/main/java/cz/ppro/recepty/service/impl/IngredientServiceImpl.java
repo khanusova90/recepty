@@ -1,5 +1,6 @@
 package cz.ppro.recepty.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,17 @@ public class IngredientServiceImpl implements IngredientService {
 	@Override
 	public List<Ingredient> getAll() {
 		return ingredientRepository.findAll();
+	}
+
+	@Override
+	public List<Ingredient> splitIngredients(String ingredientsStr) {
+		List<Ingredient> ingredients = new ArrayList<>();
+
+		String[] ingredientNames = ingredientsStr.split(",");
+		for (String s : ingredientNames) {
+			ingredientRepository.findByIngredientNameLike(s);
+		}
+
+		return ingredients;
 	}
 }

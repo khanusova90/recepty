@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Propojujici tabulka pro recepty a ingredience nesouci informace o mnozstvi
@@ -16,6 +17,7 @@ import javax.persistence.ManyToOne;
  *
  */
 @Entity
+@Table(name = "RECIPE_INGREDIENT")
 public class RecipeIngredient {
 
 	@Id

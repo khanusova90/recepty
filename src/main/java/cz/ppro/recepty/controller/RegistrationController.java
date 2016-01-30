@@ -14,21 +14,13 @@ import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.service.UserService;
 
 @Controller
-public class RegistrationController {
+class RegistrationController {
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@Autowired
-	MessageSource messageSource;
-
-	// @RequestMapping(value = "/registration", method = RequestMethod.GET)
-	// public String getRequest(Model model) {
-	// AppUser user = new AppUser();
-	// model.addAttribute("newUser", user);
-	//
-	// return "registration";
-	// }
+	private MessageSource messageSource;
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String registerUser(@ModelAttribute("newUser") AppUser user, Model model, Locale locale) {

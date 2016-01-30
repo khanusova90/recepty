@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import cz.ppro.recepty.repository.IngredientRepository;
-import cz.ppro.recepty.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cz.ppro.recepty.domain.AppUser;
+import cz.ppro.recepty.domain.Category;
 import cz.ppro.recepty.domain.Ingredient;
 import cz.ppro.recepty.domain.Recipe;
+import cz.ppro.recepty.service.IngredientService;
 import cz.ppro.recepty.service.RecipeService;
 
 @Controller
 @RequestMapping("/recipes")
-public class RecipeController {
+class RecipeController {
 
 	@Autowired
 	private RecipeService recipeService;
@@ -34,6 +34,7 @@ public class RecipeController {
 		model.addAttribute("recipes", recipeService.getAllRecipes());
 		return "listedRecipes";
 	}
+
 	@RequestMapping(value = "/{recipeType}")
 	public void showRecipesByCategory(HttpSession session, Model model, @PathVariable("recipeType") String recipeType) {
 		model.addAttribute("ingredients", recipeService.showRecipesByCategory(recipeType));
@@ -48,6 +49,7 @@ public class RecipeController {
 
 	@RequestMapping(value = "/addRecipe", method = RequestMethod.GET)
 	public String addRecipe(Recipe recipe) {
+
 		return "recipeAddForm";
 	}
 
@@ -56,10 +58,11 @@ public class RecipeController {
 			@RequestParam("description") String description, @RequestParam("preparation") String preparation,
 			@RequestParam("ingredients") List<Ingredient> ingredients) {
 		AppUser user = (AppUser) session.getAttribute("user");
-
 		String author = user.getUsername();
 		Recipe recipe = new Recipe();
-		recipeService.createRecipe(recipe);
+		recipeService.createRecipe(recipe); // FIXME: Tady uz se recept uklada
+											// do DB, musi mit vyplneny hodnoty
+											// (postup a ingredience)
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
 		return "redirect:/listedRecipes";
 	}
@@ -74,7 +77,7 @@ public class RecipeController {
 
 	@RequestMapping(value = "/search")
 	public String showDishes(Model model) {
-			model.addAttribute("allIngredients",ingredientService.getAll());
+		model.addAttribute("allIngredients", ingredientService.getAll());
 		model.addAttribute("reicpes", null);
 		return "searchByIngredients";
 	}
@@ -83,5 +86,10 @@ public class RecipeController {
 	public String showDishes(Model model, @RequestParam("ingredients") String ingredientsString) {
 		model.addAttribute("reicpes", null);
 		return "searchByIngredients";
+	}
+
+	public String getCategories(Model model) {
+		model.addAttribute("categories", Category.values());
+		return "recipeAddForm";
 	}
 }

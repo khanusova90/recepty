@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Trida reprezentujici jednotlive druhy prisad.
@@ -13,6 +14,7 @@ import javax.persistence.Id;
  *
  */
 @Entity
+@Table(name = "INGREDIENT")
 public class Ingredient {
 
 	@Id
