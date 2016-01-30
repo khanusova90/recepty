@@ -1,0 +1,46 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="cs" xml:lang="cs" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title th:text="#{view.title}"></title>
+    <link rel="shortcut icon" href="../../resources/img/favicon.ico" th:href="@{/resources/img/favicon.ico}" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <script src="../../resources/js/jquery.js" th:src="@{/resources/js/jquery.js}"></script>
+    <script src="../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+    <script src="../../resources/js/validator.js" th:src="@{/resources/js/validator.js}"></script>
+    <script src="../../resources/js/search.js" th:src="@{/resources/js/search.js}"></script>
+    <link rel="stylesheet" href="../resources/css/main-style.css" th:href="@{/resources/css/main-style.css}" />
+</head>
+
+<body>
+    <th:block th:include="fragments/header :: header"></th:block>
+    <div class="container">
+        <div class="row first">
+            <div class="col-xs-12">
+                <form id="searchBy" role="form" method="post" th:action="@{/recipes/searchByIngredient}">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="sizing-addon1">
+                        	<i class="fa fa-flask"></i>
+                        </span>
+                        <input type="text" id="tags" class="form-control" th:placeholder="${ingredients}" aria-describedby="sizing-addon1" />
+                        <span class="input-group-btn">
+	                        <button class="btn btn-orange" type="submit">
+	                        	<i class="fa fa-search"></i>
+	                        </button>
+	                    </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <th:block th:include="recipes/recipeList :: recipeList"></th:block>
+        </div>
+        <!-- /.row -->
+        </div>
+        <hr />
+        <footer th:include="fragments/footer :: footer"></footer>
+    
+</body>
+
+</html>

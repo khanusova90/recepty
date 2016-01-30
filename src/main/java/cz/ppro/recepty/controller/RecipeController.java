@@ -84,7 +84,7 @@ class RecipeController {
 
 	@RequestMapping(value = "/searchByIngredientAll")
 	public String showDishes(Model model, Locale locale) {
-		model.addAttribute("ingredients", ingredientService.getAll());
+		// model.addAttribute("ingredients", ingredientService.getAll());
 		model.addAttribute("recipes", null);
 		model.addAttribute("selectedIngredients", messageSource.getMessage("insertIngredients", null, locale));
 		return "searchByIngredients";
@@ -93,21 +93,35 @@ class RecipeController {
 	@RequestMapping(value = "/searchByIngredientAll", method = RequestMethod.POST)
 	public String showDishes(Model model, @ModelAttribute("selectedIngredients") String ingredientsString) {
 		List<Ingredient> ingredients = ingredientService.splitIngredients(ingredientsString);
-		List<Recipe> recipes = recipeService.findRecipesByIngredients(ingredients);
+		List<Recipe> recipes = recipeService.findRecipesByAllIngredients(ingredients);
 		model.addAttribute("recipes", recipes);
 		return "listedRecipes";
 	}
 
 	@RequestMapping(value = "/searchByName", method = RequestMethod.GET)
-	public String searchByName(Model model, Locale locale) {
-		model.addAttribute("ingredients", ingredientService.getAll());
+	public String findByName(Model model, Locale locale) {
+		model.addAttribute("name", messageSource.getMessage("insertName", null, locale));
 		model.addAttribute("recipes", null);
 		return "searchByName";
 	}
 
 	@RequestMapping(value = "/searchByName", method = RequestMethod.POST)
-	public String findRecipeByName(Model model, @ModelAttribute("name") String name) {
+	public String findByName(Model model, @ModelAttribute("name") String name) {
 		List<Recipe> recipes = recipeService.findRecipesByName(name);
+		model.addAttribute("recipes", recipes);
+		return "listedRecipes";
+	}
+
+	@RequestMapping(value = "/searchByIngredient", method = RequestMethod.GET)
+	public String findByIngredients(Model model, Locale locale) {
+		model.addAttribute("selectedIngredients", messageSource.getMessage("insertIngredients", null, locale));
+		return "searchByIngredients";
+	}
+
+	@RequestMapping(value = "/searchByIngredient", method = RequestMethod.POST)
+	public String findByIngredients(Model model, @ModelAttribute("ingredients") String ingredientsString) {
+		List<Ingredient> ingredients = ingredientService.splitIngredients(ingredientsString);
+		List<Recipe> recipes = recipeService.findRecipesByIngredients(ingredients);
 		model.addAttribute("recipes", recipes);
 		return "listedRecipes";
 	}
