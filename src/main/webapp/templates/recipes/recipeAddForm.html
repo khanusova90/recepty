@@ -6,54 +6,63 @@
     <link rel="shortcut icon" href="/resources/img/favicon.ico" type="image/x-icon" />
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <th:block th:include="fragments/includes :: js" />
-    <link rel="stylesheet" href="../../resources/css/main-style.css" th:href="@{resources/css/main-style.css}" />
+    <link rel="stylesheet" href="../../resources/css/main-style.css" th:href="@{/resources/css/main-style.css}" />
 </head>
 
 <body>
     <th:block th:include="fragments/header :: header"></th:block>
     <div class="container">
         <div class="row first">
-            <form id="loginform" class="form-horizontal" role="form" action="#" th:action="@{/loginProcess}" method="post">
+            <form id="addRecipe" class="form-horizontal" role="form" action="#" th:action="@{addRecipe}" th:object="${recipe}" method="post">
                 <div class="form-group">
                     <label for="category" class="col-md-3 control-label" th:text="#{category}">Název kategorie</label>
                     <div class="col-md-9">
                         <select class="form-control" id="sel1">
-                            <option th:each="category : ${categories}"><span th:text="${category.name}">Název kategorie</span></option>
+                            <option th:each="category : ${categories}"><span th:text="#{${category.name}}">Název kategorie</span></option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="name" class="col-md-3 control-label" th:text="#{name}">Název receptu</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" name="firstname" th:field="*{name}" />
+                        <input type="text" class="form-control" name="name" th:field="*{name}" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="description" class="col-md-3 control-label" th:text="#{description}">Popis</label>
+                    <label for="description" class="col-md-3 control-label" th:text="#{recipe.description}">Popis</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" name="lastname" th:field="*{description}" />
+                        <input type="text" class="form-control" name="description" th:field="*{description}" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="preparation" class="col-md-3 control-label" th:text="#{preparation}">Příprava</label>
+                    <label for="preparation" class="col-md-3 control-label" th:text="#{recipe.preparation}">Příprava</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" name="lastname" th:field="*{preparation}" />
+                        <input type="text" class="form-control" name="preparation" th:field="*{preparationProcess}" />
                     </div>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-file-image-o"></i></span>
-                    <input type="text" id="tags" class="form-control" th:placeholder="#{insertIngredients}" aria-describedby="sizing-addon1" />
+                    <textarea rows="9" type="text" id="tags" class="form-control" th:placeholder="#{insertIngredients}" th:value="${ingredients}" aria-describedby="sizing-addon1" />
                     <span class="input-group-btn">
                         <button class="btn btn-orange" type="file"><i class="fa fa-search">Procházet</i>
                         </button> 
                     </span>
+                </div> 
+                <div class="form-group">
+                	<!-- Button -->
+                    <div class="col-md-offset-3 col-md-9">
+                    	<button id="btn-save" type="submit" class="btn btn-orange"><i class="icon-hand-right"></i>
+                        	<span th:text="#{save}"></span>
+                        </button>
+                    </div>
                 </div>
                 <div class="help-block with-errors"></div>
             </form>
         </div>
-        <hr />
-        <footer th:include="fragments/footer :: footer"></footer>
-        <th:block th:include="fragments/includes :: js"></th:block>
+	</div>
+    <hr />
+    <footer th:include="fragments/footer :: footer"></footer>
+    <th:block th:include="fragments/includes :: js"></th:block>
 </body>
 
 </html>

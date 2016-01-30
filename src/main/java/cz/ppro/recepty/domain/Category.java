@@ -31,4 +31,8 @@ public enum Category {
 		return EnumTranslator.getMessageKey(this);
 	}
 
+	public String getName() {
+		return this.toString();
+	}
+
 }

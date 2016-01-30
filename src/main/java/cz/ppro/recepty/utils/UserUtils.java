@@ -2,7 +2,8 @@ package cz.ppro.recepty.utils;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
+
+import cz.ppro.recepty.domain.AppUser;
 
 public class UserUtils {
 
@@ -20,10 +21,9 @@ public class UserUtils {
 	/**
 	 * @return Aktualne prihlaseny uzivatel
 	 */
-	public static User getActualUser() {
-		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	public static AppUser getActualUser() {
+		AppUser user = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return user;
 	}
-
 
 }

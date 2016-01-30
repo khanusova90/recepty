@@ -1,5 +1,6 @@
 package cz.ppro.recepty.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.domain.Category;
 import cz.ppro.recepty.domain.Ingredient;
 import cz.ppro.recepty.domain.Recipe;
+import cz.ppro.recepty.domain.RecipeIngredient;
 import cz.ppro.recepty.service.IngredientService;
 import cz.ppro.recepty.service.RecipeService;
 
@@ -48,9 +50,22 @@ class RecipeController {
 	}
 
 	@RequestMapping(value = "/addRecipe", method = RequestMethod.GET)
-	public String addRecipe(Recipe recipe) {
+	public String addRecipe(Model model) {
+		Recipe recipe = new Recipe();
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("categories", Category.values());
 
-		return "recipeAddForm";
+		return "recipes/recipeAddForm";
+	}
+
+	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
+	public String doAddRecipe(Recipe recipe, @RequestParam("ingredients") String ingredients) {
+		// List<Ingredient> ingredientsList =
+		// ingredientService.splitIngredients(ingredients);
+		List<RecipeIngredient> ingredientsList = new ArrayList<>();
+		recipeService.createRecipe(recipe, ingredientsList);
+
+		return "redirect:/listedRecipes";
 	}
 
 	@RequestMapping(value = "/doAddRecipe", method = RequestMethod.POST)
@@ -60,9 +75,14 @@ class RecipeController {
 		AppUser user = (AppUser) session.getAttribute("user");
 		String author = user.getUsername();
 		Recipe recipe = new Recipe();
-		recipeService.createRecipe(recipe); // FIXME: Tady uz se recept uklada
-											// do DB, musi mit vyplneny hodnoty
-											// (postup a ingredience)
+		recipeService.createRecipe(recipe, new ArrayList<RecipeIngredient>()); // FIXME:
+																				// Tady
+																				// uz
+																				// se
+																				// recept
+																				// uklada
+		// do DB, musi mit vyplneny hodnoty
+		// (postup a ingredience)
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
 		return "redirect:/listedRecipes";
 	}
@@ -86,11 +106,6 @@ class RecipeController {
 	public String showDishes(Model model, @RequestParam("ingredients") String ingredientsString) {
 		model.addAttribute("reicpes", null);
 		return "searchByIngredients";
-	}
-
-	public String getCategories(Model model) {
-		model.addAttribute("categories", Category.values());
-		return "recipeAddForm";
 	}
 
 	public String findRecipeByName(Model model) {

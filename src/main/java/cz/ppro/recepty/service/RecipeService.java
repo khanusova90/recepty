@@ -81,9 +81,10 @@ public interface RecipeService {
 	 *
 	 * @param recipe
 	 *            {@link Recipe} s vyplnenymi hodnotami. Musi mit vyplnen postup
-	 *            a ingredience
+	 * @param ingredients
+	 *            Seznam ingredienci k receptu
 	 */
-	public void createRecipe(Recipe recipe);
+	public void createRecipe(Recipe recipe, List<RecipeIngredient> ingredients);
 
 	/**
 	 * Vrati list receptu podle jejich nejlepsiho hodnoceni

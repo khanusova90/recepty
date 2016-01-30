@@ -23,6 +23,7 @@ import cz.ppro.recepty.repository.PhotoRepository;
 import cz.ppro.recepty.repository.RecipeIngredientRepository;
 import cz.ppro.recepty.repository.RecipeRepository;
 import cz.ppro.recepty.service.RecipeService;
+import cz.ppro.recepty.utils.UserUtils;
 import cz.ppro.recepty.validation.EntityValidator;
 
 @Service
@@ -128,7 +129,9 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	@Transactional
-	public void createRecipe(Recipe recipe) {
+	public void createRecipe(Recipe recipe, List<RecipeIngredient> ingredients) {
+		recipe.getRecipeIngredients().addAll(ingredients);
+		recipe.setAuthor(UserUtils.getActualUser());
 		EntityValidator.checkRecipe(recipe);
 		recipeRepository.save(recipe);
 	}

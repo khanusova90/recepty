@@ -14,8 +14,8 @@
     <div class="container">
         <div class="row first">
             <div class="col-md-6">
-             <h1 sec:authorize="isAuthenticated()">Vítejte na Cooking!</h1>
-              <h1 sec:authorize="isAnonymous()">Byl/a jste úspěšné přihlášen/a!</h1>
+             <h1 sec:authorize="isAuthenticated()">Byl/a jste úspěšně přihlášen/a! </h1>
+             <h1 sec:authorize="isAnonymous()">Vítejte na Cooking!</h1>
                 <p class="RobotoBold">
                     blibli blabla
                 </p>
@@ -35,7 +35,7 @@
         <div sec:authorize="isAuthenticated()">
             <div class="row">
                 <!-- Authorized - add recipe -->
-                <a th:href="@{addRecipe}" th:text="#{addrecipe}" class="btn btn-orange RobotoBold"></a>
+                <a th:href="@{recipes/addRecipe}" th:text="#{addrecipe}" class="btn btn-orange RobotoBold"></a>
             </div>
         </div>
     </div>
