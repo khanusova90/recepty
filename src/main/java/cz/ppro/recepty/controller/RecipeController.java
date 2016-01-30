@@ -91,7 +91,7 @@ class RecipeController {
 
 	@RequestMapping(value = "/addRecipe", params = "addRecipeIngredient", method = RequestMethod.POST)
 	public String addRow(final Recipe recipe, Model model, @ModelAttribute("ingredient") Ingredient ingredient,
-			@ModelAttribute("photo") File photo) {
+			@ModelAttribute("photo") File photo, Category category) {
 		RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
 		recipeIngredient.setIngredient(ingredient);
 		recipe.getRecipeIngredients().add(recipeIngredient);
@@ -100,6 +100,7 @@ class RecipeController {
 		model.addAttribute("recipeIngredients", new ArrayList<RecipeIngredient>());
 		model.addAttribute("ingredients", ingredientService.getAll());
 		model.addAttribute("photo", new File("test"));
+		model.addAttribute("category", category);
 		return "recipes/recipeAddForm";
 	}
 
