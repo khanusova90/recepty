@@ -27,10 +27,10 @@ class RegistrationController {
 		Boolean success = userService.saveUser(user);
 		if (success) {
 			model.addAttribute("message", messageSource.getMessage("login.user.added", null, locale));
-			return "login";
+			return "home";
 		} else {
 			model.addAttribute("errMsg", messageSource.getMessage("validation.login.exists", null, locale));
-			return "home";
+			return "user/login";
 		}
 	}
 }
