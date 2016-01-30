@@ -91,7 +91,6 @@ class RecipeController {
 	@RequestMapping(value = "/addRecipe", params = "addRecipeIngredient", method = RequestMethod.POST)
 	public String addRow(final Recipe recipe, Model model, @ModelAttribute("ingredient") Ingredient ingredient) {
 		RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
-		// recipeIngredient.setIdRecipeIngredient(-1l);
 		recipeIngredient.setIngredient(ingredient);
 		recipe.getRecipeIngredients().add(recipeIngredient);
 		model.addAttribute("recipe", recipe);
