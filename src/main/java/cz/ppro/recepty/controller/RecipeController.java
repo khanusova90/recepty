@@ -76,13 +76,15 @@ class RecipeController {
 
 	@RequestMapping(value = "/search")
 	public String showDishes(Model model) {
-		model.addAttribute("allIngredients", ingredientService.getAll());
-		model.addAttribute("reicpes", null);
+		model.addAttribute("ingredients", ingredientService.getAll());
+		model.addAttribute("recipes", null);
 		return "searchByIngredients";
 	}
 
 	@RequestMapping(value = "/searchBy")
 	public String showDishes(Model model, @RequestParam("ingredients") String ingredientsString) {
+
+		// TODO: recepty podle ingredienci
 		model.addAttribute("reicpes", null);
 		return "searchByIngredients";
 	}
