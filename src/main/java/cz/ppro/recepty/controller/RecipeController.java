@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.domain.Category;
@@ -61,15 +62,14 @@ class RecipeController {
 	}
 
 	@RequestMapping(value = "/detail")
-	public String showRecipesDetail(Model model, HttpSession session, @RequestParam("id") Long idRecipe) {
-		Recipe recipe = recipeService.findById(idRecipe);
+	public String showRecipesDetail(Model model, HttpSession session, @RequestParam("recipe") Recipe recipe) {
 		model.addAttribute("recipeIngredients", recipe.getRecipeIngredients());
 		model.addAttribute("recipe", recipe);
-		List<Photo> images = recipe.getPhotos();
-		if (!images.isEmpty()) {
-			byte[] imgInBytes = images.get(0).getPhoto();
-			model.addAttribute("imgInBytes", imgInBytes);
-		}
+        List<Photo> images = recipe.getPhotos();
+        if(!images.isEmpty()){
+            byte[] imgInBytes = images.get(0).getPhoto();
+            model.addAttribute("imgInBytes", imgInBytes);
+        }
 		return "recipeDetail";
 	}
 
@@ -119,21 +119,21 @@ class RecipeController {
 	}
 
 	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
-	public String doAddRecipe(Recipe recipe, Model model, @RequestParam("photo") File file) {
+	public String doAddRecipe(Recipe recipe, Model model,@RequestParam("photos") List<File> photos) {
 		String username = UserUtils.getActualUsername();
 		AppUser user = userService.findUserByUsername(username);
 
-		byte[] bytes = null;
-		if (file.exists()) {
-			bytes = imageToByte(file);
-		}
-		if (bytes != null) {
-			Photo photo = new Photo();
-			photo.setPhoto(bytes);
-			List<Photo> photos = null;
-			photos.add(photo);
-			recipe.setPhotos(photos);
-		}
+        File file = photos.get(1);
+        byte[] bytes = null;
+        if (file.exists()) {
+            bytes = imageToByte(file);
+        }
+        if(bytes != null) {
+            Photo photo = new Photo();
+            photo.setPhoto(bytes);
+            List<Photo> photosIn = null;
+            photosIn.add(photo);
+            recipe.setPhotos(photosIn);}
 
 		recipeService.createRecipe(recipe, user);
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
@@ -183,18 +183,18 @@ class RecipeController {
 		return "listedRecipes";
 	}
 
-	private byte[] imageToByte(File file) {
-		try {
-			byte[] imageInByte;
-			BufferedImage originalImage = ImageIO.read(new File(file.getName()));
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ImageIO.write(originalImage, "jpg", baos);
-			baos.flush();
-			imageInByte = baos.toByteArray();
-			baos.close();
-			return imageInByte;
-		} catch (IOException e) {
-			return null;
-		}
-	}
+    private byte[] imageToByte(File file){
+        try {
+            byte[] imageInByte;
+            BufferedImage originalImage = ImageIO.read(new File(file.getName()));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(originalImage, "jpg", baos);
+            baos.flush();
+            imageInByte = baos.toByteArray();
+            baos.close();
+            return imageInByte;
+        } catch (IOException e) {
+            return null;
+        }
+    }
 }
