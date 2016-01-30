@@ -14,7 +14,7 @@ import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.service.UserService;
 
 @Controller
-public class RegistrationController {
+class RegistrationController {
 
 	@Autowired
 	private UserService userService;
