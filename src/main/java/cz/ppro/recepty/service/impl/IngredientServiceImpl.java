@@ -20,7 +20,7 @@ public class IngredientServiceImpl implements IngredientService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Ingredient> findIngredientByName(String name) {
-		return ingredientRepository.findByIngredientNameLike(name);
+		return ingredientRepository.findByIngredientName(name);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class IngredientServiceImpl implements IngredientService {
 
 		String[] ingredientNames = ingredientsStr.split(",");
 		for (String s : ingredientNames) {
-			ingredientRepository.findByIngredientNameLike(s);
+			ingredientRepository.findByIngredientName(s);
 		}
 
 		return ingredients;

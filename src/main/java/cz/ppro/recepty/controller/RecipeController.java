@@ -1,14 +1,9 @@
 package cz.ppro.recepty.controller;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -83,7 +78,6 @@ class RecipeController {
 		model.addAttribute("categories", Category.values());
 		model.addAttribute("recipeIngredients", new ArrayList<RecipeIngredient>());
 		model.addAttribute("ingredients", ingredientService.getAll());
-		model.addAttribute("photo", "fotka");
 		model.addAttribute("ingredient", new Ingredient());
 
 		return "recipes/recipeAddForm";
@@ -91,15 +85,15 @@ class RecipeController {
 
 	@RequestMapping(value = "/addRecipe", params = "addRecipeIngredient", method = RequestMethod.POST)
 	public String addRow(final Recipe recipe, Model model, @ModelAttribute("ingredient") Ingredient ingredient,
-			@ModelAttribute("photo") File photo, Category category) {
+			Category category) {
 		RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
+		recipeIngredient.setIdRecipeIngredient(-1l);
 		recipeIngredient.setIngredient(ingredient);
 		recipe.getRecipeIngredients().add(recipeIngredient);
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("categories", Category.values());
-		model.addAttribute("recipeIngredients", new ArrayList<RecipeIngredient>());
+		model.addAttribute("recipeIngredients", recipe.getRecipeIngredients());
 		model.addAttribute("ingredients", ingredientService.getAll());
-		model.addAttribute("photo", new File("test"));
 		model.addAttribute("category", category);
 		return "recipes/recipeAddForm";
 	}
@@ -171,6 +165,5 @@ class RecipeController {
 		model.addAttribute("recipes", recipes);
 		return "listedRecipes";
 	}
-
 
 }

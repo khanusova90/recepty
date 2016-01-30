@@ -10,6 +10,6 @@ import cz.ppro.recepty.domain.Ingredient;
 @Repository
 public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
 
-	public List<Ingredient> findByIngredientNameLike(String ingredientName);
+	public List<Ingredient> findByIngredientName(String ingredientName);
 
 }
