@@ -4,15 +4,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
-<th:block th:fragment="recipeList">
+<th:block th:fragment="recipes">
     <div class="container">
         <div class="row" th:each="recipe : ${recipes}">
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
-                    <img th:src="resources/img/recipes/thumbnail/${recipe.id}" alt="Foto${recipe.id}" />
+                    <div th:if="${not #lists.isEmpty(recipe.photos)}">
+                    	<img th:src="resources/img/recipes/thumbnail/${recipe.idRecipe}" alt="Foto${recipe.id}" />
+                    </div>
                     <div class="caption">
-                        <h3><a th:href="@{/detail(id=${recipe.id})">${recipe.name}</a></h3>
-                        <p th:text="${recipe.author}">autor</p>
+                        <h3><a th:href="@{/recipes/detail(id=${recipe.idRecipe})}" th:text="${recipe.name}">Název receptu</a></h3>
+                        <p th:text="${recipe.author.username}">autor</p>
                         <p th:text="${recipe.description}">Popis</p>
                     </div>
                 </div>
