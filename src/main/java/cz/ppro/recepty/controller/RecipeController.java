@@ -120,7 +120,7 @@ class RecipeController {
 
 		recipeService.createRecipe(recipe, user);
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
-		return "redirect:/listedRecipes";
+		return "listedRecipes";
 	}
 
 	@RequestMapping(value = "/addPhoto", method = RequestMethod.POST)
