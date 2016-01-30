@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,31 @@ class RecipeController {
 		recipeService.createRecipe(recipe, ingredients, user);
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
 		return "redirect:/listedRecipes";
+	}
+
+	@RequestMapping(value = "/addRecipe/update/{recipeId}", method = RequestMethod.POST)
+	public String addRow(final Recipe recipe) {
+		RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
+		recipeIngredient.setIdRecipeIngredient(-1l);
+		recipe.getRecipeIngredients().add(recipeIngredient);
+		return "recipes/recipeAddForm";
+	}
+
+	@RequestMapping(value = "/addRecipe/update/{recipeId}", params = "removeRecipeIngredient", method = RequestMethod.POST)
+	public String addRow(final Recipe recipe, final HttpServletRequest request) {
+		Long recipeIngredientId = Long.valueOf(request.getParameter("removeRecipeIngredient"));
+
+		for (RecipeIngredient ri : recipe.getRecipeIngredients()) {
+			if (ri.getIdRecipeIngredient().equals(recipeIngredientId)) {
+				recipe.getRecipeIngredients().remove(ri);
+				break;
+			}
+		}
+
+		if (recipeIngredientId > 0) {
+			recipeService.deleteRecipeIngredient(recipeIngredientId);
+		}
+		return "recipes/recipeAddForm";
 	}
 
 	// @RequestMapping(value = "/doDeleteRecipe", method = RequestMethod.POST)

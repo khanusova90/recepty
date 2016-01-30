@@ -135,4 +135,6 @@ public interface RecipeService {
 	 */
 	public List<Recipe> findRecipesByName(String name);
 
+	public void deleteRecipeIngredient(Long id);
+
 }
