@@ -12,25 +12,11 @@
 
 <body>
     <th:block th:include="fragments/header :: header"></th:block>
-    <div class="container" >
+    <div class="container">
         <div class="row first">
             <div class="col-md-6">
-             <h1 sec:authorize="isAuthenticated()">Byl/a jste úspěšné přihlášen/a! </h1>
-              <h1 sec:authorize="isAnonymous()">Vítejte na Cooking!</h1>
-                <p class="RobotoBold">
-                    blibli blabla
-                </p>
-                <ul>
-                    <li><strong>protoč</strong>
-                    </li>
-                    <li>protoč</li>
-                    <li>protoč</li>
-                    <li>protoč</li>
-                    <li>protoč</li>
-                    <li>protoč</li>
-                </ul>
-                <p>Roku ta zimu virům, mi ředitel tkání ročník všeho zvýšil označuje, narodil jmelí, radost výběr, matriarchálně jejichž, pozvedl podobu.Za svá borci uplynulých názvy cyttaria, map slovo apokalyptická podobné zambezi, člun je je póla teorii tmavou právě úspěšnost. </p>
-                <img class="img-responsive" src="resources/img/wtf.jpg" alt="" />
+                <h1 sec:authorize="isAuthenticated()">Byl/a jste úspěšné přihlášen/a! </h1>
+                <h1 sec:authorize="isAnonymous()">Vítejte na Cooking!</h1>
             </div>
         </div>
         <div sec:authorize="isAuthenticated()">
@@ -51,8 +37,18 @@
                         <h4><i class="fa fa-search"></i>&nbsp;Vím co, ale nevím jak</h4>
                     </div>
                     <div class="panel-body">
-                        <p th:text="#{text.recipes}">Máte nápad co uvařit, ale nevíte jak? Pak si podle názvu pokrmu vyhledejte recept, který potřebujete.</p>
-                        <a href="#" class="btn btn-orange RobotoBold">Hledat recept</a>
+                    <br />
+                        <p th:text="#{text.recipes}">Máte nápad co uvařit, ale nevíte jak? Pak si podle názvu pokrmu vyhledejte recept, který potřebujete. </p>
+                        <br />
+                        <br />
+                        <div class="col-xs-12 text-center">
+                            <i class="fa fa-book fa-5x text-center"></i>
+                        </div>
+                        <br />
+                        <div class="col-xs-12 text-center">
+                            <br />
+                            <a th:href="@{recipes/search}" class="btn btn-orange RobotoBold"> Hledat recept</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -62,32 +58,47 @@
                         <h4><i class="fa fa-fw fa-gift"></i>&nbsp;Vím z čeho, ale nevím co</h4>
                     </div>
                     <div class="panel-body">
+                        <br />
                         <p th:text="#{text.ingred}">Lednice je plná, ale chybí inspirace? Pak si podle potravin, najděte něco dobrého.
                         </p>
-                        <a th:href="@{recipes/search}" class="btn btn-orange RobotoBold"> Hledat inspiraci</a>
+                        <br />
+                        <br />
+                        <div class="col-xs-12 text-center">
+                            <i class="fa fa-key fa-5x text-center"></i>
+                        </div>
+                        <br />
+                        <div class="col-xs-12 text-center">
+                            <br />
+                            <a th:href="@{recipes/search}" class="btn btn-orange RobotoBold"> Hledat inspiraci</a>
+                        </div>
                     </div>
                 </div>
             </div>
-             <div class="col-md-4 RobotoRegular">
+            <div class="col-md-4 RobotoRegular">
                 <div class="panel panel-warning">
                     <div class="panel-heading">
                         <h4><i class="fa fa-fw fa-gift"></i>&nbsp;Vím, na co mám chuť</h4>
                     </div>
                     <div class="panel-body">
+                        <br />
                         <p th:text="#{text.ingred}">Chci najít recept, který bude obsahovat hledané ingredience.
                         </p>
-                        <a th:href="@{recipes/search}" class="btn btn-orange RobotoBold"> Hledat inspiraci</a>
+                        <br />
+                        <br />
+                        <div class="col-xs-12 text-center">
+                            <i class="fa fa-heart fa-5x text-center"></i>
+                        </div>
+                        <br />
+                        <div class="col-xs-12 text-center">
+                            <br />
+                            <a th:href="@{recipes/search}" class="btn btn-orange RobotoBold"> Hledat inspiraci</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- /.row -->
         <!-- Call to Action Section -->
-        <div class="well">
-            <div class="row">
-               
-            </div>
-        </div>
         <hr />
         <footer th:include="fragments/footer :: footer"></footer>
         <th:block th:include="fragments/includes :: js"></th:block>
