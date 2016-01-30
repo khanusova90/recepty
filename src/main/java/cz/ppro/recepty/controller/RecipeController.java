@@ -84,7 +84,6 @@ class RecipeController {
 
 	@RequestMapping(value = "/searchByIngredientAll")
 	public String showDishes(Model model, Locale locale) {
-		// model.addAttribute("ingredients", ingredientService.getAll());
 		model.addAttribute("recipes", null);
 		model.addAttribute("selectedIngredients", messageSource.getMessage("insertIngredients", null, locale));
 		return "searchByIngredients";
