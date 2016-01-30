@@ -1,6 +1,5 @@
 package cz.ppro.recepty.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.domain.Category;
-import cz.ppro.recepty.domain.Ingredient;
 import cz.ppro.recepty.domain.Recipe;
 import cz.ppro.recepty.domain.RecipeIngredient;
 import cz.ppro.recepty.service.IngredientService;
 import cz.ppro.recepty.service.RecipeService;
+import cz.ppro.recepty.utils.UserUtils;
 
 @Controller
 @RequestMapping("/recipes")
@@ -59,30 +58,10 @@ class RecipeController {
 	}
 
 	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
-	public String doAddRecipe(Recipe recipe, @RequestParam("ingredients") String ingredients) {
-		// List<Ingredient> ingredientsList =
-		// ingredientService.splitIngredients(ingredients);
-		List<RecipeIngredient> ingredientsList = new ArrayList<>();
-		recipeService.createRecipe(recipe, ingredientsList);
-
-		return "redirect:/listedRecipes";
-	}
-
-	@RequestMapping(value = "/doAddRecipe", method = RequestMethod.POST)
-	public String doAddRecipe(Model model, HttpSession session, @RequestParam("name") String name,
-			@RequestParam("description") String description, @RequestParam("preparation") String preparation,
-			@RequestParam("ingredients") List<Ingredient> ingredients) {
-		AppUser user = (AppUser) session.getAttribute("user");
-		String author = user.getUsername();
-		Recipe recipe = new Recipe();
-		recipeService.createRecipe(recipe, new ArrayList<RecipeIngredient>()); // FIXME:
-																				// Tady
-																				// uz
-																				// se
-																				// recept
-																				// uklada
-		// do DB, musi mit vyplneny hodnoty
-		// (postup a ingredience)
+	public String doAddRecipe(Recipe recipe, @RequestParam("ingredients") List<RecipeIngredient> ingredients,
+			Model model) {
+		AppUser user = UserUtils.getActualUser();
+		recipeService.createRecipe(recipe, ingredients, user);
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
 		return "redirect:/listedRecipes";
 	}
