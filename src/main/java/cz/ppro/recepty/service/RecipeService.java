@@ -137,4 +137,6 @@ public interface RecipeService {
 
 	public void deleteRecipeIngredient(Long id);
 
+	public Recipe findById(Long id);
+
 }

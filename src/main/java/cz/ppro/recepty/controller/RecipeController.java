@@ -61,7 +61,8 @@ class RecipeController {
 	}
 
 	@RequestMapping(value = "/detail")
-	public String showRecipesDetail(Model model, HttpSession session, @RequestParam("recipe") Recipe recipe) {
+	public String showRecipesDetail(Model model, HttpSession session, @RequestParam("id") Long idRecipe) {
+		Recipe recipe = recipeService.findById(idRecipe);
 		model.addAttribute("recipeIngredients", recipe.getRecipeIngredients());
 		model.addAttribute("recipe", recipe);
 		List<Photo> images = recipe.getPhotos();

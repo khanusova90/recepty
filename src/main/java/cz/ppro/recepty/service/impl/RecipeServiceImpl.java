@@ -137,7 +137,8 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Recipe> getRecipesSortedByRating() {
-		return recipeRepository.findAllByOrderByRatingAsc();
+		List<Recipe> recipes = recipeRepository.findAllByOrderByRatingAsc();
+		return recipes;
 	}
 
 	@Override
@@ -156,6 +157,11 @@ public class RecipeServiceImpl implements RecipeService {
 	@Transactional(readOnly = true)
 	public List<Recipe> getAllRecipesByUser(AppUser user) {
 		return recipeRepository.findByAuthor(user);
+	}
+
+	@Override
+	public Recipe findById(Long id) {
+		return recipeRepository.findOne(id);
 	}
 
 	@Override
