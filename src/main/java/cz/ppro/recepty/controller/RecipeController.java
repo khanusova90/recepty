@@ -1,5 +1,6 @@
 package cz.ppro.recepty.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -60,6 +61,8 @@ class RecipeController {
 		Recipe recipe = new Recipe();
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("categories", Category.values());
+		model.addAttribute("recipeIngredients", new ArrayList<RecipeIngredient>());
+		model.addAttribute("ingredients", ingredientService.getAll());
 
 		return "recipes/recipeAddForm";
 	}

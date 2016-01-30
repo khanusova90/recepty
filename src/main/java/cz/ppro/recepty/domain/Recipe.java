@@ -1,5 +1,6 @@
 package cz.ppro.recepty.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -54,7 +55,7 @@ public class Recipe {
 	private List<String> categories;
 
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "recipe", fetch = FetchType.EAGER)
-	private List<RecipeIngredient> recipeIngredients;
+	private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Photo> photos;
