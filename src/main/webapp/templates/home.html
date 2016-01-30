@@ -6,12 +6,13 @@
     <link rel="shortcut icon" href="/resources/img/favicon.ico" type="image/x-icon" />
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <th:block th:include="fragments/includes :: js" />
-    <link rel="stylesheet" href="../../resources/css/main-style.css" th:href="@{resources/css/main-style.css}" />
+    <link rel="stylesheet" href="../resources/css/main-style.css" th:href="@{resources/css/main-style.css}" />
+    <link rel="stylesheet" href="../resources/css/main-style.css" th:href="@{/resources/css/main-style.css}" />
 </head>
 
 <body>
     <th:block th:include="fragments/header :: header"></th:block>
-    <div class="container">
+    <div class="container" >
         <div class="row first">
             <div class="col-md-6">
              <h1 sec:authorize="isAuthenticated()">Vítejte na Cooking!</h1>
@@ -35,7 +36,7 @@
         <div sec:authorize="isAuthenticated()">
             <div class="row">
                 <!-- Authorized - add recipe -->
-                <a th:href="@{addRecipe}" th:text="#{addrecipe}" class="btn btn-orange RobotoBold"></a>
+                <a th:href="@{addRecipe}" th:text="#{addrecipe}" class="btn btn-orange RobotoBold">Přidat recept</a>
             </div>
         </div>
     </div>
@@ -62,6 +63,18 @@
                     </div>
                     <div class="panel-body">
                         <p th:text="@{text.ingred}">Lednice je plná, ale chybí inspirace? Pak si podle potravin, najděte něco dobrého.
+                        </p>
+                        <a th:href="@{recipes/search}" class="btn btn-orange RobotoBold"> Hledat inspiraci</a>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-4 RobotoRegular">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-fw fa-gift"></i>&nbsp;Vím, na co mám chuť</h4>
+                    </div>
+                    <div class="panel-body">
+                        <p th:text="@{text.ingred}">Chci najít recept, který bude obsahovat hledané ingredience.
                         </p>
                         <a th:href="@{recipes/search}" class="btn btn-orange RobotoBold"> Hledat inspiraci</a>
                     </div>

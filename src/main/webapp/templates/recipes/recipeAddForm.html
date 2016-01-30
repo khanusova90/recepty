@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="/resources/img/favicon.ico" type="image/x-icon" />
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <th:block th:include="fragments/includes :: js" />
+     <script src="../../resources/js/input.js" th:src="@{/resources/js/input.js}"></script>
     <link rel="stylesheet" href="../../resources/css/main-style.css" th:href="@{resources/css/main-style.css}" />
 </head>
 
@@ -15,15 +16,15 @@
         <div class="row first">
             <form id="loginform" class="form-horizontal" role="form" action="#" th:action="@{/loginProcess}" method="post">
                 <div class="form-group">
-                    <label for="category" class="col-md-3 control-label" th:text="#{category}">Název kategorie</label>
+                    <label for="category" class="col-md-3 control-label" th:text="#{category}">NĂˇzev kategorie</label>
                     <div class="col-md-9">
                         <select class="form-control" id="sel1">
-                            <option th:each="category : ${categories}"><span th:text="${category.name}">Název kategorie</span></option>
+                            <option th:each="category : ${categories}"><span th:text="${category.name}">NĂˇzev kategorie</span></option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="name" class="col-md-3 control-label" th:text="#{name}">Název receptu</label>
+                    <label for="name" class="col-md-3 control-label" th:text="#{name}">NĂˇzev receptu</label>
                     <div class="col-md-9">
                         <input type="text" class="form-control" name="firstname" th:field="*{name}" />
                     </div>
@@ -31,11 +32,11 @@
                 <div class="form-group">
                     <label for="description" class="col-md-3 control-label" th:text="#{description}">Popis</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" name="lastname" th:field="*{description}" />
+                        <textarea type="text" class="form-control" name="lastname" th:field="*{description}" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="preparation" class="col-md-3 control-label" th:text="#{preparation}">Příprava</label>
+                    <label for="preparation" class="col-md-3 control-label" th:text="#{preparation}">PĹ™Ă­prava</label>
                     <div class="col-md-9">
                         <input type="text" class="form-control" name="lastname" th:field="*{preparation}" />
                     </div>
@@ -44,7 +45,7 @@
                     <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-file-image-o"></i></span>
                     <input type="text" id="tags" class="form-control" th:placeholder="#{insertIngredients}" aria-describedby="sizing-addon1" />
                     <span class="input-group-btn">
-                        <button class="btn btn-orange" type="file"><i class="fa fa-search">Procházet</i>
+                        <button class="btn btn-orange" type="file"><i class="fa fa-search">ProchĂˇzet</i>
                         </button> 
                     </span>
                 </div>
