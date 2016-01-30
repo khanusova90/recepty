@@ -12,7 +12,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,15 +43,16 @@ class RecipeController {
 	@Autowired
 	private MessageSource messageSource;
 
+	@RequestMapping(value = "/")
+	public String showRecipesByCategory(Model model, @RequestParam("category") String category) {
+		model.addAttribute("ingredients", recipeService.showRecipesByCategory(category));
+		return "listedRecipes";
+	}
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showRecipes(Model model) {
 		model.addAttribute("recipes", recipeService.getAllRecipes());
 		return "listedRecipes";
-	}
-
-	@RequestMapping(value = "/{recipeType}")
-	public void showRecipesByCategory(HttpSession session, Model model, @PathVariable("recipeType") String recipeType) {
-		model.addAttribute("ingredients", recipeService.showRecipesByCategory(recipeType));
 	}
 
 	@RequestMapping(value = "/detail")
