@@ -20,7 +20,7 @@ import cz.ppro.recepty.service.RecipeService;
 
 @Controller
 @RequestMapping("/recipes")
-public class RecipeController {
+class RecipeController {
 
 	@Autowired
 	private RecipeService recipeService;

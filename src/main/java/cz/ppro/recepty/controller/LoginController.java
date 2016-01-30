@@ -11,7 +11,7 @@ import cz.ppro.recepty.domain.AppUser;
  */
 
 @Controller
-public class LoginController {
+class LoginController {
 
 	@RequestMapping(value = "/loginForm")
 	public String showLoginForm(Model model) {

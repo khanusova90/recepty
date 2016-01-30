@@ -17,10 +17,10 @@ import cz.ppro.recepty.service.UserService;
 public class RegistrationController {
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@Autowired
-	MessageSource messageSource;
+	private MessageSource messageSource;
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String registerUser(@ModelAttribute("newUser") AppUser user, Model model, Locale locale) {
