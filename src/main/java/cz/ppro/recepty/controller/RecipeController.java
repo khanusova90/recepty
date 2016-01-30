@@ -34,7 +34,6 @@ public class RecipeController {
 		model.addAttribute("recipes", recipeService.getAllRecipes());
 		return "listedRecipes";
 	}
-
 	@RequestMapping(value = "/{recipeType}")
 	public void showRecipesByCategory(HttpSession session, Model model, @PathVariable("recipeType") String recipeType) {
 		model.addAttribute("ingredients", recipeService.showRecipesByCategory(recipeType));
@@ -57,18 +56,10 @@ public class RecipeController {
 			@RequestParam("description") String description, @RequestParam("preparation") String preparation,
 			@RequestParam("ingredients") List<Ingredient> ingredients) {
 		AppUser user = (AppUser) session.getAttribute("user");
-		/*
-		 * TODO insert correct constructor for all those params ratings bude v
-		 * const pro toto 0 a 0
-		 * 
-		 * V Recipe je bezparametricky konstruktor. Nastavi hodnoceni a pocet
-		 * hodnoticich na 0
-		 */
+
 		String author = user.getUsername();
 		Recipe recipe = new Recipe();
-		recipeService.createRecipe(recipe); // FIXME: Tady uz se recept uklada
-											// do DB, musi mit vyplneny hodnoty
-											// (postup a ingredience)
+		recipeService.createRecipe(recipe);
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
 		return "redirect:/listedRecipes";
 	}
@@ -90,8 +81,6 @@ public class RecipeController {
 
 	@RequestMapping(value = "/searchBy")
 	public String showDishes(Model model, @RequestParam("ingredients") String ingredientsString) {
-
-
 		model.addAttribute("reicpes", null);
 		return "searchByIngredients";
 	}
