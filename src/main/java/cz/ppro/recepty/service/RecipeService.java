@@ -123,4 +123,13 @@ public interface RecipeService {
 	 */
 	public List<Photo> getPhotosByRecipe(Recipe recipe);
 
+	/**
+	 * Najde recept podle nazvu
+	 * 
+	 * @param name
+	 *            Nazev receptu
+	 * @return Seznam receptu, jejichz nazev obsahuje pozadovany nazev
+	 */
+	public List<Recipe> findRecipesByName(String name);
+
 }

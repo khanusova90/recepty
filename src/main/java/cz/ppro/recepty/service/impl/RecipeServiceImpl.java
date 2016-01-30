@@ -169,4 +169,9 @@ public class RecipeServiceImpl implements RecipeService {
 		return photoRepository.findByRecipe(recipe);
 	}
 
+	@Override
+	public List<Recipe> findRecipesByName(String name) {
+		return recipeRepository.findByNameLike(name);
+	}
+
 }

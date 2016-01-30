@@ -1,16 +1,59 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: tynak_000
-  Date: 26/01/2016
-  Time: 12:20
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="cs" xml:lang="cs" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
+<head>
+    <title th:text="#{view.title}"></title>
+    <link rel="shortcut icon" href="/resources/img/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <th:block th:include="fragments/includes :: js" />
+    <link rel="stylesheet" href="../../resources/css/main-style.css" th:href="@{resources/css/main-style.css}" />
+</head>
+
+<body>
+    <th:block th:include="fragments/header :: header"></th:block>
+    <div class="container">
+        <div class="row first">
+            <form id="loginform" class="form-horizontal" role="form" action="#" th:action="@{/loginProcess}" method="post">
+                <div class="form-group">
+                    <label for="category" class="col-md-3 control-label" th:text="#{category}">Název kategorie</label>
+                    <div class="col-md-9">
+                        <select class="form-control" id="sel1">
+                            <option th:each="category : ${categories}"><span th:text="${category.name}">Název kategorie</span></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-md-3 control-label" th:text="#{name}">Název receptu</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="firstname" th:field="*{name}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-md-3 control-label" th:text="#{description}">Popis</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="lastname" th:field="*{description}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="preparation" class="col-md-3 control-label" th:text="#{preparation}">Příprava</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="lastname" th:field="*{preparation}" />
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-file-image-o"></i></span>
+                    <input type="text" id="tags" class="form-control" th:placeholder="#{insertIngredients}" aria-describedby="sizing-addon1" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-orange" type="file"><i class="fa fa-search">Procházet</i>
+                        </button> 
+                    </span>
+                </div>
+                <div class="help-block with-errors"></div>
+            </form>
+        </div>
+        <hr />
+        <footer th:include="fragments/footer :: footer"></footer>
+        <th:block th:include="fragments/includes :: js"></th:block>
 </body>
+
 </html>
