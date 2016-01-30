@@ -53,7 +53,7 @@
                         <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-file-image-o"></i></span>
                         <input type="text" id="tags" class="form-control" aria-describedby="sizing-addon1" />
                         <span class="input-group-btn">
-                            <input class="btn btn-orange" type="file"><i class="fa fa-search">Procházet</i>
+                            <input class="btn btn-orange" type="file" th:field="*{photos[0]}"><i class="fa fa-search">Procházet</i>
                             </input> 
                         </span>
                     </div>
@@ -62,8 +62,19 @@
                 <div class="form-group">
                     <label for="ingredients" class="col-md-3 control-label" th:text="#{recipe.preparation}">Příprava</label>
                     <div class="col-md-9">
-                        <input type="text" th:placeholder="#{insertIngredients}" class="form-control" name="ingredients" th:field="*{preparationProcess}" required="true" />
-                        <div class="help-block with-errors"></div>
+                    	<table>
+                    		<tr th:each="recipeIngredient, rowStat: *{recipeIngredients}">
+                    			<td>
+                    				<select class="form-control" id="sel2" th:field="*{recipeIngredients[__${rowStat.index}__].ingredient}">
+                    					<option th:each="ingredient : ${ingredients}"><span th:text="*{ingredientName}">Ingence</span></option>
+                    				</select>
+                    				<input type="text" class="form-control" th:field="*{recipeIngredients[__${rowStat.index}__].amount" />
+                    				<input type="text" class="form-control" th:field="*{recipeIngredients[__${rowStat.index}__].unit" />
+                    			</td>
+                    		</tr>
+                    	</table>
+<!--                         <input type="text" th:placeholder="#{insertIngredients}" class="form-control" name="ingredients" th:field="*{preparationProcess}" required="true" /> -->
+<!--                         <div class="help-block with-errors"></div> -->
                     </div>
                 </div>
                 <div class="form-group" data-toggle="input">

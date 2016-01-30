@@ -40,9 +40,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a th:href="@{/articles}" th:text="#{articles}"></a>
-                    </li>
                     <li sec:authorize="isAnonymous()">
                         <a th:href="@{/loginForm}"><i class="fa fa-user"></i>&nbsp;<span th:text="#{login}"></span></a>
                     </li>
