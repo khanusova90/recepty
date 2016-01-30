@@ -1,5 +1,6 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html lang="cs" xml:lang="cs" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="cs" xml:lang="cs" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,16 +27,16 @@
                                 <a th:href="@{/recipes}" th:text="#{AllRecipes}">Všechny recepty</a>
                             </li>
                             <li>
-                                <a th:href="@{/recipes/soup}" th:text="#{recipemenu.soup}">Polévky</a>
+                                <a th:href="@{/recipes/soup}" th:text="#{Category.BREAKFAST}">Snídaně</a>
                             </li>
                             <li>
-                                <a th:href="@{/recipes/mainmeal}" th:text="#{recipemenu.mainmeal}">Email</a>
+                                <a th:href="@{/recipes/mainmeal}" th:text="#{Category.LUNCH}">Oběd</a>
                             </li>
                             <li>
-                                <a th:href="@{/recipes/sweet}" th:text="#{recipemenu.sweets}">Moučníky</a>
+                                <a th:href="@{/recipes/sweet}" th:text="#{Category.DINNER}">Večeře</a>
                             </li>
                             <li>
-                                <a th:href="@{/recipes/smoot}" th:text=" #{recipemenu.smoot}">Nápoje</a>
+                                <a th:href="@{/recipes/smoot}" th:text=" #{Category.desert}">Desert</a>
                             </li>
                         </ul>
                     </li>
