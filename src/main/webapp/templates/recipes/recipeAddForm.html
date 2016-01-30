@@ -3,14 +3,10 @@
 
 <head>
     <title th:text="#{view.title}"></title>
-    <script src="/resources/js/jquery.js" th:src="@{/resources/js/jquery.js}"></script>
-    <script src="/resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
-    <script src="/resources/js/validator.js" th:src="@{/resources/js/validator.js}"></script>
-    <script src="/resources/js/search.js" th:src="@{/resources/js/search.js}"></script>
-    <link rel="shortcut icon" href="/resources/img/favicon.ico" th:href="@{/resources/img/favicon.ico}" type="image/x-icon" />
+    <link rel="shortcut icon" href="/resources/img/favicon.ico" type="image/x-icon" />
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <script src="../../resources/js/input.js" th:src="@{/resources/js/input.js}"></script>
-    <link rel="stylesheet" href="../../resources/css/main-style.css" th:href="@{/resources/css/main-style.css}" />
+    <th:block th:include="fragments/includes :: js" />
+    <link rel="stylesheet" href="../resources/css/main-style.css" th:href="@{/resources/css/main-style.css}" />
 </head>
 
 <body>
