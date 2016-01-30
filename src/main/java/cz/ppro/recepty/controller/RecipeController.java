@@ -69,19 +69,24 @@ class RecipeController {
 	@RequestMapping(value = "/addRecipe", method = RequestMethod.GET)
 	public String addRecipe(Model model) {
 		Recipe recipe = new Recipe();
+		RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
+		recipeIngredient.setIdRecipeIngredient(-1l);
+		recipe.getRecipeIngredients().add(recipeIngredient);
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("categories", Category.values());
 		model.addAttribute("recipeIngredients", new ArrayList<RecipeIngredient>());
 		model.addAttribute("ingredients", ingredientService.getAll());
 		model.addAttribute("photo", "fotka");
+		model.addAttribute("ingredient", new Ingredient());
 
 		return "recipes/recipeAddForm";
 	}
 
 	@RequestMapping(value = "/addRecipe", params = "addRecipeIngredient", method = RequestMethod.POST)
-	public String addRow(final Recipe recipe, Model model) {
+	public String addRow(final Recipe recipe, Model model, @ModelAttribute("ingredient") Ingredient ingredient) {
 		RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
-		recipeIngredient.setIdRecipeIngredient(-1l);
+		// recipeIngredient.setIdRecipeIngredient(-1l);
+		recipeIngredient.setIngredient(ingredient);
 		recipe.getRecipeIngredients().add(recipeIngredient);
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("categories", Category.values());
@@ -118,8 +123,8 @@ class RecipeController {
 		return "redirect:/listedRecipes";
 	}
 
-	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
-	public String doAddRecipe(Recipe recipe, @RequestParam("ingredients") List<RecipeIngredient> ingredients,
+	@RequestMapping(value = "/addPhoto", method = RequestMethod.POST)
+	public String addPhoto(Recipe recipe, @RequestParam("ingredients") List<RecipeIngredient> ingredients,
 			@RequestParam("myFile") MultipartFile file, Model model) {
 		if (!file.isEmpty()) {
 			String name = file.getName();
