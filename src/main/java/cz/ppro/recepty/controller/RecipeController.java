@@ -1,12 +1,12 @@
 package cz.ppro.recepty.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -63,6 +63,11 @@ class RecipeController {
 	public String showRecipesDetail(Model model, HttpSession session, @RequestParam("recipe") Recipe recipe) {
 		model.addAttribute("recipeIngredients", recipe.getRecipeIngredients());
 		model.addAttribute("recipe", recipe);
+        List<Photo> images = recipe.getPhotos();
+        if(!images.isEmpty()){
+            byte[] imgInBytes = images.get(0).getPhoto();
+            model.addAttribute("imgInBytes", imgInBytes);
+        }
 		return "recipeDetail";
 	}
 
@@ -113,46 +118,27 @@ class RecipeController {
 	}
 
 	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
-	public String doAddRecipe(Recipe recipe, Model model) {
-		// AppUser user = UserUtils.getActualUser();
+	public String doAddRecipe(Recipe recipe, Model model,@RequestParam("photo") File file) {
 		String username = UserUtils.getActualUsername();
 		AppUser user = userService.findUserByUsername(username);
 
+        byte[] bytes = null;
+        if (file.exists()) {
+            bytes = imageToByte(file);
+        }
+        if(bytes != null) {
+            Photo photo = new Photo();
+            photo.setPhoto(bytes);
+            List<Photo> photos = null;
+            photos.add(photo);
+            recipe.setPhotos(photos);}
+
 		recipeService.createRecipe(recipe, user);
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
-		return "redirect:/listedRecipes";
+		return "/listedRecipes";
 	}
 
-	@RequestMapping(value = "/addPhoto", method = RequestMethod.POST)
-	public String addPhoto(Recipe recipe, @RequestParam("ingredients") List<RecipeIngredient> ingredients,
-			@RequestParam("myFile") MultipartFile file, Model model) {
-		if (!file.isEmpty()) {
-			String name = file.getName();
-			try {
-				byte[] bytes = file.getBytes();
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File(name + "-uploaded")));
-				stream.write(bytes);
-				stream.close();
-				Photo photo = new Photo();
-				photo.setPhoto(bytes);
-				List<Photo> photos = null;
-				photos.add(photo);
-				recipe.setPhotos(photos);
-				return "You successfully uploaded " + name + " into " + name + "-uploaded !";
-			} catch (Exception e) {
-				return "You failed to upload " + name + " => " + e.getMessage();
-			}
-		} else {
-			return "The selected file was empty and could not be uploaded.";
-		}
 
-		// AppUser user = UserUtils.getActualUser();
-		// recipeService.createRecipe(recipe, ingredients, user);
-		// model.addAttribute("recipes",
-		// recipeService.getAllRecipesByUser(user));
-		// return "redirect:/listedRecipes";
-	}
 
 	@RequestMapping(value = "/searchByIngredientAll")
 	public String showRecipes(Model model, Locale locale) {
@@ -196,4 +182,19 @@ class RecipeController {
 		model.addAttribute("recipes", recipes);
 		return "listedRecipes";
 	}
+
+    private byte[] imageToByte(File file){
+        try {
+            byte[] imageInByte;
+            BufferedImage originalImage = ImageIO.read(new File(file.getName()));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(originalImage, "jpg", baos);
+            baos.flush();
+            imageInByte = baos.toByteArray();
+            baos.close();
+            return imageInByte;
+        } catch (IOException e) {
+            return null;
+        }
+    }
 }
