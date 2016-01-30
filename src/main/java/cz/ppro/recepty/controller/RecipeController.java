@@ -118,10 +118,11 @@ class RecipeController {
 	}
 
 	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
-	public String doAddRecipe(Recipe recipe, Model model,@RequestParam("photo") File file) {
+	public String doAddRecipe(Recipe recipe, Model model,@RequestParam("photos") List<File> photos) {
 		String username = UserUtils.getActualUsername();
 		AppUser user = userService.findUserByUsername(username);
 
+        File file = photos.get(1);
         byte[] bytes = null;
         if (file.exists()) {
             bytes = imageToByte(file);
@@ -129,9 +130,9 @@ class RecipeController {
         if(bytes != null) {
             Photo photo = new Photo();
             photo.setPhoto(bytes);
-            List<Photo> photos = null;
-            photos.add(photo);
-            recipe.setPhotos(photos);}
+            List<Photo> photosIn = null;
+            photosIn.add(photo);
+            recipe.setPhotos(photosIn);}
 
 		recipeService.createRecipe(recipe, user);
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
