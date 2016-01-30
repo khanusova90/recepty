@@ -5,12 +5,13 @@
     <title th:text="#{view.title}"></title>
     <link rel="shortcut icon" href="../../resources/img/favicon.ico" th:href="@{/resources/img/favicon.ico}" type="image/x-icon" />
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-     <script src="../../resources/js/jquery.js" th:src="@{/resources/js/jquery.js}"></script>
+    <script src="../../resources/js/jquery.js" th:src="@{/resources/js/jquery.js}"></script>
     <script src="../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
     <script src="../../resources/js/validator.js" th:src="@{/resources/js/validator.js}"></script>
     <script src="../../resources/js/search.js" th:src="@{/resources/js/search.js}"></script>
     <link rel="stylesheet" href="../resources/css/main-style.css" th:href="@{/resources/css/main-style.css}" />
 </head>
+
 <body>
     <th:block th:include="fragments/header :: header"></th:block>
     <div class="container">
@@ -33,10 +34,9 @@
         <div class="row">
             <th:block th:include="recipes/recipeList :: recipeList"></th:block>
         </div>
-    
-    <!-- /.row -->
-    <hr />
-    <footer th:include="fragments/footer :: footer"></footer>
+        <!-- /.row -->
+        <hr />
+        <footer th:include="fragments/footer :: footer"></footer>
     </div>
 </body>
 
