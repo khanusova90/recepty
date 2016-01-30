@@ -49,7 +49,7 @@ class RecipeController {
 
 	@Autowired
 	private MessageSource messageSource;
-
+Webová aplikace
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showRecipes(Model model) {
 		model.addAttribute("recipes", recipeService.getAllRecipes());
@@ -119,22 +119,9 @@ class RecipeController {
 	}
 
 	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
-	public String doAddRecipe(Recipe recipe, Model model,@RequestParam("photos") List<File> photos) {
+	public String doAddRecipe(Recipe recipe, Model model) {
 		String username = UserUtils.getActualUsername();
 		AppUser user = userService.findUserByUsername(username);
-
-        File file = photos.get(1);
-        byte[] bytes = null;
-        if (file.exists()) {
-            bytes = imageToByte(file);
-        }
-        if(bytes != null) {
-            Photo photo = new Photo();
-            photo.setPhoto(bytes);
-            List<Photo> photosIn = null;
-            photosIn.add(photo);
-            recipe.setPhotos(photosIn);}
-
 		recipeService.createRecipe(recipe, user);
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
 		return "listedRecipes";
@@ -183,18 +170,5 @@ class RecipeController {
 		return "listedRecipes";
 	}
 
-    private byte[] imageToByte(File file){
-        try {
-            byte[] imageInByte;
-            BufferedImage originalImage = ImageIO.read(new File(file.getName()));
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(originalImage, "jpg", baos);
-            baos.flush();
-            imageInByte = baos.toByteArray();
-            baos.close();
-            return imageInByte;
-        } catch (IOException e) {
-            return null;
-        }
-    }
+
 }

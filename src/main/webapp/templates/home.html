@@ -21,9 +21,13 @@
         </div>
         <div sec:authorize="isAuthenticated()">
             <div class="row">
+                <div class="col-xs-12">
                 <!-- Authorized - add recipe -->
-                <a th:href="@{recipes/addRecipe}" th:text="#{addrecipe}" class="btn btn-orange RobotoBold">Přidat recept</a>
-            </div>
+                    <div class="text-right">
+                <a th:href="@{recipes/addRecipe}" th:text="#{addrecipe}" class="btn btn-lg btn-orange RobotoBold text-right">Přidat recept</a>
+                </div>
+                </div>
+                </div>
         </div>
     </div>
     <!-- /.row -->

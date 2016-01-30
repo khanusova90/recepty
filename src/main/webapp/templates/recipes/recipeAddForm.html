@@ -20,84 +20,65 @@
             <form data-toggle="validator" id="recipeForm" class="form-horizontal" role="form" action="#" th:action="@{/recipes/addRecipe}" th:object="${recipe}" method="post">
                 <h2 class="text-center"><span>Vložit nový recept</span></h2>
                 <br />
+                <br />
                 <div class="form-group">
-                    <label for="category" class="col-md-3 control-label" th:text="#{category}">Název kategorie</label>
+                    <label for="category" class="col-md-2 control-label" th:text="#{category}">Název kategorie</label>
                     <div class="col-md-2">
                         <select class="form-control" id="sel1">
                             <option th:each="category : ${categories}" th:value="${category}"><span th:text="#{${category.name}}">Název kategorie</span></option>
                         </select>
                     </div>
-                    <label for="name" class="col-md-3 control-label" th:text="#{recipe.name}">Název receptu</label>
-                    <div class="col-md-4">
+                    <label for="name" class="col-md-2 control-label" th:text="#{recipe.name}">Název receptu</label>
+                    <div class="col-md-5">
                         <input type="text" class="form-control" name="name" th:field="*{name}" required="true" />
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="description" class="col-md-3 control-label" th:text="#{recipe.description}">Popis</label>
+                    <label for="description" class="col-md-2 control-label" th:text="#{recipe.description}">Popis</label>
                     <div class="col-md-9">
                         <textarea rows="2" type="text" class="form-control" name="description" th:field="*{description}" required="true" />
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="preparation" class="col-md-3 control-label" th:text="#{recipe.preparation}">Příprava</label>
+                    <label for="preparation" class="col-md-2 control-label" th:text="#{recipe.preparation}">Příprava</label>
                     <div class="col-md-9">
                         <textarea rows="6" type="text" class="form-control" name="preparation" th:field="*{preparationProcess}" required="true" />
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
-                <div class="input-group">
-                    <label for="photo" class="col-md-3 control-label" th:text="#{recipe.description}">Popis</label>
-                    <div class="col-md-9">
-                        <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-file-image-o"></i></span>
-                        <input type="text" id="tags" class="form-control" aria-describedby="sizing-addon1" />
-                        <span class="input-group-btn">
-                            <input class="btn btn-orange" type="file" th:field="*{photos[0]}"><i class="fa fa-search">Procházet</i>
-                            </input> 
-                        </span>
+                <div class="form-group col-xs-12">
+                    <label for="ingredients" class="col-md-2 control-label" th:text="#{recipe.preparation}">Příprava</label>
+                    <div class="col-md-7">
+                        <table>
+                            <tr th:each="recipeIngredient, rowStat: *{recipeIngredients}">
+                                <td>
+                                    <select class="form-control" id="sel2" th:field="${ingredient}">
+                                        <option th:each="ingredient : ${ingredients}" th:value="${ingredient}"><span th:text="${ingredient.ingredientName}">Ingredience</span></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" th:field="*{recipeIngredients[__${rowStat.index}__].amount}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" th:field="*{recipeIngredients[__${rowStat.index}__].unit}" />
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                    <label for="ingredients" class="col-md-3 control-label" th:text="#{recipe.preparation}">Příprava</label>
-                    <div class="col-md-9">
-                    	<table>
-                    		<tr th:each="recipeIngredient, rowStat: *{recipeIngredients}">
-                    			<td>
-                    				<select class="form-control" id="sel2" th:field="${ingredient}">
-                    					<option th:each="ingredient : ${ingredients}" th:value="${ingredient}" ><span th:text="${ingredient.ingredientName}">Ingredience</span></option>
-                    				</select>
-                    			</td>
-                    			<td>
-                    				<input type="text" class="form-control" th:field="*{recipeIngredients[__${rowStat.index}__].amount}" />
-                    			</td>
-                    			<td>
-                    				<input type="text" class="form-control" th:field="*{recipeIngredients[__${rowStat.index}__].unit}" />
-                    				<span class="col-sm-1 row-delete-button">
-                    					<button type="submit" class="btn btn-orange" th:value="*{recipeIngredients[__${rowStat.index}__].idRecipeIngredient}"
-                    						name="remove">
-                    						<i class="glyphicon glyphicon-trash icon-white"></i>	
-                    					</button>
-                    				</span>
-                    			</td>
-                    		</tr>
-                    	</table>
-                    	
-                    	<input type="submit" class="btn btn-orange" th:value="#{addRecipeIngredient}" name="addRecipeIngredient"/>
-<!--                         <input type="text" th:placeholder="#{insertIngredients}" class="form-control" name="ingredients" th:field="*{preparationProcess}" required="true" /> -->
-<!--                         <div class="help-block with-errors"></div> -->
+                    <div class="col-md-2">
+                        <input type="submit" class="btn btn-yellow" th:value="#{addRecipeIngredient}" name="addRecipeIngredient" />
                     </div>
                 </div>
                 <div class="form-group">
                     <!-- Button -->
-                    <div class="col-md-offset-3 col-md-9">
-                        <button id="btn-save" type="submit" class="btn btn-success form-control"><i class="icon-hand-right"></i>
+                    <div class="col-md-offset-2 col-md-9">
+                        <button id="btn-save" type="submit" class="btn btn-orange form-control"><i class="icon-hand-right"></i>
                             <span th:text="#{save}"></span>
                         </button>
                     </div>
                 </div>
-                <div class="help-block with-errors"></div>
             </form>
         </div>
     </div>
