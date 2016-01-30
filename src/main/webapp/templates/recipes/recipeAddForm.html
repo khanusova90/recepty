@@ -14,7 +14,7 @@
     <th:block th:include="fragments/header :: header"></th:block>
     <div class="container">
         <div class="row first">
-            <form id="loginform" class="form-horizontal" role="form" action="#" th:action="@{/loginProcess}" th:object="${recipe}" method="post">
+            <form id="loginform" class="form-horizontal" role="form" action="#" th:action="@{/recipes/addRecipe}" th:object="${recipe}" method="post">
                 <div class="form-group">
                     <label for="category" class="col-md-3 control-label" th:text="#{category}">Název kategorie</label>
                     <div class="col-md-9">
