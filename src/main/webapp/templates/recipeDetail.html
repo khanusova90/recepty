@@ -2,10 +2,16 @@
 <html lang="cs" xml:lang="cs" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title th:text="#{view.title}"></title>
+    <link rel="shortcut icon" href="/resources/img/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <th:block th:include="fragments/includes :: js" />
+    <link rel="stylesheet" href="../resources/css/main-style.css" th:href="@{/resources/css/main-style.css}" />
 </head>
+<body>
+<th:block th:include="fragments/header :: header"></th:block>
     <div class="container">
-        <div class="row">
+        <div class="row first">
             <div class="col-md-6">
 	            <div th:if="${not #lists.isEmpty(recipe.photos)}">
 	                <img th:src="@{'data:image/jpeg;base64,' + ${imgInBytes.generateBase64Image()}" />
@@ -15,9 +21,8 @@
                 <p th:text="${recipe.description}"></p>
                 <h3 th:text="#{recipe.ingredience}"></h3>
                 <ul>
-                    <li th:each="ingredience : ${recipeIngredience}" th:text="#{ingredience.value.name}"></li>
+                    <li th:each="ingredience : ${recipeIngredience}" th:text="${ingredience.}"></li>
                 </ul>
-            </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -27,6 +32,11 @@
                 <p th:text="${recipe.preparationProcess}"></p>
             </div>
         </div>
+    </div>
+    <div class="well">
+        <footer th:include="fragments/footer :: footer"></footer>
+    </div>
+</body>
 </html>
 
 

@@ -6,7 +6,7 @@
 </head>
 <th:block th:fragment="recipes">
     <div class="container">
-        <div class="row" th:each="recipe : ${recipes}">
+        <div class="row first" th:each="recipe : ${recipes}">
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
                     <div th:if="${not #lists.isEmpty(recipe.photos)}">

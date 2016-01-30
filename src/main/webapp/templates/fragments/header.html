@@ -27,24 +27,22 @@
                                 <a th:href="@{/recipes}" th:text="#{AllRecipes}">Všechny recepty</a>
                             </li>
                             <li>
-                                <a th:href="@{/recipes/soup}" th:text="#{Category.BREAKFAST}">Snídaně</a>
+                                <a th:href="@{/recipes/(category=breakfast)}" th:text="#{Category.BREAKFAST}">Snídaně</a>
                             </li>
                             <li>
-                                <a th:href="@{/recipes/mainmeal}" th:text="#{Category.LUNCH}">Oběd</a>
+                                <a th:href="@{/recipes/(category=lunch)}" th:text="#{Category.LUNCH}">Oběd</a>
                             </li>
                             <li>
-                                <a th:href="@{/recipes/sweet}" th:text="#{Category.DINNER}">Večeře</a>
+                                <a th:href="@{/recipes/(category=dinner)}" th:text="#{Category.DINNER}">Večeře</a>
                             </li>
                             <li>
                                 <a th:href="@{/recipes/smoot}" th:text=" #{Category.DESERT}">Desert</a>
+                                <a th:href="@{/recipes/(category=desert)}" th:text=" #{Category.DESERT}">Desert</a>
                             </li>
                         </ul>
                     </li>
                     <li sec:authorize="isAnonymous()">
                         <a th:href="@{/login}"><i class="fa fa-user"></i>&nbsp;<span th:text="#{login}"></span></a>
-                    </li>
-                    <li sec:authorize="isAuthenticated()">
-                        <a th:href="@{/userDetail}"><i class="fa fa-user"></i>&nbsp;<span th:text="#{profile}"></span></a>
                     </li>
                     <li sec:authorize="isAuthenticated()">
                         <a th:href="@{/logoutProcess}"><i class="fa fa-times"></i>&nbsp;<span th:text="#{logout}"></span></a>
