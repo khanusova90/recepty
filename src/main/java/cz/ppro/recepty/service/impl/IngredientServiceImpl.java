@@ -20,4 +20,8 @@ public class IngredientServiceImpl implements IngredientService {
 		return ingredientRepository.findByIngredientNameLike(name);
 	}
 
+	@Override
+	public List<Ingredient> getAll() {
+		return ingredientRepository.findAll();
+	}
 }
