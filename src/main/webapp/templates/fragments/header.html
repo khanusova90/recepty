@@ -44,6 +44,9 @@
                         <a th:href="@{/loginForm}"><i class="fa fa-user"></i>&nbsp;<span th:text="#{login}"></span></a>
                     </li>
                     <li sec:authorize="isAuthenticated()">
+                        <a th:href="@{/userDetail}"><i class="fa fa-user"></i>&nbsp;<span th:text="#{profile}"></span></a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
                         <a th:href="@{/logoutProcess}"><i class="fa fa-times"></i>&nbsp;<span th:text="#{logout}"></span></a>
                     </li>
                 </ul>
