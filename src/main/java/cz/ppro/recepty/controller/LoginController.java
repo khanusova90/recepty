@@ -20,19 +20,13 @@ public class LoginController {
 		return "user/login";
 	}
 
-	// @RequestMapping("/login")
-	// public String getRequest(Model model) {
-	// model.addAttribute("loginError", false);
-	// model.addAttribute("logout", false);
-	// model.addAttribute("denied", false);
-	// return "home";
-	// }
-	//
-	// @RequestMapping("/login-error")
-	// public String loginError(Model model) {
-	// model.addAttribute("loginError", true);
-	// return "login";
-	// }
+	@RequestMapping("/login-error")
+	public String loginError(Model model) {
+		AppUser user = new AppUser();
+		model.addAttribute("newUser", user);
+		model.addAttribute("loginError", true);
+		return "user/login";
+	}
 	//
 	// @RequestMapping("/login-logout")
 	// public String logout(Model model) {

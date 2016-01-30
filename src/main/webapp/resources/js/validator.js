@@ -1,37 +1,3 @@
-
-Skip to content
-This repository
-
-    Pull requests
-    Issues
-    Gist
-
-    @TynaKam
-
-69
-861
-
-    395
-
-1000hz/bootstrap-validator
-Code
-Issues 53
-Pull requests 13
-Wiki
-Pulse
-Graphs
-bootstrap-validator/js/validator.js
-504a8bd on 20 Jul 2015
-@1000hz 1000hz :fire: v0.9.0 :fire:
-7 contributors
-@1000hz
-@mrDinckleman
-@r0ro
-@marten-seemann
-@ptica
-@balcsida
-@jugglebird
-326 lines (252 sloc) 10.4 KB
 /* ========================================================================
  * Bootstrap (plugin): validator.js v0.9.0
  * ========================================================================
@@ -357,8 +323,4 @@ bootstrap-validator/js/validator.js
   })
 
 }(jQuery);
-
-    Status API Training Shop Blog About Pricing 
-
-    © 2016 GitHub, Inc. Terms Privacy Security Contact Help 
 

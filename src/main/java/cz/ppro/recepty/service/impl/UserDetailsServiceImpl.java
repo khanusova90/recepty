@@ -24,7 +24,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		logger.info("Loading user: " + username);
 		AppUser user = userRepository.findByUsername(username);
-		user.getAuthorities();
+		if (user != null) {
+			user.getAuthorities();
+		} else {
+			logger.error("Uživatel se jménem " + username + " nebyl nalezen");
+		}
 		return user;
 	}
 
