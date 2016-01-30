@@ -103,7 +103,21 @@
 
 
         <div class="row">
-        <th:block th:include="recipes/recipeList :: recipeList"></th:block>
+<!--         <th:block th:include="recipes/recipeList :: ${recipes}"></th:block> -->
+<div class="row" th:each="recipe : ${recipes}">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <div th:if="${not #lists.isEmpty(recipe.photos)}">
+                    	<img th:src="resources/img/recipes/thumbnail/${recipe.idRecipe}" alt="Foto${recipe.id}" />
+                    </div>
+                    <div class="caption">
+                        <h3><a th:href="@{/recipes/detail(id=${recipe.idRecipe})}" th:text="${recipe.name}">Název receptu</a></h3>
+                        <p th:text="${recipe.author.username}">autor</p>
+                        <p th:text="${recipe.description}">Popis</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
          </div>
     <div class="well">

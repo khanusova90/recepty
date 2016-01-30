@@ -57,7 +57,7 @@ public class Recipe {
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "recipe", fetch = FetchType.EAGER)
 	private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "recipe")
 	private List<Photo> photos = new ArrayList<>();
 
 	@ManyToOne

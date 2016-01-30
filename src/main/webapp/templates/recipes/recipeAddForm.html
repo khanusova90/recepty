@@ -17,7 +17,7 @@
     <th:block th:include="fragments/header :: header"></th:block>
     <div class="container">
         <div class="row first">
-            <form data-toggle="validator" id="loginform" class="form-horizontal" role="form" action="#" th:action="@{/recipes/addRecipe}" th:object="${recipe}" method="post">
+            <form data-toggle="validator" id="recipeForm" class="form-horizontal" role="form" action="#" th:action="@{/recipes/addRecipe}" th:object="${recipe}" method="post">
                 <h2 class="text-center"><span>Vložit nový recept</span></h2>
                 <br />
                 <div class="form-group">

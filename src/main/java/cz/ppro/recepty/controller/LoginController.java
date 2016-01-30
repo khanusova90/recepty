@@ -13,8 +13,15 @@ import cz.ppro.recepty.domain.AppUser;
 @Controller
 class LoginController {
 
-	@RequestMapping(value = "/loginForm")
+	@RequestMapping(value = "/user/login")
 	public String showLoginForm(Model model) {
+		AppUser user = new AppUser();
+		model.addAttribute("newUser", user);
+		return "user/login";
+	}
+
+	@RequestMapping(value = "/login")
+	public String showLogin(Model model) {
 		AppUser user = new AppUser();
 		model.addAttribute("newUser", user);
 		return "user/login";

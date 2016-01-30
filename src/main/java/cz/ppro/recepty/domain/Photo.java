@@ -1,5 +1,6 @@
 package cz.ppro.recepty.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,14 +15,17 @@ public class Photo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_PHOTO")
 	private Long idPhoto;
 
+	@Column(name = "PHOTO")
 	private byte[] photo;
 
 	@ManyToOne
 	@JoinColumn(name = "ID_RECIPE")
 	private Recipe recipe;
 
+	@Column(name = "ACTIVE")
 	private boolean active;
 
 	public Long getIdPhoto() {

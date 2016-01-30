@@ -1,7 +1,9 @@
 package cz.ppro.recepty.controller;
 
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -90,7 +92,6 @@ class RecipeController {
 	@RequestMapping(value = "/addRecipe", params = "addRecipeIngredient", method = RequestMethod.POST)
 	public String addRow(final Recipe recipe, Model model, @ModelAttribute("ingredient") Ingredient ingredient) {
 		RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
-		// recipeIngredient.setIdRecipeIngredient(-1l);
 		recipeIngredient.setIngredient(ingredient);
 		recipe.getRecipeIngredients().add(recipeIngredient);
 		model.addAttribute("recipe", recipe);
@@ -136,10 +137,8 @@ class RecipeController {
 
 		recipeService.createRecipe(recipe, user);
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
-		return "/listedRecipes";
+		return "listedRecipes";
 	}
-
-
 
 	@RequestMapping(value = "/searchByIngredientAll")
 	public String showRecipes(Model model, Locale locale) {
