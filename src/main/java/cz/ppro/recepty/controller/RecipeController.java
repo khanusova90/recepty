@@ -92,4 +92,9 @@ class RecipeController {
 		model.addAttribute("categories", Category.values());
 		return "recipeAddForm";
 	}
+
+	public String findRecipeByName(Model model) {
+
+		return "listedRecipes";
+	}
 }
