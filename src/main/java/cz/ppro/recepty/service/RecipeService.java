@@ -81,9 +81,12 @@ public interface RecipeService {
 	 *
 	 * @param recipe
 	 *            {@link Recipe} s vyplnenymi hodnotami. Musi mit vyplnen postup
-	 *            a ingredience
+	 * @param ingredients
+	 *            Seznam ingredienci k receptu
+	 * @param user
+	 *            Autor receptu
 	 */
-	public void createRecipe(Recipe recipe);
+	public void createRecipe(Recipe recipe, List<RecipeIngredient> ingredients, AppUser user);
 
 	/**
 	 * Vrati list receptu podle jejich nejlepsiho hodnoceni
@@ -122,5 +125,14 @@ public interface RecipeService {
 	 * @return
 	 */
 	public List<Photo> getPhotosByRecipe(Recipe recipe);
+
+	/**
+	 * Najde recept podle nazvu
+	 * 
+	 * @param name
+	 *            Nazev receptu
+	 * @return Seznam receptu, jejichz nazev obsahuje pozadovany nazev
+	 */
+	public List<Recipe> findRecipesByName(String name);
 
 }

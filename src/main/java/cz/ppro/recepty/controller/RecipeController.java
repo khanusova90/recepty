@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.domain.Category;
-import cz.ppro.recepty.domain.Ingredient;
 import cz.ppro.recepty.domain.Recipe;
+import cz.ppro.recepty.domain.RecipeIngredient;
 import cz.ppro.recepty.service.IngredientService;
 import cz.ppro.recepty.service.RecipeService;
+import cz.ppro.recepty.utils.UserUtils;
 
 @Controller
 @RequestMapping("/recipes")
@@ -48,21 +49,19 @@ class RecipeController {
 	}
 
 	@RequestMapping(value = "/addRecipe", method = RequestMethod.GET)
-	public String addRecipe(Recipe recipe) {
+	public String addRecipe(Model model) {
+		Recipe recipe = new Recipe();
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("categories", Category.values());
 
-		return "recipeAddForm";
+		return "recipes/recipeAddForm";
 	}
 
-	@RequestMapping(value = "/doAddRecipe", method = RequestMethod.POST)
-	public String doAddRecipe(Model model, HttpSession session, @RequestParam("name") String name,
-			@RequestParam("description") String description, @RequestParam("preparation") String preparation,
-			@RequestParam("ingredients") List<Ingredient> ingredients) {
-		AppUser user = (AppUser) session.getAttribute("user");
-		String author = user.getUsername();
-		Recipe recipe = new Recipe();
-		recipeService.createRecipe(recipe); // FIXME: Tady uz se recept uklada
-											// do DB, musi mit vyplneny hodnoty
-											// (postup a ingredience)
+	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
+	public String doAddRecipe(Recipe recipe, @RequestParam("ingredients") List<RecipeIngredient> ingredients,
+			Model model) {
+		AppUser user = UserUtils.getActualUser();
+		recipeService.createRecipe(recipe, ingredients, user);
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
 		return "redirect:/listedRecipes";
 	}
@@ -88,8 +87,8 @@ class RecipeController {
 		return "searchByIngredients";
 	}
 
-	public String getCategories(Model model) {
-		model.addAttribute("categories", Category.values());
-		return "recipeAddForm";
+	public String findRecipeByName(Model model) {
+
+		return "listedRecipes";
 	}
 }

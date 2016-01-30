@@ -32,6 +32,7 @@ public class Recipe {
 	@Column(name = "ID_RECIPE")
 	private Long idRecipe;
 
+	@Column(name = "NAME")
 	private String name;
 
 	@Column(name = "RATING")
@@ -40,6 +41,7 @@ public class Recipe {
 	@Column(name = "RATE_COUNT")
 	private Integer rateCount;
 
+	@Column(name = "DESCRIPTION")
 	private String description;
 
 	@Lob

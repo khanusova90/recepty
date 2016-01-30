@@ -128,7 +128,9 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	@Transactional
-	public void createRecipe(Recipe recipe) {
+	public void createRecipe(Recipe recipe, List<RecipeIngredient> ingredients, AppUser user) {
+		recipe.getRecipeIngredients().addAll(ingredients);
+		recipe.setAuthor(user);
 		EntityValidator.checkRecipe(recipe);
 		recipeRepository.save(recipe);
 	}
@@ -167,6 +169,11 @@ public class RecipeServiceImpl implements RecipeService {
 	@Transactional(readOnly = true)
 	public List<Photo> getPhotosByRecipe(Recipe recipe) {
 		return photoRepository.findByRecipe(recipe);
+	}
+
+	@Override
+	public List<Recipe> findRecipesByName(String name) {
+		return recipeRepository.findByNameLike(name);
 	}
 
 }

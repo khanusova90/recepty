@@ -23,4 +23,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
 	public List<Recipe> findByAuthor(AppUser author);
 
+	public List<Recipe> findByNameLike(String name);
+
 }
