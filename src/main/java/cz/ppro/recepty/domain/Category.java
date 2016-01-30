@@ -1,5 +1,7 @@
 package cz.ppro.recepty.domain;
 
+import cz.ppro.recepty.utils.EnumTranslator;
+
 /**
  * Druh jidla
  * 
@@ -18,15 +20,15 @@ public enum Category {
 
 	BREAKFAST("BREAKFAST"), LUNCH("LUNCH"), DINNER("DINNER"), DESERT("DESERT");
 
-	private String meal;
+	private String name;
 
-	private Category(String meal) {
-		this.meal = meal;
+	private Category(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public String toString() {
-		return meal;
+		return EnumTranslator.getMessageKey(this);
 	}
 
 }

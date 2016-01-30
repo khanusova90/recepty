@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cz.ppro.recepty.domain.AppUser;
+import cz.ppro.recepty.domain.Category;
 import cz.ppro.recepty.domain.Ingredient;
 import cz.ppro.recepty.domain.Recipe;
 import cz.ppro.recepty.service.IngredientService;
@@ -48,6 +49,7 @@ class RecipeController {
 
 	@RequestMapping(value = "/addRecipe", method = RequestMethod.GET)
 	public String addRecipe(Recipe recipe) {
+
 		return "recipeAddForm";
 	}
 
@@ -84,5 +86,10 @@ class RecipeController {
 	public String showDishes(Model model, @RequestParam("ingredients") String ingredientsString) {
 		model.addAttribute("reicpes", null);
 		return "searchByIngredients";
+	}
+
+	public String getCategories(Model model) {
+		model.addAttribute("categories", Category.values());
+		return "recipeAddForm";
 	}
 }
