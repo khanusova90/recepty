@@ -27,16 +27,4 @@ public class LoginController {
 		model.addAttribute("loginError", true);
 		return "user/login";
 	}
-	//
-	// @RequestMapping("/login-logout")
-	// public String logout(Model model) {
-	// model.addAttribute("logout", true);
-	// return "login";
-	// }
-	//
-	// @RequestMapping("/login-denied")
-	// public String deny(Model model) {
-	// model.addAttribute("denied", true);
-	// return "login";
-	// }
 }

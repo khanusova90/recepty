@@ -82,7 +82,6 @@ public class RecipeController {
 
 	@RequestMapping(value = "/searchBy")
 	public String showDishes(Model model, @RequestParam("ingredients") String ingredientsString) {
-
 		model.addAttribute("reicpes", null);
 		return "searchByIngredients";
 	}

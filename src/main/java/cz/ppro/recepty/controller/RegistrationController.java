@@ -22,14 +22,6 @@ public class RegistrationController {
 	@Autowired
 	MessageSource messageSource;
 
-	// @RequestMapping(value = "/registration", method = RequestMethod.GET)
-	// public String getRequest(Model model) {
-	// AppUser user = new AppUser();
-	// model.addAttribute("newUser", user);
-	//
-	// return "registration";
-	// }
-
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String registerUser(@ModelAttribute("newUser") AppUser user, Model model, Locale locale) {
 		Boolean success = userService.saveUser(user);
