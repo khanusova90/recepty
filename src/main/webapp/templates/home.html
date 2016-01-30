@@ -100,8 +100,14 @@
         <!-- /.row -->
         <!-- Call to Action Section -->
         <hr />
+
+
+        <div class="row">
+        <th:block th:include="recipes/recipeList :: recipeList"></th:block>
+        </div>
+         </div>
+    <div class="well">
         <footer th:include="fragments/footer :: footer"></footer>
-        <th:block th:include="fragments/includes :: js"></th:block>
     </div>
 </body>
 

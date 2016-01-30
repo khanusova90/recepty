@@ -3,10 +3,13 @@
 
 <head>
     <title th:text="#{view.title}"></title>
+    <script src="/resources/js/jquery.js" th:src="@{/resources/js/jquery.js}"></script>
+    <script src="/resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+    <script src="/resources/js/validator.js" th:src="@{/resources/js/validator.js}"></script>
+    <script src="/resources/js/search.js" th:src="@{/resources/js/search.js}"></script>
     <link rel="shortcut icon" href="/resources/img/favicon.ico" th:href="@{/resources/img/favicon.ico}" type="image/x-icon" />
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <th:block th:include="fragments/includes :: js" />
-     <script src="../../resources/js/input.js" th:src="@{/resources/js/input.js}"></script>
+    <script src="../../resources/js/input.js" th:src="@{/resources/js/input.js}"></script>
     <link rel="stylesheet" href="../../resources/css/main-style.css" th:href="@{/resources/css/main-style.css}" />
 </head>
 
@@ -14,7 +17,8 @@
     <th:block th:include="fragments/header :: header"></th:block>
     <div class="container">
         <div class="row first">
-            <form id="loginform" class="form-horizontal" role="form" action="#" th:action="@{/recipes/addRecipe}" th:object="${recipe}" method="post">
+            <form data-toggle="validator" id="loginform" class="form-horizontal" role="form" action="#" th:action="@{/recipes/addRecipe}" th:object="${recipe}" method="post">
+                <h2 class="text-center"><span>Vložit nový recept</span></h2>
                 <div class="form-group">
                     <label for="category" class="col-md-3 control-label" th:text="#{category}">Název kategorie</label>
                     <div class="col-md-9">
@@ -26,53 +30,61 @@
                 <div class="form-group">
                     <label for="name" class="col-md-3 control-label" th:text="#{name}">Název receptu</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" name="name" th:field="*{name}" />
+                        <input type="text" class="form-control" name="name" th:field="*{name}" required="true" />
+                   <div class="help-block with-errors"></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="description" class="col-md-3 control-label" th:text="#{recipe.description}">Popis</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" name="description" th:field="*{description}" />
+                        <textarea rows="2" type="text" class="form-control" name="description" th:field="*{description}" required="true" />
+                        <div class="help-block with-errors"></div>
+
                     </div>
+                     
                 </div>
                 <div class="form-group">
                     <label for="preparation" class="col-md-3 control-label" th:text="#{recipe.preparation}">Příprava</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" name="preparation" th:field="*{preparationProcess}" />
+                        <textarea rows="6" type="text" class="form-control" name="preparation" th:field="*{preparationProcess}" required="true" />
+                     <div class="help-block with-errors"></div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-9">
+                    <div class="input-group">
+                        <label for="description" class="col-md-3 control-label" th:text="#{recipe.description}">Popis</label>
+                        <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-file-image-o"></i></span>
+                        <input type="text" id="tags" class="form-control"  aria-describedby="sizing-addon1" />
+                        <span class="input-group-btn">
+                            <input class="btn btn-orange" type="file"><i class="fa fa-search">Procházet</i>
+                            </input> 
+                        </span>
+                    </div>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="ingredients" class="col-md-3 control-label" th:text="#{recipe.preparation}">Příprava</label>
+                    <div class="col-md-9">
+                        <input type="text" th:placeholder="#{insertIngredients}" class="form-control" name="ingredients" th:field="*{preparationProcess}" required="true" />
+                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
-	            <div class="input-group">
-	                <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-file-image-o"></i></span>
-	                <textarea rows="9" type="text" id="tags" class="form-control" th:placeholder="#{insertIngredients}"
-	                          aria-describedby="sizing-addon1"/>
-	                    <span class="input-group-btn">
-	                        <button class="btn btn-orange" type="file"><i class="fa fa-search">Procházet</i>
-	                        </button> 
-	                    </span>
-	            </div>
-	            <div class="entry input-group col-xs-3">
-	                <input class="form-control" name="fields[]" type="text" th:placeholder="#{insertIngredients}"/>
-	                    	<span class="input-group-btn">
-	                            <button class="btn btn-success btn-add" type="button">
-	                                <span class="glyphicon glyphicon-plus"></span>
-	                            </button>
-	                        </span>
-	            </div>
-	            <div class="form-group">
-	                <!-- Button -->
-	                <div class="col-md-offset-3 col-md-9">
-	                    <button id="btn-save" type="submit" class="btn btn-orange"><i class="icon-hand-right"></i>
-	                        <span th:text="#{save}"></span>
-	                    </button>
-	                </div>
-	            </div>
-	            <div class="help-block with-errors"></div>
-	        </form>
-	    </div>
-	</div>
-	<hr/>
-	<footer th:include="fragments/footer :: footer"></footer>
-	<th:block th:include="fragments/includes :: js"></th:block>
+                <div class="form-group">
+                    <!-- Button -->
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="btn-save" type="submit" class="btn btn-orange form-control"><i class="icon-hand-right"></i>
+                            <span th:text="#{save}"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="help-block with-errors"></div>
+            </form>
+        </div>
+    </div>
+    <hr/>
+    <footer th:include="fragments/footer :: footer"></footer>
+    <th:block th:include="fragments/includes :: js"></th:block>
 </body>
 
 </html>
