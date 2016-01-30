@@ -83,7 +83,8 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Recipe> showRecipesByCategory(String category) {
-		return recipeRepository.findByCategory(category);
+		List<Recipe> recipes = recipeRepository.findByCategory(category);
+		return recipes;
 	}
 
 	@Override
