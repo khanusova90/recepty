@@ -176,4 +176,9 @@ public class RecipeServiceImpl implements RecipeService {
 		return recipeRepository.findByNameLike(name);
 	}
 
+	@Override
+	public void deleteRecipeIngredient(Long id) {
+		recipeIngredientRepository.delete(id);
+	}
+
 }

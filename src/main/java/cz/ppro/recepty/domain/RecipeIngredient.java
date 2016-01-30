@@ -39,6 +39,13 @@ public class RecipeIngredient {
 	@Column(name = "UNIT")
 	private String unit;
 
+	public RecipeIngredient() {
+	}
+
+	public RecipeIngredient(Recipe recipe) {
+		this.recipe = recipe;
+	}
+
 	public Long getIdRecipeIngredient() {
 		return idRecipeIngredient;
 	}
