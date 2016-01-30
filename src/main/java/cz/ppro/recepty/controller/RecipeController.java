@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import cz.ppro.recepty.repository.IngredientRepository;
-import cz.ppro.recepty.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.domain.Ingredient;
 import cz.ppro.recepty.domain.Recipe;
+import cz.ppro.recepty.service.IngredientService;
 import cz.ppro.recepty.service.RecipeService;
 
 @Controller
@@ -57,13 +56,6 @@ public class RecipeController {
 			@RequestParam("description") String description, @RequestParam("preparation") String preparation,
 			@RequestParam("ingredients") List<Ingredient> ingredients) {
 		AppUser user = (AppUser) session.getAttribute("user");
-		/*
-		 * TODO insert correct constructor for all those params ratings bude v
-		 * const pro toto 0 a 0
-		 * 
-		 * V Recipe je bezparametricky konstruktor. Nastavi hodnoceni a pocet
-		 * hodnoticich na 0
-		 */
 		String author = user.getUsername();
 		Recipe recipe = new Recipe();
 		recipeService.createRecipe(recipe); // FIXME: Tady uz se recept uklada
@@ -83,14 +75,13 @@ public class RecipeController {
 
 	@RequestMapping(value = "/search")
 	public String showDishes(Model model) {
-			model.addAttribute("allIngredients",ingredientService.getAll());
+		model.addAttribute("allIngredients", ingredientService.getAll());
 		model.addAttribute("reicpes", null);
 		return "searchByIngredients";
 	}
 
 	@RequestMapping(value = "/searchBy")
 	public String showDishes(Model model, @RequestParam("ingredients") String ingredientsString) {
-
 
 		model.addAttribute("reicpes", null);
 		return "searchByIngredients";
