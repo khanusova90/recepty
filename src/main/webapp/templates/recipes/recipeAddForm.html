@@ -19,19 +19,18 @@
         <div class="row first">
             <form data-toggle="validator" id="loginform" class="form-horizontal" role="form" action="#" th:action="@{/recipes/addRecipe}" th:object="${recipe}" method="post">
                 <h2 class="text-center"><span>Vložit nový recept</span></h2>
+                <br />
                 <div class="form-group">
                     <label for="category" class="col-md-3 control-label" th:text="#{category}">Název kategorie</label>
-                    <div class="col-md-9">
+                    <div class="col-md-2">
                         <select class="form-control" id="sel1">
                             <option th:each="category : ${categories}"><span th:text="#{${category.name}}">Název kategorie</span></option>
                         </select>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="name" class="col-md-3 control-label" th:text="#{name}">Název receptu</label>
-                    <div class="col-md-9">
+                    <label for="name" class="col-md-3 control-label" th:text="#{recipe.name}">Název receptu</label>
+                    <div class="col-md-4">
                         <input type="text" class="form-control" name="name" th:field="*{name}" required="true" />
-                   <div class="help-block with-errors"></div>
+                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -39,23 +38,20 @@
                     <div class="col-md-9">
                         <textarea rows="2" type="text" class="form-control" name="description" th:field="*{description}" required="true" />
                         <div class="help-block with-errors"></div>
-
                     </div>
-                     
                 </div>
                 <div class="form-group">
                     <label for="preparation" class="col-md-3 control-label" th:text="#{recipe.preparation}">Příprava</label>
                     <div class="col-md-9">
                         <textarea rows="6" type="text" class="form-control" name="preparation" th:field="*{preparationProcess}" required="true" />
-                     <div class="help-block with-errors"></div>
+                        <div class="help-block with-errors"></div>
                     </div>
-                    
                 </div>
-                <div class="col-md-9">
-                    <div class="input-group">
-                        <label for="description" class="col-md-3 control-label" th:text="#{recipe.description}">Popis</label>
+                <div class="input-group">
+                    <label for="description" class="col-md-3 control-label" th:text="#{recipe.description}">Popis</label>
+                    <div class="col-md-9">
                         <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-file-image-o"></i></span>
-                        <input type="text" id="tags" class="form-control"  aria-describedby="sizing-addon1" />
+                        <input type="text" id="tags" class="form-control" aria-describedby="sizing-addon1" />
                         <span class="input-group-btn">
                             <input class="btn btn-orange" type="file" th:field="${photo}"><i class="fa fa-search">Procházet</i>
                             </input> 
@@ -92,6 +88,35 @@
                     	<input type="submit" class="btn btn-orange" th:value="#{addRecipeIngredient}" name="addRecipeIngredient"/>
 <!--                         <input type="text" th:placeholder="#{insertIngredients}" class="form-control" name="ingredients" th:field="*{preparationProcess}" required="true" /> -->
 <!--                         <div class="help-block with-errors"></div> -->
+                    </div>
+                </div>
+                <div class="form-group" data-toggle="input">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="contacts">
+                                <label>Ingredience:</label>
+                                <div class="form-group multiple-form-group input-group">
+                                    <input type="text" name="contacts['value'][]" class="form-control" />
+                                    <div class="input-group-btn input-group-select">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <span class="concept">Forma</span> <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#phone">Ks</a></li>
+                                            <li><a href="#fax">Lžč</a></li>
+                                            <li><a href="#skype">Lž</a></li>
+                                            <li><a href="#email">g</a></li>
+                                            <li><a href="#www">Hrnky</a></li>
+                                        </ul>
+                                        <input type="hidden" class="input-group-select-val" name="contacts['type'][]" value="ingredient" />
+                                    </div>
+                                    <input type="text" name="contacts['value'][]" class="form-control" />
+                                    <span class="input-group-btn">
+                            <button type="button" class="btn btn-success btn-add">+</button>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">

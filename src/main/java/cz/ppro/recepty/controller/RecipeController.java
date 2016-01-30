@@ -1,5 +1,8 @@
 package cz.ppro.recepty.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -16,10 +19,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import cz.ppro.recepty.domain.AppUser;
 import cz.ppro.recepty.domain.Category;
 import cz.ppro.recepty.domain.Ingredient;
+import cz.ppro.recepty.domain.Photo;
 import cz.ppro.recepty.domain.Recipe;
 import cz.ppro.recepty.domain.RecipeIngredient;
 import cz.ppro.recepty.service.IngredientService;
@@ -113,15 +118,46 @@ class RecipeController {
 		return "redirect:/listedRecipes";
 	}
 
+	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
+	public String doAddRecipe(Recipe recipe, @RequestParam("ingredients") List<RecipeIngredient> ingredients,
+			@RequestParam("myFile") MultipartFile file, Model model) {
+		if (!file.isEmpty()) {
+			String name = file.getName();
+			try {
+				byte[] bytes = file.getBytes();
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(new File(name + "-uploaded")));
+				stream.write(bytes);
+				stream.close();
+				Photo photo = new Photo();
+				photo.setPhoto(bytes);
+				List<Photo> photos = null;
+				photos.add(photo);
+				recipe.setPhotos(photos);
+				return "You successfully uploaded " + name + " into " + name + "-uploaded !";
+			} catch (Exception e) {
+				return "You failed to upload " + name + " => " + e.getMessage();
+			}
+		} else {
+			return "The selected file was empty and could not be uploaded.";
+		}
+
+		// AppUser user = UserUtils.getActualUser();
+		// recipeService.createRecipe(recipe, ingredients, user);
+		// model.addAttribute("recipes",
+		// recipeService.getAllRecipesByUser(user));
+		// return "redirect:/listedRecipes";
+	}
+
 	@RequestMapping(value = "/searchByIngredientAll")
-	public String showDishes(Model model, Locale locale) {
+	public String showRecipes(Model model, Locale locale) {
 		model.addAttribute("recipes", null);
 		model.addAttribute("selectedIngredients", messageSource.getMessage("insertIngredients", null, locale));
 		return "searchByIngredients";
 	}
 
 	@RequestMapping(value = "/searchByIngredientAll", method = RequestMethod.POST)
-	public String showDishes(Model model, @ModelAttribute("selectedIngredients") String ingredientsString) {
+	public String showRecipes(Model model, @ModelAttribute("selectedIngredients") String ingredientsString) {
 		List<Ingredient> ingredients = ingredientService.splitIngredients(ingredientsString);
 		List<Recipe> recipes = recipeService.findRecipesByAllIngredients(ingredients);
 		model.addAttribute("recipes", recipes);
