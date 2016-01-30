@@ -86,7 +86,7 @@ public interface RecipeService {
 	 * @param user
 	 *            Autor receptu
 	 */
-	public void createRecipe(Recipe recipe, List<RecipeIngredient> ingredients, AppUser user);
+	public void createRecipe(Recipe recipe, AppUser user);
 
 	/**
 	 * Vrati list receptu podle jejich nejlepsiho hodnoceni

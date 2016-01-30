@@ -40,10 +40,14 @@ public class RecipeIngredient {
 	private String unit;
 
 	public RecipeIngredient() {
+		this.amount = 0f;
+		this.unit = "kg";
 	}
 
 	public RecipeIngredient(Recipe recipe) {
 		this.recipe = recipe;
+		this.amount = 0f;
+		this.unit = "kg";
 	}
 
 	public Long getIdRecipeIngredient() {

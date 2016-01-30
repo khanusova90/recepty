@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 	private static Log logger = LogFactory.getLog(UserServiceImpl.class);
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
 	private PasswordEncoder encoder;
 
@@ -30,7 +30,14 @@ public class UserServiceImpl implements UserService {
 		this.encoder = new BCryptPasswordEncoder();
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public AppUser findUserByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+
 	@Transactional
+	@Override
 	public Boolean saveUser(AppUser user) {
 		AppUser existingUser = userRepository.findByUsername(user.getUsername());
 

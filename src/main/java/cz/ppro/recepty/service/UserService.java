@@ -13,4 +13,12 @@ public interface UserService {
 	 *         databazi existuje, jinak vraci <code>true</code>
 	 */
 	public Boolean saveUser(AppUser user);
+
+	/**
+	 * Najde uzivatele podle zadaneho uzivatelskeho jmena
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public AppUser findUserByUsername(String username);
 }

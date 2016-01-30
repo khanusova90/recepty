@@ -24,6 +24,7 @@ import cz.ppro.recepty.domain.Recipe;
 import cz.ppro.recepty.domain.RecipeIngredient;
 import cz.ppro.recepty.service.IngredientService;
 import cz.ppro.recepty.service.RecipeService;
+import cz.ppro.recepty.service.UserService;
 import cz.ppro.recepty.utils.UserUtils;
 
 @Controller
@@ -35,6 +36,9 @@ class RecipeController {
 
 	@Autowired
 	private IngredientService ingredientService;
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private MessageSource messageSource;
@@ -64,29 +68,26 @@ class RecipeController {
 		model.addAttribute("categories", Category.values());
 		model.addAttribute("recipeIngredients", new ArrayList<RecipeIngredient>());
 		model.addAttribute("ingredients", ingredientService.getAll());
+		model.addAttribute("photo", "fotka");
 
 		return "recipes/recipeAddForm";
 	}
 
-	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
-	public String doAddRecipe(Recipe recipe, @RequestParam("ingredients") List<RecipeIngredient> ingredients,
-			Model model) {
-		AppUser user = UserUtils.getActualUser();
-		recipeService.createRecipe(recipe, ingredients, user);
-		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
-		return "redirect:/listedRecipes";
-	}
-
-	@RequestMapping(value = "/addRecipe/update/{recipeId}", method = RequestMethod.POST)
-	public String addRow(final Recipe recipe) {
+	@RequestMapping(value = "/addRecipe", params = "addRecipeIngredient", method = RequestMethod.POST)
+	public String addRow(final Recipe recipe, Model model) {
 		RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
 		recipeIngredient.setIdRecipeIngredient(-1l);
 		recipe.getRecipeIngredients().add(recipeIngredient);
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("categories", Category.values());
+		model.addAttribute("recipeIngredients", new ArrayList<RecipeIngredient>());
+		model.addAttribute("ingredients", ingredientService.getAll());
+		model.addAttribute("photo", "fotka");
 		return "recipes/recipeAddForm";
 	}
 
-	@RequestMapping(value = "/addRecipe/update/{recipeId}", params = "removeRecipeIngredient", method = RequestMethod.POST)
-	public String addRow(final Recipe recipe, final HttpServletRequest request) {
+	@RequestMapping(value = "/addRecipe/{recipeId}", params = "removeRecipeIngredient", method = RequestMethod.POST)
+	public String deleteRow(final Recipe recipe, final HttpServletRequest request) {
 		Long recipeIngredientId = Long.valueOf(request.getParameter("removeRecipeIngredient"));
 
 		for (RecipeIngredient ri : recipe.getRecipeIngredients()) {
@@ -95,21 +96,22 @@ class RecipeController {
 				break;
 			}
 		}
-
 		if (recipeIngredientId > 0) {
 			recipeService.deleteRecipeIngredient(recipeIngredientId);
 		}
 		return "recipes/recipeAddForm";
 	}
 
-	// @RequestMapping(value = "/doDeleteRecipe", method = RequestMethod.POST)
-	// public String deleteRecipe(Model model, HttpSession session,
-	// @RequestParam("recipe") Recipe recipe) {
-	// recipeService.deleteRecipe(recipe);
-	// AppUser user = (AppUser) session.getAttribute("user");
-	// model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
-	// return "listedRecipes";
-	// }
+	@RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
+	public String doAddRecipe(Recipe recipe, Model model) {
+		// AppUser user = UserUtils.getActualUser();
+		String username = UserUtils.getActualUsername();
+		AppUser user = userService.findUserByUsername(username);
+
+		recipeService.createRecipe(recipe, user);
+		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
+		return "redirect:/listedRecipes";
+	}
 
 	@RequestMapping(value = "/searchByIngredientAll")
 	public String showDishes(Model model, Locale locale) {

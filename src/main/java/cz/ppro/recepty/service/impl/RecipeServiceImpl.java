@@ -128,8 +128,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	@Transactional
-	public void createRecipe(Recipe recipe, List<RecipeIngredient> ingredients, AppUser user) {
-		recipe.getRecipeIngredients().addAll(ingredients);
+	public void createRecipe(Recipe recipe, AppUser user) {
 		recipe.setAuthor(user);
 		EntityValidator.checkRecipe(recipe);
 		recipeRepository.save(recipe);

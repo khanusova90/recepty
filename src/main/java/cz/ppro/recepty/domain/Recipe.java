@@ -58,7 +58,7 @@ public class Recipe {
 	private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Photo> photos;
+	private List<Photo> photos = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "ID_APP_USER")
