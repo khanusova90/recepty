@@ -21,10 +21,11 @@
 	<sec:http auto-config="true" use-expressions="true">
 		<sec:intercept-url pattern="/administration/**" access="hasRole('ROLE_ADMIN')" />
 		<sec:intercept-url pattern="/recipes/recipeAddForm*" access="hasRole('ROLE_USER')" />
+		<sec:intercept-url pattern="/user/userdetail" access="hasRole('ROLE_USER')" />
 		<sec:access-denied-handler error-page="/login-denied" />
 		<sec:csrf disabled="true"/>
 		<sec:form-login
-			login-page="/user/login"
+			login-page="/user/loginForm"
 			login-processing-url="/loginProcess"
 			default-target-url="/home"
 			always-use-default-target="true"
