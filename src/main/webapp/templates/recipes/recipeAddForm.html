@@ -41,29 +41,39 @@
                         <input type="text" class="form-control" name="preparation" th:field="*{preparationProcess}" />
                     </div>
                 </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-file-image-o"></i></span>
-                    <textarea rows="9" type="text" id="tags" class="form-control" th:placeholder="#{insertIngredients}" aria-describedby="sizing-addon1" />
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-file-image-o"></i></span>
+                <textarea rows="9" type="text" id="tags" class="form-control" th:placeholder="#{insertIngredients}"
+                          aria-describedby="sizing-addon1"/>
                     <span class="input-group-btn">
                         <button class="btn btn-orange" type="file"><i class="fa fa-search">Procházet</i>
                         </button> 
                     </span>
-                </div>
-                <div class="form-group">
-                        <!-- Button -->
-                        <div class="col-md-offset-3 col-md-9">
-                            <button id="btn-save" type="submit" class="btn btn-orange"><i class="icon-hand-right"></i>
-                                <span th:text="#{save}"></span>
+            </div>
+            <div class="entry input-group col-xs-3">
+                <input class="form-control" name="fields[]" type="text" placeholder="Type something"/>
+                    	<span class="input-group-btn">
+                            <button class="btn btn-success btn-add" type="button">
+                                <span class="glyphicon glyphicon-plus"></span>
                             </button>
-                        </div>
-                    </div>
-                <div class="help-block with-errors"></div>
-            </form>
-        </div>
-	</div>
-    <hr />
-    <footer th:include="fragments/footer :: footer"></footer>
-    <th:block th:include="fragments/includes :: js"></th:block>
+                        </span>
+            </div>
+            <div class="form-group">
+                <!-- Button -->
+                <div class="col-md-offset-3 col-md-9">
+                    <button id="btn-save" type="submit" class="btn btn-orange"><i class="icon-hand-right"></i>
+                        <span th:text="#{save}"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="help-block with-errors"></div>
+        </form>
+    </div>
+</div>
+<hr/>
+<footer th:include="fragments/footer :: footer"></footer>
+<th:block th:include="fragments/includes :: js"></th:block>
 </body>
 
 </html>
