@@ -82,7 +82,7 @@ class RecipeController {
 	// return "listedRecipes";
 	// }
 
-	@RequestMapping(value = "/search")
+	@RequestMapping(value = "/searchByIngredientAll")
 	public String showDishes(Model model, Locale locale) {
 		model.addAttribute("ingredients", ingredientService.getAll());
 		model.addAttribute("recipes", null);
@@ -90,7 +90,7 @@ class RecipeController {
 		return "searchByIngredients";
 	}
 
-	@RequestMapping(value = "/searchBy", method = RequestMethod.POST)
+	@RequestMapping(value = "/searchByIngredientAll", method = RequestMethod.POST)
 	public String showDishes(Model model, @ModelAttribute("selectedIngredients") String ingredientsString) {
 		List<Ingredient> ingredients = ingredientService.splitIngredients(ingredientsString);
 		List<Recipe> recipes = recipeService.findRecipesByIngredients(ingredients);
@@ -98,8 +98,17 @@ class RecipeController {
 		return "listedRecipes";
 	}
 
-	public String findRecipeByName(Model model) {
+	@RequestMapping(value = "/searchByName", method = RequestMethod.GET)
+	public String searchByName(Model model, Locale locale) {
+		model.addAttribute("ingredients", ingredientService.getAll());
+		model.addAttribute("recipes", null);
+		return "searchByName";
+	}
 
+	@RequestMapping(value = "/searchByName", method = RequestMethod.POST)
+	public String findRecipeByName(Model model, @ModelAttribute("name") String name) {
+		List<Recipe> recipes = recipeService.findRecipesByName(name);
+		model.addAttribute("recipes", recipes);
 		return "listedRecipes";
 	}
 }

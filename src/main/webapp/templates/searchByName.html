@@ -17,12 +17,12 @@
     <div class="container">
         <div class="row first">
             <div class="col-xs-12">
-                <form id="searchBy" role="form" method="post" th:action="@{/recipes/searchByIngredientAll}">
+                <form id="searchBy" role="form" method="post" th:action="@{/recipes/searchByName}">
                     <div class="input-group input-group-lg">
                         <span class="input-group-addon" id="sizing-addon1">
                         	<i class="fa fa-flask"></i>
                         </span>
-                        <input type="text" id="tags" class="form-control" th:placeholder="${selectedIngredients}" aria-describedby="sizing-addon1" />
+                        <input type="text" id="tags" class="form-control" th:placeholder="${name}" aria-describedby="sizing-addon1" />
                         <span class="input-group-btn">
 	                        <button class="btn btn-orange" type="submit">
 	                        	<i class="fa fa-search"></i>
