@@ -52,7 +52,7 @@ public class Recipe {
 	@ElementCollection
 	@CollectionTable(name = "RECIPE_MEAL", joinColumns = { @JoinColumn(name = "ID_RECIPE") })
 	@Column(name = "MEAL")
-	private List<String> categories;
+	private List<String> categories = new ArrayList<>();
 
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "recipe", fetch = FetchType.EAGER)
 	private List<RecipeIngredient> recipeIngredients = new ArrayList<>();

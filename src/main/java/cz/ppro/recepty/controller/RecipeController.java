@@ -44,7 +44,7 @@ class RecipeController {
 
 	@RequestMapping(value = "/")
 	public String showRecipesByCategory(Model model, @RequestParam("category") String category) {
-		model.addAttribute("ingredients", recipeService.showRecipesByCategory(category));
+		model.addAttribute("recipes", recipeService.showRecipesByCategory(category));
 		return "listedRecipes";
 	}
 
@@ -71,28 +71,24 @@ class RecipeController {
 	public String addRecipe(Model model) {
 		Recipe recipe = new Recipe();
 		RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
-		// recipeIngredient.setIdRecipeIngredient(-1l);
 		recipe.getRecipeIngredients().add(recipeIngredient);
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("categories", Category.values());
-		// model.addAttribute("recipeIngredients", new
-		// ArrayList<RecipeIngredient>());
 		model.addAttribute("ingredients", ingredientService.getAll());
-		// model.addAttribute("ingredient", new Ingredient());
 
 		return "recipes/recipeAddForm";
 	}
 
 	@RequestMapping(value = "/addRecipe", params = "addRecipeIngredient", method = RequestMethod.POST)
-	public String addRow(final Recipe recipe, Model model, @ModelAttribute("ingredient") Ingredient ingredient,
-			Category category) {
+	public String addRow(final Recipe recipe, Model model) {
 		RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
-		// recipeIngredient.setIdRecipeIngredient(-1l);
-		recipeIngredient.setIngredient(ingredient);
+		// recipeIngredient.setIngredient(ingredient);
 		recipe.getRecipeIngredients().add(recipeIngredient);
+		// recipe.getCategories().add(category);
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("categories", Category.values());
-		model.addAttribute("recipeIngredients", recipe.getRecipeIngredients());
+		// model.addAttribute("recipeIngredients",
+		// recipe.getRecipeIngredients());
 		model.addAttribute("ingredients", ingredientService.getAll());
 		// model.addAttribute("category", category);
 		return "recipes/recipeAddForm";
@@ -118,6 +114,10 @@ class RecipeController {
 	public String doAddRecipe(Recipe recipe, Model model) {
 		String username = UserUtils.getActualUsername();
 		AppUser user = userService.findUserByUsername(username);
+		// RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
+		// recipeIngredient.setIngredient(ingredient);
+		// recipe.getRecipeIngredients().add(recipeIngredient);
+		// recipe.getCategories().add(category);
 		recipeService.createRecipe(recipe, user);
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
 		return "listedRecipes";

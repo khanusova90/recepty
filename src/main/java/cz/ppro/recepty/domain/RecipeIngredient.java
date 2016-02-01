@@ -1,5 +1,6 @@
 package cz.ppro.recepty.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,11 +26,11 @@ public class RecipeIngredient {
 	@Column(name = "ID_RECIPE_INGREDIENT")
 	private Long idRecipeIngredient;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_RECIPE")
 	private Recipe recipe;
 
-	@ManyToOne
+	@ManyToOne(cascade = (CascadeType.ALL))
 	@JoinColumn(name = "ID_INGREDIENT")
 	private Ingredient ingredient;
 

@@ -35,4 +35,8 @@ public enum Category {
 		return this.toString();
 	}
 
+	public String getCategoryName() {
+		return this.name();
+	}
+
 }
