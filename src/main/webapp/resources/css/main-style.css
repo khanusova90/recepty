@@ -11285,4 +11285,5 @@ button.close {
 /* line 54, ../scss/main-style.scss */
 body {
   background-image: url("../../resources/img/restaurant.png");
+  min-height: 300px;
 }
