@@ -82,15 +82,10 @@ class RecipeController {
 	@RequestMapping(value = "/addRecipe", params = "addRecipeIngredient", method = RequestMethod.POST)
 	public String addRow(final Recipe recipe, Model model) {
 		RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
-		// recipeIngredient.setIngredient(ingredient);
 		recipe.getRecipeIngredients().add(recipeIngredient);
-		// recipe.getCategories().add(category);
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("categories", Category.values());
-		// model.addAttribute("recipeIngredients",
-		// recipe.getRecipeIngredients());
 		model.addAttribute("ingredients", ingredientService.getAll());
-		// model.addAttribute("category", category);
 		return "recipes/recipeAddForm";
 	}
 
@@ -114,10 +109,6 @@ class RecipeController {
 	public String doAddRecipe(Recipe recipe, Model model) {
 		String username = UserUtils.getActualUsername();
 		AppUser user = userService.findUserByUsername(username);
-		// RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
-		// recipeIngredient.setIngredient(ingredient);
-		// recipe.getRecipeIngredients().add(recipeIngredient);
-		// recipe.getCategories().add(category);
 		recipeService.createRecipe(recipe, user);
 		model.addAttribute("recipes", recipeService.getAllRecipesByUser(user));
 		return "listedRecipes";
