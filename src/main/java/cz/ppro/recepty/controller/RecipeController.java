@@ -1,6 +1,5 @@
 package cz.ppro.recepty.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -72,13 +71,14 @@ class RecipeController {
 	public String addRecipe(Model model) {
 		Recipe recipe = new Recipe();
 		RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
-		recipeIngredient.setIdRecipeIngredient(-1l);
+		// recipeIngredient.setIdRecipeIngredient(-1l);
 		recipe.getRecipeIngredients().add(recipeIngredient);
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("categories", Category.values());
-		model.addAttribute("recipeIngredients", new ArrayList<RecipeIngredient>());
+		// model.addAttribute("recipeIngredients", new
+		// ArrayList<RecipeIngredient>());
 		model.addAttribute("ingredients", ingredientService.getAll());
-		model.addAttribute("ingredient", new Ingredient());
+		// model.addAttribute("ingredient", new Ingredient());
 
 		return "recipes/recipeAddForm";
 	}
@@ -87,14 +87,14 @@ class RecipeController {
 	public String addRow(final Recipe recipe, Model model, @ModelAttribute("ingredient") Ingredient ingredient,
 			Category category) {
 		RecipeIngredient recipeIngredient = new RecipeIngredient(recipe);
-		recipeIngredient.setIdRecipeIngredient(-1l);
+		// recipeIngredient.setIdRecipeIngredient(-1l);
 		recipeIngredient.setIngredient(ingredient);
 		recipe.getRecipeIngredients().add(recipeIngredient);
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("categories", Category.values());
 		model.addAttribute("recipeIngredients", recipe.getRecipeIngredients());
 		model.addAttribute("ingredients", ingredientService.getAll());
-		model.addAttribute("category", category);
+		// model.addAttribute("category", category);
 		return "recipes/recipeAddForm";
 	}
 

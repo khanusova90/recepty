@@ -9,8 +9,8 @@
     <script src="/resources/js/search.js" th:src="@{/resources/js/search.js}"></script>
     <link rel="shortcut icon" href="/resources/img/favicon.ico" th:href="@{/resources/img/favicon.ico}" type="image/x-icon" />
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <th:block th:include="fragments/includes :: js" />
-    <link rel="stylesheet" href="../resources/css/main-style.css" th:href="@{/resources/css/main-style.css}" />
+    <script src="../../resources/js/input.js" th:src="@{/resources/js/input.js}"></script>
+    <link rel="stylesheet" href="../../resources/css/main-style.css" th:href="@{/resources/css/main-style.css}" />
 </head>
 
 <body>
@@ -24,8 +24,8 @@
                 <div class="form-group">
                     <label for="category" class="col-md-2 control-label" th:text="#{category}">Název kategorie</label>
                     <div class="col-md-2">
-                        <select class="form-control" id="sel1">
-                            <option th:each="category : ${categories}" th:value="${category}"><span th:text="#{${category.name}}">Název kategorie</span></option>
+                        <select class="form-control" id="sel1" name="category">
+                            <option th:each="category : ${categories}"><span th:text="#{${category.name}}">Název kategorie</span></option>
                         </select>
                     </div>
                     <label for="name" class="col-md-2 control-label" th:text="#{recipe.name}">Název receptu</label>
@@ -55,8 +55,8 @@
                         <table>
                             <tr th:each="recipeIngredient, rowStat: *{recipeIngredients}">
                                 <td>
-                                    <select class="form-control" id="sel2" th:field="${ingredient}">
-                                        <option th:each="ingredient : ${ingredients}" th:value="${ingredient}"><span th:text="${ingredient.ingredientName}">Ingredience</span></option>
+                                    <select class="form-control" id="sel2" name="ingredient">
+                                        <option th:each="ingredient : ${ingredients}"><span th:text="${ingredient.ingredientName}">Ingredience</span></option>
                                     </select>
                                 </td>
                                 <td>
